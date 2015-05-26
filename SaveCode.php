@@ -14,19 +14,24 @@
 		$zend_out = NULL;
 
 		if ($zend == TRUE) {
-			$fname = "dialects/zend/code.php";
+			$fname = "tmp/zend/code.php";	
 			$file = fopen($fname, 'w');
 			fwrite($file, "<?php " . $data . " ?>" );
 			fclose($file);
 
 			$zend_time_before = microtime(true);
-			$zend_out = `php dialects/zend/code.php`;
+			$zend_out = `php tmp/zend/code.php`;
 			$zend_time_after = microtime(true);
 
 			$zend_time = round($zend_time_after - $zend_time_before, 5);
 
-			`rm dialects/zend/code.php`;
+			`rm tmp/zend/code.php`;
 		}
+
+		//$zend_out = "?!?!?!?";
+		//if (defined('HHVM_VERSION')) {
+		//	$zend_out = "HHVM IS ON!!";
+		//}
 
 		$hhvm_time_before;
 		$hhvm_time_after;
@@ -34,18 +39,18 @@
 		$hhvm_out = NULL;
 
 		if ($hhvm == TRUE) {
-			$fname = "dialects/hhvm/code.php";
+			$fname = "tmp/hhvm/code.php";
 			$file = fopen($fname, 'w');
 			fwrite($file, "<?php " . $data . " ?>" );
 			fclose($file);
 
 			$hhvm_time_before = microtime(true);
-			$hhvm_out = `php dialects/hhvm/code.php`;
+			$hhvm_out = `hhvm tmp/hhvm/code.php`;
 			$hhvm_time_after = microtime(true);
 
 			$hhvm_time = round($hhvm_time_after - $hhvm_time_before, 5);
 
-			`rm dialects/hhvm/code.php`;
+			`rm tmp/hhvm/code.php`;
 		}
 
 		$hippyvm_time_before;
@@ -54,18 +59,18 @@
 		$hippyvm_out = NULL;
 
 		if ($hippyvm == TRUE) {
-			$fname = "dialects/hippyvm/code.php";
+			$fname = "tmp/hippyvm/code.php";
 			$file = fopen($fname, 'w');
 			fwrite($file, "<?php " . $data . " ?>" );
 			fclose($file);
 
 			$hippyvm_time_before = microtime(true);
-			$hippyvm_out = `php dialects/hippyvm/code.php`;
+			$hippyvm_out = `/usr/src/hippyvm/hippy-c tmp/hippyvm/code.php`;
 			$hippyvm_time_after = microtime(true);
 
 			$hippyvm_time = round($hippyvm_time_after - $hippyvm_time_before, 5);
 
-			`rm dialects/hippyvm/code.php`;
+			`rm tmp/hippyvm/code.php`;
 		}
 
 		$hack_time_before;
@@ -74,19 +79,19 @@
 		$hack_out = NULL;
 
 		if ($hack == TRUE) {
-			$fname = "dialects/hack/code.php";
+			$fname = "tmp/hack/code.php";
 			$file = fopen($fname, 'w');
-			/*fwrite($file, "<?hh " . $data . " ?>" );*/
-			fwrite($file, "<?php " . $data . " ?>" );   // until hhvm is not used
+			fwrite($file, "<?hh " . $data);
+			/*fwrite($file, "<?php " . $data . " ?>" );*/   // until hhvm is not used
 			fclose($file);
 
 			$hack_time_before = microtime(true);
-			$hack_out = `php dialects/hack/code.php`;
+			$hack_out = `hhvm tmp/hack/code.php`;
 			$hack_time_after = microtime(true);
 
 			$hack_time = round($hack_time_after - $hack_time_before, 5);
 
-			`rm dialects/hack/code.php`;
+			`rm tmp/hack/code.php`;
 		}
 
 		echo json_encode(array("zend_out"=>$zend_out, "zend_time"=>$zend_time,
