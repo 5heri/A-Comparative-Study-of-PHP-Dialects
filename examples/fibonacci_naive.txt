@@ -1,0 +1,14 @@
+function fibonacci($n) {
+	if ($n == 1 || $n == 2) {
+    	return 1;
+  	} else {
+		return fibonacci($n - 1) + fibonacci($n - 2);
+  	}
+} 
+
+$num = 5;
+
+// ===== PROCESS - Determing the factorial of the input number =====
+$output = "\n\nFibonacci " . $num . " = " . fibonacci($num) . "\n\n";
+echo $output;
+

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>PHP Labs</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<script src="javascripts/jquery-linedtextarea.js"></script>
+	<link href="stylesheets/jquery-linedtextarea.css" type="text/css" rel="stylesheet" />
+	<link href="stylesheets/main.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+</head>
+
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">PHP Labs</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Examples <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li>
+                <a id="factorial" href="#" onclick="setExamples('factorial');return false;">Factorial
+                </a>
+            </li>
+            <li>
+                <a id="fibonacci_naive" href="#" onclick="setExamples('fibonacci_naive');return false;">Fibonacci (naive)</a>
+            </li>
+            <li>
+                <a id="fibonacci_dynamic" href="#" onclick="setExamples('fibonacci_dynamic');return false;">Fibonacci (dynamic)</a>
+            </li>
+            <li>
+                <a id="bubble_sort" href="#" onclick="setExamples('bubble_sort');return false;">Bubble-Sort</a>
+            </li>
+            <li>
+                <a id="insertion_sort" href="#" onclick="setExamples('insertion_sort');return false;">Insertion-Sort</a>
+            </li>
+            <li>
+                <a id="merge_sort" href="#" onclick="setExamples('merge_sort');return false;">Merge-Sort</a>
+            </li>
+            <li>
+                <a id="selection_sort" href="#" onclick="setExamples('selection_sort');return false;">Selection-Sort</a>
+            </li>
+            <li>
+                <a id="binary_search" href="#" onclick="setExamples('binary_search');return false;">Binary Search</a>
+            </li>
+
+
+          </ul>
+        </li>
+        <li><a href="#"><span ></span>about</a></li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<p>
+<!--<form action="code.php" method="post"> -->
+<!--<textarea id="textarea" name="code" class="lined" rows="14" cols="100"></textarea>-->
+<!--<div style="font-family:monaco">&lt?php</div>-->
+
+<pre id="editor_small">
+
+
+</pre>
+<!--<div style="font-family:monaco">?></div>-->
+&nbsp;&nbsp;Zend:<input type="checkbox" id="ZendCheck" checked>
+&nbsp;&nbsp;&nbsp;&nbsp;HHVM:<input type="checkbox" id="HHVMCheck" checked>
+&nbsp;&nbsp;&nbsp;&nbsp;HippyVM:<input type="checkbox" id="HippyVMCheck" checked>
+&nbsp;&nbsp;&nbsp;&nbsp;Hack:<input type="checkbox" id="HackCheck" checked>
+
+<!-- <button id="runCode" class="launch" onclick="sendToServer(code)">Run</button> -->
+
+
+<button id="runCode" class="launch">Run</button> 
+<br>
+
+<div id="ZendResult" class="result">
+</div>
+<div id="ZendTime" class="time">
+</div>
+<div id="HHVMResult" class="result">
+</div>
+<div id="HHVMTime" class="time">
+</div>
+<div id="HippyVMResult" class="result">
+</div>
+<div id="HippyVMTime" class="time">
+</div>
+<div id="HackResult" class="result">
+</div>
+<div id="HackTime" class="time">
+</div>
+<!-- </form> -->
+
+<!--
+<script>
+$(function() {
+	$(".lined").linedtextarea(
+		{selectedLine: 1}
+	);
+});
+</script>
+
+<script>
+    // Allow the usage of the tab key when typing in the code box, 
+    // rather than unfocusing the element.
+
+    var ta = document.getElementById('textarea');
+    ta.onkeydown = function(e) {
+      // if the key was the tab key, and the browser isn't so 
+      // prehistoric that it doesn't support selectionStart / selectionEnd
+      if (e.keyCode === 9 && typeof ta.selectionStart !== 'undefined') {
+        var startPosition = ta.selectionStart;
+        var endPosition = ta.selectionEnd;
+       
+        // insert spaces
+        ta.value = (ta.value.substring(0, startPosition) + 
+                    '    ' + 
+                    ta.value.substring(endPosition, ta.value.length));
+       
+        // move the cursor to after the inserted spaces
+        ta.selectionStart = ta.selectionEnd = startPosition + 4;
+       
+        // don't unfocus the textarea (the default behaviour of the tab key)
+        return false;
+      }
+    };
+
+    // spam catch
+    $(document).ready(function(){
+      $("#editor").attr("action", "/");
+    });
+</script>
+-->
+
+
+
+<script src="src/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var editor = ace.edit("editor_small");
+    editor.setTheme("ace/theme/textmate");
+    editor.getSession().setMode({path:"ace/mode/php", inline:true});
+
+    var code = editor.getSession().getValue();
+
+    editor.on("change", function(e) {
+    	code = editor.getValue();
+	})
+
+</script>
+
+
+
+<script>
+    /*function sendToServer(code) {
+        
+        var data = new FormData();
+       // code = "<?php " + code + " ?>";    -- when not using eval
+
+        data.append("data" , code);
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange=function() {
+                                            
+            if (xhr.readyState==4 && xhr.status==200) {
+                document.getElementById("returnedValue").innerHTML = xhr.responseText;
+            }
+        }
+        xhr.open( 'post', 'SaveCode.php', true );
+        xhr.send(data);
+        alert("sent to server");
+    }*/
+
+  /*  $(document).ready(function() {
+        $("#runCode").click(function() {
+            //alert(code);
+            $.post( "evalCode.php", { data : code})
+                .done(function( response ) {
+                //alert( "Data Loaded: " + response );
+                document.getElementById("ZendResult").innerHTML = "<b>Zend: </b>" + response;
+                document.getElementById("ZendResult").style.display = "block";
+            });
+        });
+    });*/
+
+    $(document).ready(function() {
+        $("#runCode").click(function() {
+            //alert(code);
+            code = code.trim();
+            checkPHPtags();
+            var isZend = document.getElementById("ZendCheck").checked;
+            var isHHVM = document.getElementById("HHVMCheck").checked;
+            var isHippyVM = document.getElementById("HippyVMCheck").checked;
+            var isHack = document.getElementById("HackCheck").checked;
+            $.post( "SaveCode.php", { data : code, zend : isZend,
+                                      hhvm : isHHVM, hippyvm : isHippyVM, hack : isHack})
+                .done(function( response ) {
+                //alert( "Data Loaded: " + response );
+                response = JSON.parse(response);
+                //alert(response.zend_out);
+                //alert(response.zend_time);
+                initialResultStyles();
+                if (isZend) {
+                    /*document.getElementById("ZendResult").innerHTML = "<b>Zend: </b>" + response.zend_out;
+                    document.getElementById("ZendResult").style.display = "inline";*/
+                    setAfterResponse("Zend", response.zend_out, response.zend_time);
+                }
+                if (isHHVM) {
+                    /*document.getElementById("HHVMResult").innerHTML = "<b>HHVM: </b>" + response.hhvm_out;
+                    document.getElementById("HHVMResult").style.display = "inline";*/
+                    setAfterResponse("HHVM", response.hhvm_out, response.hhvm_time);
+                }
+                if (isHippyVM) {
+                    /*document.getElementById("HippyVMResult").innerHTML = "<b>HippyVM: </b>" + response.hippyvm_out;
+                    document.getElementById("HippyVMResult").style.display = "inline";*/
+                    setAfterResponse("HippyVM", response.hippyvm_out, response.hippyvm_time);
+                }
+                if (isHack) {
+                    /*document.getElementById("HackResult").innerHTML = "<b>Hack: </b>" + response.hack_out;
+                    document.getElementById("HackResult").style.display = "inline";*/
+                    setAfterResponse("Hack", response.hack_out, response.hack_time);
+                }
+
+                    
+            });
+        });
+    });
+
+    function checkPHPtags() {
+        var start = code.substring(0, 2);
+        var end = code.substring(code.length - 2, code.length);
+
+        if (start === "<?") {
+            code = code.substring(5, code.length);
+        }
+        if (end === "?>") {
+            code = code.substring(0, code.length - 2);
+        }
+    }
+
+    function initialResultStyles() {
+        document.getElementById("ZendResult").style.display    = "none";
+        document.getElementById("HHVMResult").style.display    = "none";
+        document.getElementById("HippyVMResult").style.display = "none";
+        document.getElementById("HackResult").style.display    = "none";
+        document.getElementById("ZendTime").style.display      = "none";
+        document.getElementById("HHVMTime").style.display      = "none";
+        document.getElementById("HippyVMTime").style.display   = "none";
+        document.getElementById("HackTime").style.display      = "none";
+    }
+
+    function setAfterResponse(prefix, out, time) {
+        var resStr = prefix + "Result";
+        var timeStr = prefix + "Time";
+
+        document.getElementById(resStr).innerHTML = "<b>"+ prefix + ": </b>" + out;
+        document.getElementById(resStr).style.display = "inline";
+        document.getElementById(timeStr).innerHTML = time + "s";
+        document.getElementById(timeStr).style.display = "inline";
+
+    }
+
+    function setExamples(example) {
+        var file = "examples/" + example + ".txt"
+        var rawFile = new XMLHttpRequest();
+        rawFile.open("GET", file, false);
+        rawFile.onreadystatechange = function () {
+            if(rawFile.readyState === 4) {
+                if(rawFile.status === 200 || rawFile.status == 0) {
+                    var allText = rawFile.responseText;
+                    //alert(allText);
+                    editor.setValue(allText, -1);
+                }
+            }
+        }
+        rawFile.send(null);
+    }
+
+    /*
+       
+
+    */
+
+</script>
+</body>
+
+</html>

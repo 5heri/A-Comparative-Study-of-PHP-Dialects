@@ -1,0 +1,30 @@
+function fibonacci($n) {
+	if ($n < 0) {
+		return -1;	
+	}
+	if ($n == 0) {
+		return 0;	
+	}
+	if ($n == 1 || $n == 2) {
+		return 1;	
+	}
+
+	$int1 = 1;
+	$int2 = 1;
+
+	$fib = 0;
+
+	for($i = 1; $i <= $n - 2; $i++) {
+		$fib  = $int1 + $int2;
+		$int2 = $int1;
+		$int1 = $fib;
+	}
+	return $fib;
+}
+
+$num = 5;
+
+// ===== PROCESS - Determing the factorial of the input number =====
+$output = "\n\nFibonacci " . $num . " = " . fibonacci($num) . "\n\n";
+echo $output;
+
