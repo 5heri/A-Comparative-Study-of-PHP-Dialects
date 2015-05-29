@@ -76,7 +76,6 @@
 
 <!-- <button id="runCode" class="launch" onclick="sendToServer(code)">Run</button> -->
 
-
 <button id="runCode" class="launch">Run</button> 
 <br>
 
@@ -191,7 +190,9 @@ $(function() {
     $(document).ready(function() {
         $("#runCode").click(function() {
             //alert(code);
-            code = code.trim();
+            //document.getElementById("runCode").innerHTML = "Running...";
+
+            //code = code.trim();
             checkPHPtags();
             var isZend = document.getElementById("ZendCheck").checked;
             var isHHVM = document.getElementById("HHVMCheck").checked;
@@ -225,14 +226,14 @@ $(function() {
                     document.getElementById("HackResult").style.display = "inline";*/
                     setAfterResponse("Hack", response.hack_out, response.hack_time);
                 }
-
+                //document.getElementById("runCode").innerHTML = "Run";
                     
             });
         });
     });
 
     function checkPHPtags() {
-        var start = code.substring(0, 2);
+        /*var start = code.substring(0, 2);
         var end = code.substring(code.length - 2, code.length);
 
         if (start === "<?") {
@@ -240,7 +241,48 @@ $(function() {
         }
         if (end === "?>") {
             code = code.substring(0, code.length - 2);
+        }*/
+
+        /*
+        ******** DOUBLE CHECK LOGIC
+        */
+        var start = 0;
+        var end = code.length;
+
+        for (i = 0; i < code.length; i++) {
+            var ch_s = code.charAt(i);
+            if ((ch_s !== ' ') && (ch_s !== '\t') && (ch_s !== '\n')) {
+                start = i;
+                break;
+            }
         }
+
+        for (i = code.length - 1; i >= 0; i--) {
+            var ch_e = code.charAt(i);
+            if ((ch_e !== ' ') && (ch_e !== '\t') && (ch_e !== '\n')) {
+                start = i;
+                break;
+            }
+        }
+
+        var start_str = code.substring(start, 2);
+        var end_str = code.substring(end, end + 2);
+
+        if (start_str === "<?") {
+            code = code.substring(0, start - 1) + code.substring(start + 5, code.length);
+            //code = code.substring(start + 5, code.length);
+        }
+        if (end_str === "?>") {
+            code = code.substring(0, end - 1) + code.substring(end + 2, code.length);
+            //code = code.substring(0, code.length - 2);
+        }
+
+        /* INDEXES ARE BUGGY*/
+
+
+        //alert(start_str+"---"+code+"---"+end_str);
+        //alert("---" + start_str + "---");
+        //alert("---" + end_str + "---");
     }
 
     function initialResultStyles() {
@@ -260,9 +302,10 @@ $(function() {
 
         document.getElementById(resStr).innerHTML = "<b>"+ prefix + ": </b>" + out;
         document.getElementById(resStr).style.display = "inline";
-        document.getElementById(timeStr).innerHTML = time + "s";
-        document.getElementById(timeStr).style.display = "inline";
-
+        if (time != null) {
+            document.getElementById(timeStr).innerHTML = time;
+            document.getElementById(timeStr).style.display = "inline";
+        }
     }
 
     function setExamples(example) {

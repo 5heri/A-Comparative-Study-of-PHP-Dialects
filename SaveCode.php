@@ -6,32 +6,47 @@
 		$hippyvm = $_POST['hippyvm'];
 		$hack = $_POST['hack'];
 
-		$fname = "code.php";
+		$ip = getIP();
 
-		$zend_time_before;
-		$zend_time_after;
-		$zend_time;
+		$fname = $ip . "code.php";
+
+		$data = addUtilCode($data, $ip);
+
 		$zend_out = NULL;
 
 		if ($zend == TRUE) {
-			$fname = "tmp/zend/code.php";	
+			$fname = "tmp/zend/" . $fname;	
 			$file = fopen($fname, 'w');
-			fwrite($file, "<?php " . $data . " ?>" );
+			fwrite($file, "<?php \n" . $data . " \n?>" );
 			fclose($file);
 
-			$zend_time_before = microtime(true);
-			$zend_out = `php tmp/zend/code.php`;
-			$zend_time_after = microtime(true);
+			//$zend_out = `php $fname`;
+			exec("php $fname", $out, $zend_exit_code);
 
-			$zend_time = round($zend_time_after - $zend_time_before, 5);
+			//$pos = strrpos($zend_out, "time___"); 
+			//$zend_time = substring($zend_out, $pos - 10, $pos);
+			//$zend_out = substring($zend_out, 0, $pos - 10);
 
-			`rm tmp/zend/code.php`;
+			//$zend_exit_code = `echo $?`;
+			if ($zend_exit_code == 0) {
+				for ($i = 0; $i < count($out) - 1; ++$i) {
+					if ($i == 0) {
+						$zend_out = $out[0];
+					} else {
+						$zend_out = $zend_out . "\n" . $out[$i];
+					}
+				}
+				$zend_time = $out[count($out) - 1] . "s";
+			} else {
+				$zend_out = $out[count($out) - 1];
+				$zend_time = NULL;
+			}
+			
+			//$zend_out = $out;
+			//$zend_time = $zend_exit_code;
+
+			//`rm $fname`;
 		}
-
-		//$zend_out = "?!?!?!?";
-		//if (defined('HHVM_VERSION')) {
-		//	$zend_out = "HHVM IS ON!!";
-		//}
 
 		$hhvm_time_before;
 		$hhvm_time_after;
@@ -98,7 +113,33 @@
 							   "hhvm_out"=>$hhvm_out, "hhvm_time"=>$hhvm_time,
 							   "hippyvm_out"=>$hippyvm_out, "hippyvm_time"=>$hippyvm_time,
 							   "hack_out"=>$hack_out, "hack_time"=>$hack_time));
-		//echo $zend_time . " " . $hhvm_time . " " . $hippyvm_time . " " . $hack_time;
 
+	}
+
+	function getIP() {
+    	if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+ 		   $ip = $_SERVER['HTTP_CLIENT_IP'];
+		} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    		$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		} else {
+    		$ip = $_SERVER['REMOTE_ADDR'];
+		}
+		$ip = str_replace(":", "_", $ip);
+		$ip = str_replace(".", "_", $ip);
+		return $ip;
+	}
+
+	function addUtilCode($data, $ip) {
+		$data = "$" . "time_before_$ip = microtime(true);\n" . $data;
+		$data = "set_time_limit(3);\nini_set('memory_limit','64K');\n" . $data; 
+		$data = $data . "\n$" . "time_after_$ip = microtime(true);\n"; 
+		$data = $data . str_replace("n", "\n", "echo 'n';");
+		$data = $data . "\necho printf('%.7f', " . "$" . "time_after_$ip - " . "$" . "time_before_$ip);\n";
+
+		return $data;
+	}
+
+	function substring($str, $start, $end) {
+		return substr($str, $start, $end - $start);
 	}
 ?>
