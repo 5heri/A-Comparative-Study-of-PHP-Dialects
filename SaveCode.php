@@ -157,6 +157,9 @@
 						}
 					}
 				}*/
+				if (strpos($exec_out_hippyvm[0], "In function") !== false) {
+					$exec_out_hippyvm[0] = "";
+				}
 				$is_first_hippyvm = true;
 				for ($i = 0; $i < count($exec_out_hippyvm); ++$i) {
 					if (strcmp($exec_out_hippyvm[$i], "") != 0) {
