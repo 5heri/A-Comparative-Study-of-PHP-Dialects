@@ -168,7 +168,7 @@
                 		}
 					}
 				}
-				while(strpos($hippyvm_out, "/var/www/html/website/tmp/") !== false) {
+				while(strpos($hippyvm_out, "tmp/hippyvm") !== false) {
 					$hippyvm_out = errorPrinter($hippyvm_out, "tmp/hippyvm/");
 				}
 				$hippyvm_out = errorPrinterHippyvmCaseTrace($hippyvm_out);
