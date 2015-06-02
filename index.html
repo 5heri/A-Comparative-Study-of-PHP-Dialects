@@ -16,7 +16,7 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand">PHP Labs</a>
+      <a class="navbar-brand" href="index.html">PHP Labs</a>
     </div>
     <div>
       <ul class="nav navbar-nav navbar-right">
@@ -245,6 +245,10 @@ $(function() {
 
         var start_tag = false;
 
+        if (code.charAt(0) === '\n') {
+            start_tag = true;
+        }
+
         for (i = 0; i < code.length; i++) {
             var ch_s = code.charAt(i);
             if ((ch_s !== ' ') && (ch_s !== '\t') && (ch_s !== '\n')) {
@@ -255,7 +259,6 @@ $(function() {
 
         var start_str = code.substr(start, 2);
         if (start_str === "<?") {
-            start_tag = true;
             code = code.substring(0, start - 1) + code.substring(start + 5, code.length);
         }
 
