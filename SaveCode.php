@@ -137,7 +137,7 @@
 					if ($i == 0) {
 						$hack_out = $exec_out_hack[0];
 					} else {
-						$hack_out = $hack_out . "\n" . $exec_out_hack[$i];
+						$hack_out = $hack_out . "<br>" . $exec_out_hack[$i];
 					}
 				}
 				$hack_time = $exec_out_hack[count($exec_out_hack) - 1] . "s";
@@ -147,7 +147,7 @@
 
 				for ($i = 0; $i < count($exec_out_hack); ++$i) {
 					if (strcmp($exec_out_hack[$i], "") != 0) {
-						$hack_out = $hack_out . "\n" . $exec_out_hack[$i];
+						$hack_out = $hack_out . "<br>" . $exec_out_hack[$i];
 					}
 				}
 				$zend_time = NULL;
