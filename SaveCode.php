@@ -229,7 +229,7 @@
 				while(strpos($hack_out, "/var/www/html/website/tmp/") !== false) {
 					$hack_out = errorPrinter($hack_out);
 				}
-				$hack_out = fixLineNumbers($hack_out);
+				$hack_out = fixLineNumbers($hack_out, $start_tag);
 				$hack_time = NULL;
 			}
 			//$hack_out = $exec_out_hack;
