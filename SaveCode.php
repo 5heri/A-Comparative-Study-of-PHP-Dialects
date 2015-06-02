@@ -190,19 +190,19 @@
 			}
 		}
 
-		return substr($error_out, 0, $start) . substr($error_out, $end + 1, strlen($error_out));
+		return substr($error_out, 0, $start) . " ". substr($error_out, $end + 1, strlen($error_out));
 
 
 
 	}
 
-	function errorPrinterHippyvm($error_out) {
+	/*function errorPrinterHippyvm($error_out) {
 
 	}
 
 	function isAlpa() {
 
-	}
+	}*/
 
 	function getIP() {
     	if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
