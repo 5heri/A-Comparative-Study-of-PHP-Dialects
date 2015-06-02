@@ -174,7 +174,11 @@
 					$hippyvm_out = errorPrinterHippyvm($hippyvm_out);
 				}
 				$hippyvm_out = errorPrinterHippyvmCaseTrace($hippyvm_out);
-				$hippyvm_out = fixLineNumbers($hippyvm_out, $start_tag);
+				if (strpos($hippyvm_out, "Parse error") === false) {
+					$hippyvm_out = fixLineNumbers($hippyvm_out, $start_tag);
+				} else {
+					$hippyvm_out = chop($hippyvm_out, ":");
+				}
 				$hippyvm_time = NULL;
 			}
 
