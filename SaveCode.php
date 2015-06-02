@@ -219,8 +219,8 @@
                 		}
 					}
 				}
-				while(strpos($zend_out, "/var/www/html/website/tmp/") !== false) {
-					$zend_out = errorPrinterZendHhvmHack($zend_out);
+				while(strpos($hack_out, "/var/www/html/website/tmp/") !== false) {
+					$hack_out = errorPrinterZendHhvmHack($hack_out);
 				}
 				$hack_time = NULL;
 			}
@@ -245,7 +245,6 @@
 				break;
 			}
 		}
-
 		return substr($error_out, 0, $start - 3) . " ". substr($error_out, $end + 1, strlen($error_out));
 	}
 
