@@ -246,10 +246,10 @@ $(function() {
         var start = 0;
         var end = code_copy.length;
 
-        var start_tag = false;
+        var newline_tag = false;
 
         if (code.charAt(0) === '\n') {
-            start_tag = true;
+            newline_tag = true;
         }
 
         for (i = 0; i < code_copy.length; i++) {
@@ -262,7 +262,7 @@ $(function() {
 
         var start_str = code.substr(start, 2);
         if (start_str === "<?") {
-            start_tag = start_tag && true;
+            start_tag = true;
             code_copy = code_copy.substring(0, start - 1) + code_copy.substring(start + 5, code_copy.length);
         }
 
@@ -278,8 +278,9 @@ $(function() {
         if (end_str === "?>") {
             code_copy = code_copy.substring(0, end - 1) + code_copy.substring(end + 2, code_copy.length);
         }
-
-        return [code_copy, start_tag];
+        var both_tag = start_tag && newline_tag;
+        alert()
+        return [code_copy, both_tag];
     }
 
     function initialResultStyles() {
