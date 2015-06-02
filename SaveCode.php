@@ -175,7 +175,7 @@
 				}
 				$hippyvm_out = errorPrinterHippyvmCaseTrace($hippyvm_out);
 				if (strpos($hippyvm_out, "Parse error") === false) {
-					$hippyvm_out = fixLineNumbers($hippyvm_out, $start_tag);
+					$hippyvm_out = "Parse error";
 				} else {
 					$hippyvm_out = rtrim($hippyvm_out, ":");
 				}
