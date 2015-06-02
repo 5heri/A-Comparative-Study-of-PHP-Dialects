@@ -201,7 +201,9 @@ $(function() {
 
             //code = code.trim();
             var copy_code = code.copy();
-            var startTag = checkPHPtags(copy_code);
+            var returns = checkPHPtags(copy_code);
+            copy_code = returns[0];
+            startTag = returns[1];
             var isZend = document.getElementById("ZendCheck").checked;
             var isHHVM = document.getElementById("HHVMCheck").checked;
             var isHippyVM = document.getElementById("HippyVMCheck").checked;
@@ -277,7 +279,7 @@ $(function() {
             code_copy = code_copy.substring(0, end - 1) + code_copy.substring(end + 2, code_copy.length);
         }
 
-        return start_tag;
+        return [code_copy, start_tag];
     }
 
     function initialResultStyles() {
