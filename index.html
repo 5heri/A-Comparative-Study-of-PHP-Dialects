@@ -200,12 +200,13 @@ $(function() {
             //document.getElementById("runCode").innerHTML = "Running...";
 
             //code = code.trim();
-            var startTag = checkPHPtags();
+            var copy_code = code.copy();
+            var startTag = checkPHPtags(copy_code);
             var isZend = document.getElementById("ZendCheck").checked;
             var isHHVM = document.getElementById("HHVMCheck").checked;
             var isHippyVM = document.getElementById("HippyVMCheck").checked;
             var isHack = document.getElementById("HackCheck").checked;
-            $.post( "SaveCode.php", { data : code, start : startTag, zend : isZend,
+            $.post( "SaveCode.php", { data : copy_code, start : startTag, zend : isZend,
                                       hhvm : isHHVM, hippyvm : isHippyVM, hack : isHack})
                 .done(function( response ) {
                 //alert( "Data Loaded: " + response );
@@ -239,9 +240,9 @@ $(function() {
         });
     });
 
-    function checkPHPtags() {
+    function checkPHPtags(code_copy) {
         var start = 0;
-        var end = code.length;
+        var end = code_copy.length;
 
         var start_tag = false;
 
@@ -249,8 +250,8 @@ $(function() {
             start_tag = true;
         }
 
-        for (i = 0; i < code.length; i++) {
-            var ch_s = code.charAt(i);
+        for (i = 0; i < code_copy.length; i++) {
+            var ch_s = code_copy.charAt(i);
             if ((ch_s !== ' ') && (ch_s !== '\t') && (ch_s !== '\n')) {
                 start = i;
                 break;
@@ -260,20 +261,20 @@ $(function() {
         var start_str = code.substr(start, 2);
         if (start_str === "<?") {
             start_tag = start_tag && true;
-            code = code.substring(0, start - 1) + code.substring(start + 5, code.length);
+            code_copy = code_copy.substring(0, start - 1) + code_copy.substring(start + 5, code_copy.length);
         }
 
-        for (i = code.length - 1; i >= 0; i--) {
-            var ch_e = code.charAt(i);
+        for (i = code_copy.length - 1; i >= 0; i--) {
+            var ch_e = code_copy.charAt(i);
             if ((ch_e !== ' ') && (ch_e !== '\t') && (ch_e !== '\n')) {
                 end = i;
                 break;
             }
         }
 
-        var end_str = code.substr(end - 1, 2);
+        var end_str = code_copy.substr(end - 1, 2);
         if (end_str === "?>") {
-            code = code.substring(0, end - 1) + code.substring(end + 2, code.length);
+            code_copy = code_copy.substring(0, end - 1) + code_copy.substring(end + 2, code_copy.length);
         }
 
         return start_tag;
