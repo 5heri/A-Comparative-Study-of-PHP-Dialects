@@ -29,7 +29,7 @@
 					if ($i == 0) {
 						$zend_out = $exec_out_zend[0];
 					} else {
-						$zend_out = $zend_out . "\n" . $exec_out_zend[$i];
+						$zend_out = $zend_out . "<br>" . $exec_out_zend[$i];
 					}
 				}
 				$zend_time = $exec_out_zend[count($exec_out_zend) - 1] . "s";
@@ -39,7 +39,7 @@
 
 				for ($i = 0; $i < count($exec_out_zend); ++$i) {
 					if (strcmp($exec_out_zend[$i], "") != 0) {
-						$zend_out = $zend_out . "\n" . $exec_out_zend[$i];
+						$zend_out = $zend_out . "<br>" . $exec_out_zend[$i];
 					}
 				}
 				$zend_time = NULL;
@@ -65,7 +65,7 @@
 					if ($i == 0) {
 						$hhvm_out = $exec_out_hhvm[0];
 					} else {
-						$hhvm_out = $hhvm_out . "\n" . $exec_out_hhvm[$i];
+						$hhvm_out = $hhvm_out . "<br>" . $exec_out_hhvm[$i];
 					}
 				}
 				$hhvm_time = $exec_out_hhvm[count($exec_out_hhvm) - 1] . "s";
@@ -75,7 +75,7 @@
 
 				for ($i = 0; $i < count($exec_out_hhvm); ++$i) {
 					if (strcmp($exec_out_hhvm[$i], "") != 0) {
-						$hhvm_out = $hhvm_out . "\n" . $exec_out_hhvm[$i];
+						$hhvm_out = $hhvm_out . "<br>" . $exec_out_hhvm[$i];
 					}
 				}
 				$zend_time = NULL;
@@ -102,7 +102,7 @@
 					if ($i == 0) {
 						$hippyvm_out = $exec_out_hippyvm[0];
 					} else {
-						$hippyvm_out = $hippyvm_out . "\n" . $exec_out_hippyvm[$i];
+						$hippyvm_out = $hippyvm_out . "<br>" . $exec_out_hippyvm[$i];
 					}
 				}
 				$hippyvm_time = $exec_out_hippyvm[count($exec_out_hippyvm) - 1] . "s";
@@ -112,7 +112,7 @@
 
 				for ($i = 0; $i < count($exec_out_hippyvm); ++$i) {
 					if (strcmp($exec_out_hippyvm[$i], "") != 0) {
-						$zend_hippyvm = $hippyvm_out . "\n" . $exec_out_hippyvm[$i];
+						$zend_hippyvm = $hippyvm_out . "<br>" . $exec_out_hippyvm[$i];
 					}
 				}
 				$zend_time = NULL;
