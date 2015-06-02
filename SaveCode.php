@@ -22,7 +22,7 @@
 			fwrite($file, "<?php \n" . $data . " \n?>" );
 			fclose($file);
 
-			exec("php $fname", $exec_out_zend, $zend_exit_code);
+			exec("php $fname 2>&1", $exec_out_zend, $zend_exit_code);
 
 			if ($zend_exit_code == 0) {
 				for ($i = 0; $i < count($exec_out_zend) - 1; ++$i) {
@@ -49,7 +49,7 @@
 			fwrite($file, "<?php \n" . $data . " \n?>" );
 			fclose($file);
 
-			exec("hhvm $fname", $exec_out_hhvm, $hhvm_exit_code);
+			exec("hhvm $fname 2>&1", $exec_out_hhvm, $hhvm_exit_code);
 
 			if ($hhvm_exit_code == 0) {
 				for ($i = 0; $i < count($exec_out_hhvm) - 1; ++$i) {
@@ -76,7 +76,7 @@
 			fwrite($file, "<?php \n" . $data . " \n?>" );
 			fclose($file);
 
-			exec("/usr/src/hippyvm/hippy-c $fname", $exec_out_hippyvm, $hippyvm_exit_code);
+			exec("/usr/src/hippyvm/hippy-c $fnamem 2>&1", $exec_out_hippyvm, $hippyvm_exit_code);
 
 			if ($hippyvm_exit_code == 0) {
 				for ($i = 0; $i < count($exec_out_hippyvm) - 1; ++$i) {
@@ -103,7 +103,7 @@
 			fwrite($file, "<?hh \n" . $data);
 			fclose($file);
 
-			exec("hhvm $fname", $exec_out_hack, $hack_exit_code);
+			exec("hhvm $fname 2>&1", $exec_out_hack, $hack_exit_code);
 
 			if ($hack_exit_code == 0) {
 				for ($i = 0; $i < count($exec_out_hack) - 1; ++$i) {
