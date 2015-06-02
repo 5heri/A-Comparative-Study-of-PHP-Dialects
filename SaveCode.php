@@ -37,13 +37,24 @@
 				//$zend_out = $exec_out_zend[count($exec_out_zend) - 1];
 				//$zend_time = NULL;
 
-				for ($i = 0; $i < count($exec_out_zend); ++$i) {
+				/*for ($i = 0; $i < count($exec_out_zend); ++$i) {
 					if (strcmp($exec_out_zend[$i], "") != 0) {
 						if ($i == 0) {
 							$zend_out = $exec_out_zend[0];
 						} else {
 							$zend_out = $zend_out . "<br>" . $exec_out_zend[$i];
 						}
+					}
+				}*/
+				$is_first_zend = true;
+				for ($i = 0; $i < count($exec_out_zend); ++$i) {
+					if (strcmp($exec_out_zend[$i], "") != 0) {
+                		if ($is_first_zend) {
+                     		$zend_out = $exec_out_zend[$i];
+                     		$is_first_zend = false;
+                		} else {
+                     		$zend_out = $zend_out . "<br>" . $exec_out_zend[$i];
+                		}
 					}
 				}
 				while(strpos($zend_out, "/var/www/html/website/tmp/") !== false) {
@@ -80,7 +91,7 @@
 				//$hhvm_out = $exec_out_hhvm[count($exec_out_hhvm) - 1];
 				//$hhvm_time = NULL;
 
-				for ($i = 0; $i < count($exec_out_hhvm); ++$i) {
+				/*for ($i = 0; $i < count($exec_out_hhvm); ++$i) {
 					if (strcmp($exec_out_hhvm[$i], "") != 0) {
 						if ($i == 0) {
 							$hhvm_out = $exec_out_hhvm[0];
@@ -88,7 +99,19 @@
 							$hhvm_out = $hhvm_out . "<br>" . $exec_out_hhvm[$i];
 						}
 					}
+				}*/
+				$is_first_hhvm = true;
+				for ($i = 0; $i < count($exec_out_hhvm); ++$i) {
+					if (strcmp($exec_out_hhvm[$i], "") != 0) {
+                		if ($is_first_hhvm) {
+                     		$hhvm_out = $exec_out_hhvm[$i];
+                     		$is_first_hhvm = false;
+                		} else {
+                     		$hhvm_out = $hhvm_out . "<br>" . $exec_out_hhvm[$i];
+                		}
+					}
 				}
+
 
 				while(strpos($hhvm_out, "/var/www/html/website/tmp/") !== false) {
 					$hhvm_out = errorPrinterZendHhvmHack($hhvm_out);
@@ -125,13 +148,24 @@
 				//$hippyvm_out = $exec_out_hippyvm[count($exec_out_hippyvm) - 1];
 				//$hippyvm_time = NULL;
 
-				for ($i = 0; $i < count($exec_out_hippyvm); ++$i) {
+				/*for ($i = 0; $i < count($exec_out_hippyvm); ++$i) {
 					if (strcmp($exec_out_hippyvm[$i], "") != 0) {
 						if ($i == 0) {
 							$hippyvm_out = $exec_out_hippyvm[0];
 						} else {
 							$hippyvm_out = $hippyvm_out . "<br>" . $exec_out_hippyvm[$i];
 						}
+					}
+				}*/
+				$is_first_hippyvm = true;
+				for ($i = 0; $i < count($exec_out_hippyvm); ++$i) {
+					if (strcmp($exec_out_hippyvm[$i], "") != 0) {
+                		if ($is_first_hippyvm) {
+                     		$hippyvm_out = $exec_out_hippyvm[$i];
+                     		$is_first_hippyvm = false;
+                		} else {
+                     		$hippyvm_out = $hippyvm_out . "<br>" . $exec_out_hippyvm[$i];
+                		}
 					}
 				}
 				$hippyvm_time = NULL;
@@ -164,13 +198,25 @@
 				//$hack_out = $exec_out_hack[count($exec_out_hack) - 1];
 				//$hack_time = NULL;
 
-				for ($i = 0; $i < count($exec_out_hack); ++$i) {
+				/*for ($i = 0; $i < count($exec_out_hack); ++$i) {
 					if (strcmp($exec_out_hack[$i], "") != 0) {
 						if ($i == 0) {
 							$hack_out = $exec_out_hack[0];
 						} else {
 							$hack_out = $hack_out . "<br>" . $exec_out_hack[$i];
 						}
+					}
+				}*/
+
+				$is_first_hhack = true;
+				for ($i = 0; $i < count($exec_out_hack); ++$i) {
+					if (strcmp($exec_out_hack[$i], "") != 0) {
+                		if ($is_first_hack) {
+                     		$hack_out = $exec_out_hack[$i];
+                     		$is_first_hack = false;
+                		} else {
+                     		$hack_out = $hack_out . "<br>" . $exec_out_hack[$i];
+                		}
 					}
 				}
 				while(strpos($zend_out, "/var/www/html/website/tmp/") !== false) {
