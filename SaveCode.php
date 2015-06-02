@@ -16,7 +16,7 @@
 
 		$zend_out = NULL;
 
-		if ($zend == TRUE) {
+		if ($zend === "true") {
 			$fname = "tmp/zend/" . $fname_top;	
 			$file = fopen($fname, 'w');
 			fwrite($file, "<?php \n" . $data . " \n?>" );
@@ -70,7 +70,7 @@
 
 		$hhvm_out = NULL;
 
-		if ($hhvm == TRUE) {
+		if ($hhvm === "true") {
 			$fname = "tmp/hhvm/" . $fname_top;	
 			$file = fopen($fname, 'w');
 			fwrite($file, "<?php \n" . $data . " \n?>" );
@@ -127,7 +127,7 @@
 
 		$hippyvm_out = NULL;
 
-		if ($hippyvm == TRUE) {
+		if ($hippyvm === "true") {
 			$fname = "tmp/hippyvm/" . $fname_top;	
 			$file = fopen($fname, 'w');
 			fwrite($file, "<?php \n" . $data . " \n?>" );
@@ -184,7 +184,7 @@
 
 		$hack_out = NULL;
 
-		if ($hack == TRUE) {
+		if ($hack === "true") {
 			$fname = "tmp/hack/" . $fname_top;	
 			$file = fopen($fname, 'w');
 			fwrite($file, "<?hh \n" . $data);
@@ -301,7 +301,7 @@
 			}
 		}
 		$actual_value = substr($string, $start, $end - $start + 1) - 4;
-		if ($buffer_exists) {
+		if ($buffer_exists === "true") {
 			$actual_value++;
 		}
 		return $actual_value;

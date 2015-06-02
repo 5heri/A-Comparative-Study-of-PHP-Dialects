@@ -200,7 +200,7 @@ $(function() {
             //document.getElementById("runCode").innerHTML = "Running...";
 
             //code = code.trim();
-            var copy_code = code.copy();
+            var copy_code = code.valueOf();
             var returns = checkPHPtags(copy_code);
             copy_code = returns[0];
             startTag = returns[1];
