@@ -38,7 +38,7 @@
 				$zend_time = NULL;
 			}
 
-			//`rm $fname`;
+			`rm $fname`;
 		}
 
 		$hhvm_out = NULL;
@@ -65,45 +65,61 @@
 				$hhvm_time = NULL;
 			}
 
-			//`rm $fname`;
+			`rm $fname`;
 		}
 
 		$hippyvm_out = NULL;
 
 		if ($hippyvm == TRUE) {
-			$fname = "tmp/hippyvm/code.php";
+			$fname = "tmp/hippyvm/" . $fname_top;	
 			$file = fopen($fname, 'w');
-			fwrite($file, "<?php " . $data . " ?>" );
+			fwrite($file, "<?php \n" . $data . " \n?>" );
 			fclose($file);
 
-			$hippyvm_time_before = microtime(true);
-			$hippyvm_out = `/usr/src/hippyvm/hippy-c tmp/hippyvm/code.php`;
-			$hippyvm_time_after = microtime(true);
+			exec("/usr/src/hippyvm/hippy-c $fname", $exec_out_hippyvm, $hippyvm_exit_code);
 
-			$hippyvm_time = round($hippyvm_time_after - $hippyvm_time_before, 5);
+			if ($hippyvm_exit_code == 0) {
+				for ($i = 0; $i < count($exec_out_hippyvm) - 1; ++$i) {
+					if ($i == 0) {
+						$hippyvm_out = $exec_out_hippyvm[0];
+					} else {
+						$hippyvm_out = $hippyvm_out . "\n" . $exec_out_hippyvm[$i];
+					}
+				}
+				$hippyvm_time = $exec_out_hippyvm[count($exec_out_hippyvm) - 1] . "s";
+			} else {
+				$hippyvm_out = $exec_out_hippyvm[count($exec_out_hippyvm) - 1];
+				$hippyvm_time = NULL;
+			}
 
-			`rm tmp/hippyvm/code.php`;
+			`rm $fname`;
 		}
 
-		$hack_time_before;
-		$hack_time_after;
-		$hack_time;
 		$hack_out = NULL;
 
 		if ($hack == TRUE) {
-			$fname = "tmp/hack/code.php";
+			$fname = "tmp/hack/" . $fname_top;	
 			$file = fopen($fname, 'w');
-			fwrite($file, "<?hh " . $data);
-			/*fwrite($file, "<?php " . $data . " ?>" );*/   // until hhvm is not used
+			fwrite($file, "<?hh \n" . $data);
 			fclose($file);
 
-			$hack_time_before = microtime(true);
-			$hack_out = `hhvm tmp/hack/code.php`;
-			$hack_time_after = microtime(true);
+			exec("hhvm $fname", $exec_out_hack, $hack_exit_code);
 
-			$hack_time = round($hack_time_after - $hack_time_before, 5);
+			if ($hack_exit_code == 0) {
+				for ($i = 0; $i < count($exec_out_hack) - 1; ++$i) {
+					if ($i == 0) {
+						$hack_out = $exec_out_hack[0];
+					} else {
+						$hack_out = $hack_out . "\n" . $exec_out_hack[$i];
+					}
+				}
+				$hack_time = $exec_out_hack[count($exec_out_hack) - 1] . "s";
+			} else {
+				$hack_out = $exec_out_hack[count($exec_out_hack) - 1];
+				$hack_time = NULL;
+			}
 
-			`rm tmp/hack/code.php`;
+			`rm $fname`;
 		}
 
 		echo json_encode(array("zend_out"=>$zend_out, "zend_time"=>$zend_time,
