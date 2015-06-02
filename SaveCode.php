@@ -40,7 +40,7 @@
 
 			$zend_out = $exec_out_zend;
 
-			`rm $fname`;
+			// `rm $fname`;
 		}
 
 		$hhvm_out = NULL;
@@ -69,7 +69,7 @@
 
 			$hhvm_out = $exec_out_hhvm;
 
-			`rm $fname`;
+			// `rm $fname`;
 		}
 
 		$hippyvm_out = NULL;
@@ -98,7 +98,7 @@
 
 			$hippyvm_out = $exec_out_hippyvm;
 
-			`rm $fname`;
+			// `rm $fname`;
 		}
 
 		$hack_out = NULL;
@@ -125,7 +125,7 @@
 				$hack_time = NULL;
 			}
 
-			`rm $fname`;
+			// `rm $fname`;
 
 			$hack_out = $exec_out_hack;
 		}
