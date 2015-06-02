@@ -58,7 +58,7 @@
 					}
 				}
 				while(strpos($zend_out, "/var/www/html/website/tmp/") !== false) {
-					$zend_out = errorPrinterZendHhvmHack($zend_out);
+					$zend_out = errorPrinter($zend_out);
 				}
 				$zend_time = NULL;
 			}
@@ -114,7 +114,7 @@
 
 
 				while(strpos($hhvm_out, "/var/www/html/website/tmp/") !== false) {
-					$hhvm_out = errorPrinterZendHhvmHack($hhvm_out);
+					$hhvm_out = errorPrinter($hhvm_out);
 				}
 				
 				$hhvm_time = NULL;
@@ -168,6 +168,10 @@
                 		}
 					}
 				}
+				while(strpos($hippyvm_out, "/var/www/html/website/tmp/") !== false) {
+					$hippyvm_out = errorPrinter($hippyvm_out);
+				}
+				$hippyvm_out = errorPrinterHippyvmCase($hippyvm_out);
 				$hippyvm_time = NULL;
 			}
 
@@ -220,7 +224,7 @@
 					}
 				}
 				while(strpos($hack_out, "/var/www/html/website/tmp/") !== false) {
-					$hack_out = errorPrinterZendHhvmHack($hack_out);
+					$hack_out = errorPrinter($hack_out);
 				}
 				$hack_time = NULL;
 			}
@@ -235,7 +239,7 @@
 
 	}
 
-	function errorPrinterZendHhvmHack($error_out) {
+	function errorPrinter($error_out) {
 		$start = strpos($error_out, "/var/www/html/website/tmp/");
 		$end = strlen($error_out);
 
@@ -248,11 +252,13 @@
 		return substr($error_out, 0, $start - 3) . " ". substr($error_out, $end + 1, strlen($error_out));
 	}
 
-	/*function errorPrinterHippyvm($error_out) {
-
+	function errorPrinterHippyvmCase($error_out) {
+		$start = strpos($error_out, "RPython traceback:");
+		$end = strpos($error_out, "...");
+		return substr($error_out, 0, $start) . " ". substr($error_out, $end + 3, strlen($error_out));
 	}
 
-	function isAlpa() {
+	/*function isAlpa() {
 
 	}*/
 
