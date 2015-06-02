@@ -244,7 +244,7 @@
 		$end = strlen($error_out);
 
 		if (!$start) {
-			return;
+			return $error_out;
 		}
 
 		for ($i = $start; $i < strlen($error_out) - 1; ++$i) {
@@ -260,7 +260,7 @@
 		$start = strpos($error_out, "RPython traceback:");
 		$end = strpos($error_out, "...");
 		if (!$start || !$end) {
-			return;
+			return $error_out;
 		}
 		return substr($error_out, 0, $start) . " ". substr($error_out, $end + 3, strlen($error_out));
 	}
@@ -270,7 +270,7 @@
 		$end = strlen($error_out);
 
 		if (!$start) {
-			return;
+			return $error_out; 
 		}
 
 		for ($i = $start; $i < strlen($error_out) - 1; ++$i) {
@@ -279,7 +279,7 @@
 				break;
 			}
 		}
-		return substr($error_out, 0, $start - 5) . " ". substr($error_out, $end + 1, strlen($error_out));
+		return substr($error_out, 0, $start - 3) . " ". substr($error_out, $end + 1, strlen($error_out));
 	}
 
 	/*function isAlpa() {
