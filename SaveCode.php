@@ -38,6 +38,8 @@
 				$zend_time = NULL;
 			}
 
+			$zend_out = $exec_out_zend;
+
 			`rm $fname`;
 		}
 
@@ -65,6 +67,8 @@
 				$hhvm_time = NULL;
 			}
 
+			$hhvm_out = $exec_out_hhvm;
+
 			`rm $fname`;
 		}
 
@@ -91,6 +95,8 @@
 				$hippyvm_out = $exec_out_hippyvm[count($exec_out_hippyvm) - 1];
 				$hippyvm_time = NULL;
 			}
+
+			$hippyvm_out = $exec_out_hippyvm;
 
 			`rm $fname`;
 		}
@@ -120,6 +126,8 @@
 			}
 
 			`rm $fname`;
+
+			$hack_out = $exec_out_hack;
 		}
 
 		echo json_encode(array("zend_out"=>$zend_out, "zend_time"=>$zend_time,
