@@ -290,7 +290,7 @@
 		$start = strpos($string, "on line") + 8;
 		$end = strlen($string);
 
-		if (!start) {
+		if (!$start) {
 			return $string;
 		}
 
