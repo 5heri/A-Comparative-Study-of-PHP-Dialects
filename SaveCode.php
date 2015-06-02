@@ -208,7 +208,7 @@
 					}
 				}*/
 
-				$is_first_hhack = true;
+				$is_first_hack = true;
 				for ($i = 0; $i < count($exec_out_hack); ++$i) {
 					if (strcmp($exec_out_hack[$i], "") != 0) {
                 		if ($is_first_hack) {
