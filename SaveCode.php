@@ -286,7 +286,7 @@
 		return substr($error_out, 0, $start - 3) . " ". substr($error_out, $end + 1, strlen($error_out));
 	}
 
-	function fixLineNumbers($string) {
+	function fixLineNumbers($string, $buffer_exists) {
 		$start = strpos($string, "on line") + 8;
 		$end = strlen($string);
 
@@ -301,6 +301,9 @@
 			}
 		}
 		$actual_value = substr($string, $start, $end - $start + 1) - 4;
+		if ($buffer_exists) {
+			$actual_value++;
+		}
 		return $actual_value;
 	}
 
