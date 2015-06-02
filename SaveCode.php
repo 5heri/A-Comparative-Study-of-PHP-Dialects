@@ -5,11 +5,9 @@
 		$hhvm = $_POST['hhvm'];
 		$hippyvm = $_POST['hippyvm'];
 		$hack = $_POST['hack'];
-
 		$start_tag = $_POST['start'];
 
 		$ip = getIP();
-
 		$fname_top = $ip . "code.php";
 
 		$data = addUtilCode($data, $ip);
@@ -60,6 +58,7 @@
 				while(strpos($zend_out, "/var/www/html/website/tmp/") !== false) {
 					$zend_out = errorPrinter($zend_out);
 				}
+				$zend_out = fixLineNumbers($zend_out, $start_tag);
 				$zend_time = NULL;
 			}
 
@@ -116,7 +115,7 @@
 				while(strpos($hhvm_out, "/var/www/html/website/tmp/") !== false) {
 					$hhvm_out = errorPrinter($hhvm_out);
 				}
-				
+				$hhvm_out = fixLineNumbers($hhvm_out, $start_tag);
 				$hhvm_time = NULL;
 			}
 
@@ -175,6 +174,7 @@
 					$hippyvm_out = errorPrinterHippyvm($hippyvm_out);
 				}
 				$hippyvm_out = errorPrinterHippyvmCaseTrace($hippyvm_out);
+				$hippyvm_out = fixLineNumbers($hippyvm_out, $start_tag);
 				$hippyvm_time = NULL;
 			}
 
