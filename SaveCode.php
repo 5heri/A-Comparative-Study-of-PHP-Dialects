@@ -87,6 +87,7 @@
 						}
 					}
 				}
+				$hhvm_out = errorPrinterZendHhvmHack($hhvm_out);
 				$hhvm_time = NULL;
 			}
 
@@ -166,6 +167,7 @@
 						}
 					}
 				}
+				$hack_out = errorPrinterZendHhvmHack($hack_out);
 				$hack_time = NULL;
 			}
 			//$hack_out = $exec_out_hack;
