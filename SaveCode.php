@@ -67,7 +67,7 @@
 				$hhvm_time = NULL;
 			}
 
-			//$hhvm_out = $exec_out_hhvm;
+			$hhvm_out = $exec_out_hhvm;
 
 			//`rm $fname`;
 		}
@@ -96,7 +96,7 @@
 				$hippyvm_time = NULL;
 			}
 
-			//$hippyvm_out = $exec_out_hippyvm;
+			$hippyvm_out = $exec_out_hippyvm;
 			//`rm $fname`;
 		}
 
@@ -123,7 +123,7 @@
 				$hack_out = $exec_out_hack[count($exec_out_hack) - 1];
 				$hack_time = NULL;
 			}
-			//$hack_out = $exec_out_hack;
+			$hack_out = $exec_out_hack;
 			//`rm $fname`;
 		}
 
