@@ -58,7 +58,7 @@
 					}
 				}
 				while(strpos($zend_out, "/var/www/html/website/tmp/") !== false) {
-					$zend_out = errorPrinter($zend_out);
+					$zend_out = errorPrinter($zend_out, "/var/www/html/website/tmp/");
 				}
 				$zend_time = NULL;
 			}
@@ -114,7 +114,7 @@
 
 
 				while(strpos($hhvm_out, "/var/www/html/website/tmp/") !== false) {
-					$hhvm_out = errorPrinter($hhvm_out);
+					$hhvm_out = errorPrinter($hhvm_out, "/var/www/html/website/tmp/");
 				}
 				
 				$hhvm_time = NULL;
@@ -169,9 +169,9 @@
 					}
 				}
 				while(strpos($hippyvm_out, "/var/www/html/website/tmp/") !== false) {
-					$hippyvm_out = errorPrinter($hippyvm_out);
+					$hippyvm_out = errorPrinter($hippyvm_out, "tmp/hippyvm/");
 				}
-				$hippyvm_out = errorPrinterHippyvmCase($hippyvm_out);
+				$hippyvm_out = errorPrinterHippyvmCaseTrace($hippyvm_out);
 				$hippyvm_time = NULL;
 			}
 
@@ -224,7 +224,7 @@
 					}
 				}
 				while(strpos($hack_out, "/var/www/html/website/tmp/") !== false) {
-					$hack_out = errorPrinter($hack_out);
+					$hack_out = errorPrinter($hack_out, "/var/www/html/website/tmp/");
 				}
 				$hack_time = NULL;
 			}
@@ -239,8 +239,8 @@
 
 	}
 
-	function errorPrinter($error_out) {
-		$start = strpos($error_out, "/var/www/html/website/tmp/");
+	function errorPrinter($error_out, $location) {
+		$start = strpos($error_out, $location);
 		$end = strlen($error_out);
 
 		for ($i = $start; $i < strlen($error_out) - 1; ++$i) {
@@ -252,9 +252,12 @@
 		return substr($error_out, 0, $start - 3) . " ". substr($error_out, $end + 1, strlen($error_out));
 	}
 
-	function errorPrinterHippyvmCase($error_out) {
+	function errorPrinterHippyvmCaseTrace($error_out) {
 		$start = strpos($error_out, "RPython traceback:");
 		$end = strpos($error_out, "...");
+		if (!$start || !$end) {
+			return;
+		}
 		return substr($error_out, 0, $start) . " ". substr($error_out, $end + 3, strlen($error_out));
 	}
 
