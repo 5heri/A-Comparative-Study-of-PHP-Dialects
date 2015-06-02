@@ -46,7 +46,9 @@
 						}
 					}
 				}
-				$zend_out = errorPrinterZendHhvmHack($zend_out);
+				while(strpos($zend_out, "/var/www/html/website/tmp/") !== false) {
+					$zend_out = errorPrinterZendHhvmHack($zend_out);
+				}
 				$zend_time = NULL;
 			}
 
@@ -87,7 +89,11 @@
 						}
 					}
 				}
-				$hhvm_out = errorPrinterZendHhvmHack($hhvm_out);
+
+				while(strpos($hhvm_out, "/var/www/html/website/tmp/") !== false) {
+					$hhvm_out = errorPrinterZendHhvmHack($hhvm_out);
+				}
+				
 				$hhvm_time = NULL;
 			}
 
@@ -167,7 +173,9 @@
 						}
 					}
 				}
-				$hack_out = errorPrinterZendHhvmHack($hack_out);
+				while(strpos($zend_out, "/var/www/html/website/tmp/") !== false) {
+					$zend_out = errorPrinterZendHhvmHack($zend_out);
+				}
 				$hack_time = NULL;
 			}
 			//$hack_out = $exec_out_hack;
