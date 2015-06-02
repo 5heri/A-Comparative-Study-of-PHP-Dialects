@@ -6,6 +6,8 @@
 		$hippyvm = $_POST['hippyvm'];
 		$hack = $_POST['hack'];
 
+		$start_tag = $_POST['start'];
+
 		$ip = getIP();
 
 		$fname = $ip . "code.php";

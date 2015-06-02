@@ -146,6 +146,10 @@ $(function() {
     editor.setTheme("ace/theme/textmate");
     editor.getSession().setMode({path:"ace/mode/php", inline:true});
 
+    window.onload = function() {
+        editor.focus();
+    }
+
     var code = editor.getSession().getValue();
 
     editor.on("change", function(e) {
@@ -188,17 +192,20 @@ $(function() {
     });*/
 
     $(document).ready(function() {
+
+        $("#editor_small").focus(); 
+
         $("#runCode").click(function() {
             //alert(code);
             //document.getElementById("runCode").innerHTML = "Running...";
 
             //code = code.trim();
-            checkPHPtags();
+            var startTag = checkPHPtags();
             var isZend = document.getElementById("ZendCheck").checked;
             var isHHVM = document.getElementById("HHVMCheck").checked;
             var isHippyVM = document.getElementById("HippyVMCheck").checked;
             var isHack = document.getElementById("HackCheck").checked;
-            $.post( "SaveCode.php", { data : code, zend : isZend,
+            $.post( "SaveCode.php", { data : code, start : startTag, zend : isZend,
                                       hhvm : isHHVM, hippyvm : isHippyVM, hack : isHack})
                 .done(function( response ) {
                 //alert( "Data Loaded: " + response );
@@ -233,21 +240,10 @@ $(function() {
     });
 
     function checkPHPtags() {
-        /*var start = code.substring(0, 2);
-        var end = code.substring(code.length - 2, code.length);
-
-        if (start === "<?") {
-            code = code.substring(5, code.length);
-        }
-        if (end === "?>") {
-            code = code.substring(0, code.length - 2);
-        }*/
-
-        /*
-        ******** DOUBLE CHECK LOGIC
-        */
         var start = 0;
         var end = code.length;
+
+        var start_tag = false;
 
         for (i = 0; i < code.length; i++) {
             var ch_s = code.charAt(i);
@@ -257,32 +253,26 @@ $(function() {
             }
         }
 
+        var start_str = code.substr(start, 2);
+        if (start_str === "<?") {
+            start_tag = true;
+            code = code.substring(0, start - 1) + code.substring(start + 5, code.length);
+        }
+
         for (i = code.length - 1; i >= 0; i--) {
             var ch_e = code.charAt(i);
             if ((ch_e !== ' ') && (ch_e !== '\t') && (ch_e !== '\n')) {
-                start = i;
+                end = i;
                 break;
             }
         }
 
-        var start_str = code.substring(start, 2);
-        var end_str = code.substring(end, end + 2);
-
-        if (start_str === "<?") {
-            code = code.substring(0, start - 1) + code.substring(start + 5, code.length);
-            //code = code.substring(start + 5, code.length);
-        }
+        var end_str = code.substr(end - 1, 2);
         if (end_str === "?>") {
             code = code.substring(0, end - 1) + code.substring(end + 2, code.length);
-            //code = code.substring(0, code.length - 2);
         }
 
-        /* INDEXES ARE BUGGY*/
-
-
-        //alert(start_str+"---"+code+"---"+end_str);
-        //alert("---" + start_str + "---");
-        //alert("---" + end_str + "---");
+        return start_tag;
     }
 
     function initialResultStyles() {
