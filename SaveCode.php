@@ -34,11 +34,18 @@
 				}
 				$zend_time = $exec_out_zend[count($exec_out_zend) - 1] . "s";
 			} else {
-				$zend_out = $exec_out_zend[count($exec_out_zend) - 1];
+				//$zend_out = $exec_out_zend[count($exec_out_zend) - 1];
+				//$zend_time = NULL;
+
+				for ($i = 0; $i < count($exec_out_zend); ++$i) {
+					if (strcmp($exec_out_zend[$i], "") != 0) {
+						$zend_out = $zend_out . "\n" . $exec_out_zend[$i];
+					}
+				}
 				$zend_time = NULL;
 			}
 
-			$zend_out = $exec_out_zend;
+			//$zend_out = $exec_out_zend;
 
 			//`rm $fname`;
 		}
@@ -63,11 +70,19 @@
 				}
 				$hhvm_time = $exec_out_hhvm[count($exec_out_hhvm) - 1] . "s";
 			} else {
-				$hhvm_out = $exec_out_hhvm[count($exec_out_hhvm) - 1];
-				$hhvm_time = NULL;
+				//$hhvm_out = $exec_out_hhvm[count($exec_out_hhvm) - 1];
+				//$hhvm_time = NULL;
+
+				for ($i = 0; $i < count($exec_out_zend); ++$i) {
+					if (strcmp($exec_out_zend[$i], "") != 0) {
+						$zend_out = $zend_out . "\n" . $exec_out_zend[$i];
+					}
+				}
+				$zend_time = NULL;
+
 			}
 
-			$hhvm_out = $exec_out_hhvm;
+			//$hhvm_out = $exec_out_hhvm;
 
 			//`rm $fname`;
 		}
@@ -92,11 +107,18 @@
 				}
 				$hippyvm_time = $exec_out_hippyvm[count($exec_out_hippyvm) - 1] . "s";
 			} else {
-				$hippyvm_out = $exec_out_hippyvm[count($exec_out_hippyvm) - 1];
-				$hippyvm_time = NULL;
+				//$hippyvm_out = $exec_out_hippyvm[count($exec_out_hippyvm) - 1];
+				//$hippyvm_time = NULL;
+
+				for ($i = 0; $i < count($exec_out_zend); ++$i) {
+					if (strcmp($exec_out_zend[$i], "") != 0) {
+						$zend_out = $zend_out . "\n" . $exec_out_zend[$i];
+					}
+				}
+				$zend_time = NULL;
 			}
 
-			$hippyvm_out = $exec_out_hippyvm;
+			//$hippyvm_out = $exec_out_hippyvm;
 			//`rm $fname`;
 		}
 
@@ -120,10 +142,17 @@
 				}
 				$hack_time = $exec_out_hack[count($exec_out_hack) - 1] . "s";
 			} else {
-				$hack_out = $exec_out_hack[count($exec_out_hack) - 1];
-				$hack_time = NULL;
+				//$hack_out = $exec_out_hack[count($exec_out_hack) - 1];
+				//$hack_time = NULL;
+
+				for ($i = 0; $i < count($exec_out_zend); ++$i) {
+					if (strcmp($exec_out_zend[$i], "") != 0) {
+						$zend_out = $zend_out . "\n" . $exec_out_zend[$i];
+					}
+				}
+				$zend_time = NULL;
 			}
-			$hack_out = $exec_out_hack;
+			//$hack_out = $exec_out_hack;
 			//`rm $fname`;
 		}
 
