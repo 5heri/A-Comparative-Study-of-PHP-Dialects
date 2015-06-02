@@ -300,8 +300,8 @@
 				break;
 			}
 		}
-		//$actual_value = substr($string, $start, $end - $start + 1) - 4;
-		return substr($string, $start, $end - $start + 1);
+		$actual_value = substr($string, $start, $end - $start + 1) - 4;
+		return $actual_value;
 	}
 
 	/*function isAlpa() {
