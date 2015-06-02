@@ -183,17 +183,14 @@
 		$start = strpos($error_out, "/var/www/html/website/tmp/");
 		$end = strlen($error_out);
 
-		for ($i = start; $i < strlen($error_out) - 1; ++$i) {
+		for ($i = $start; $i < strlen($error_out) - 1; ++$i) {
 			if ($error_out{$i + 1} == ' ') {
 				$end = $i;
 				break;
 			}
 		}
 
-		return substr($error_out, 0, $start) . " ". substr($error_out, $end + 1, strlen($error_out));
-
-
-
+		return substr($error_out, 0, $start - 3) . " ". substr($error_out, $end + 1, strlen($error_out));
 	}
 
 	/*function errorPrinterHippyvm($error_out) {
