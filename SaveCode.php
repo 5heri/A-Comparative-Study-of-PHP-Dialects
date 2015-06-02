@@ -80,7 +80,7 @@
 			fwrite($file, "<?php \n" . $data . " \n?>" );
 			fclose($file);
 
-			exec("/usr/src/hippyvm/hippy-c $fnamem 2>&1", $exec_out_hippyvm, $hippyvm_exit_code);
+			exec("/usr/src/hippyvm/hippy-c $fname 2>&1", $exec_out_hippyvm, $hippyvm_exit_code);
 
 			if ($hippyvm_exit_code == 0) {
 				for ($i = 0; $i < count($exec_out_hippyvm) - 1; ++$i) {
