@@ -298,8 +298,8 @@
 			return $string;
 		}
 
-		for ($i = $start; $i < strlen($string - 1); ++$i) {
-			if ($string{$i + 1} == ' ') {
+		for ($i = $start; $i < strlen($string) - 1; ++$i) {
+			if ($string{$i + 1} == '<' || $string{i + 1} == ' ') {
 				$end = $i;
 				break;
 			}
