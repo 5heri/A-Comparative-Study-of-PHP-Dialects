@@ -22,19 +22,19 @@
 			fwrite($file, "<?php \n" . $data . " \n?>" );
 			fclose($file);
 
-			exec("php $fname", $out, $zend_exit_code);
+			exec("php $fname", $exec_out_zend, $zend_exit_code);
 
 			if ($zend_exit_code == 0) {
-				for ($i = 0; $i < count($out) - 1; ++$i) {
+				for ($i = 0; $i < count($exec_out_zend) - 1; ++$i) {
 					if ($i == 0) {
-						$zend_out = $out[0];
+						$zend_out = $exec_out_zend[0];
 					} else {
-						$zend_out = $zend_out . "\n" . $out[$i];
+						$zend_out = $zend_out . "\n" . $exec_out_zend[$i];
 					}
 				}
-				$zend_time = $out[count($out) - 1] . "s";
+				$zend_time = $exec_out_zend[count($exec_out_zend) - 1] . "s";
 			} else {
-				$zend_out = $out[count($out) - 1];
+				$zend_out = $exec_out_zend[count($exec_out_zend) - 1];
 				$zend_time = NULL;
 			}
 
@@ -49,19 +49,19 @@
 			fwrite($file, "<?php \n" . $data . " \n?>" );
 			fclose($file);
 
-			exec("hhvm $fname", $out, $hhvm_exit_code);
+			exec("hhvm $fname", $exec_out_hhvm, $hhvm_exit_code);
 
 			if ($hhvm_exit_code == 0) {
-				for ($i = 0; $i < count($out) - 1; ++$i) {
+				for ($i = 0; $i < count($exec_out_hhvm) - 1; ++$i) {
 					if ($i == 0) {
-						$hhvm_out = $out[0];
+						$hhvm_out = $exec_out_hhvm[0];
 					} else {
-						$hhvm_out = $hhvm_out . "\n" . $out[$i];
+						$hhvm_out = $hhvm_out . "\n" . $exec_out_hhvm[$i];
 					}
 				}
-				$hhvm_time = $out[count($out) - 1] . "s";
+				$hhvm_time = $exec_out_hhvm[count($exec_out_hhvm) - 1] . "s";
 			} else {
-				$hhvm_out = $out[count($out) - 1] . "  " . $hhvm_exit_code;
+				$hhvm_out = $exec_out_hhvm[count($exec_out_hhvm) - 1];
 				$hhvm_time = NULL;
 			}
 
