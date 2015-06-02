@@ -95,6 +95,7 @@
 				$hippyvm_out = $exec_out_hippyvm[count($exec_out_hippyvm) - 1];
 				$hippyvm_time = NULL;
 			}
+
 			$hippyvm_out = $exec_out_hippyvm;
 			//`rm $fname`;
 		}
@@ -122,7 +123,7 @@
 				$hack_out = $exec_out_hack[count($exec_out_hack) - 1];
 				$hack_time = NULL;
 			}
-			$hack_out = $exec_out_hack;
+			//$hack_out = $exec_out_hack;
 			//`rm $fname`;
 		}
 
