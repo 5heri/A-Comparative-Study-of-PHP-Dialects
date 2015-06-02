@@ -304,7 +304,10 @@
 		if ($buffer_exists === "true") {
 			$actual_value++;
 		}
-		return $actual_value;
+
+		$actual_string = substr($string, 0, $start) . $actual_value . substr($string, $end + 1, strlen($string));
+
+		return $actual_string;
 	}
 
 	/*function isAlpa() {
