@@ -10,14 +10,14 @@
 
 		$ip = getIP();
 
-		$fname = $ip . "code.php";
+		$fname_top = $ip . "code.php";
 
 		$data = addUtilCode($data, $ip);
 
 		$zend_out = NULL;
 
 		if ($zend == TRUE) {
-			$fname = "tmp/zend/" . $fname;	
+			$fname = "tmp/zend/" . $fname_top;	
 			$file = fopen($fname, 'w');
 			fwrite($file, "<?php \n" . $data . " \n?>" );
 			fclose($file);
@@ -44,7 +44,7 @@
 		$hhvm_out = NULL;
 
 		if ($hhvm == TRUE) {
-			$fname = "tmp/hhvm/" . $fname;	
+			$fname = "tmp/hhvm/" . $fname_top;	
 			$file = fopen($fname, 'w');
 			fwrite($file, "<?php \n" . $data . " \n?>" );
 			fclose($file);
