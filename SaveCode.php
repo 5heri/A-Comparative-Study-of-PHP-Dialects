@@ -46,10 +46,11 @@
 						}
 					}
 				}
+				$zend_out = errorPrinterZendHhvmHack($zend_out);
 				$zend_time = NULL;
 			}
 
-			$zend_out = errorPrinterZendHhvmHack($zend_out);
+			
 
 			//`rm $fname`;
 		}
