@@ -294,14 +294,14 @@
 			return $string;
 		}
 
-		for ($i = $start; $i < strlen($string - 1; ++$i) {
+		for ($i = $start; $i < strlen($string - 1); ++$i) {
 			if ($string{$i + 1} == ' ') {
 				$end = $i;
 				break;
 			}
 		}
-
-		return substr($string, $end - $start + 1);
+		//$actual_value = substr($string, $start, $end - $start + 1) - 4;
+		return substr($string, $start, $end - $start + 1);
 	}
 
 	/*function isAlpa() {
