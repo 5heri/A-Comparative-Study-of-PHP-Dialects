@@ -259,6 +259,7 @@ $(function() {
 
         var start_str = code.substr(start, 2);
         if (start_str === "<?") {
+            start_tag = start_tag && true;
             code = code.substring(0, start - 1) + code.substring(start + 5, code.length);
         }
 
