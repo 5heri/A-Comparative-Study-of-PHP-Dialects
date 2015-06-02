@@ -67,7 +67,7 @@
 				$hhvm_time = NULL;
 			}
 
-			$hhvm_out = $exec_out_hhvm;
+			//$hhvm_out = $exec_out_hhvm;
 
 			//`rm $fname`;
 		}
@@ -96,7 +96,7 @@
 				$hippyvm_time = NULL;
 			}
 
-			$hippyvm_out = $exec_out_hippyvm;
+			//$hippyvm_out = $exec_out_hippyvm;
 			//`rm $fname`;
 		}
 
