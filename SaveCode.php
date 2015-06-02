@@ -55,12 +55,10 @@
                 		}
 					}
 				}
-				while(strpos($zend_out, "/var/www/html/website/tmp/") !== false) {
+				while (strpos($zend_out, "/var/www/html/website/tmp/") !== false) {
 					$zend_out = errorPrinter($zend_out);
 				}
-				while (strpos($zend_out, "on line") !== false) {
-					$zend_out = fixLineNumbers($zend_out, $start_tag);	
-				}
+				$zend_out = fixLineNumbers($zend_out, $start_tag);
 				$zend_time = NULL;
 			}
 
@@ -114,12 +112,10 @@
 				}
 
 
-				while(strpos($hhvm_out, "/var/www/html/website/tmp/") !== false) {
+				while (strpos($hhvm_out, "/var/www/html/website/tmp/") !== false) {
 					$hhvm_out = errorPrinter($hhvm_out);
 				}
-				while (strpos($hhvm_out, "on line") !== false) {
-					$hhvm_out = fixLineNumbers($hhvm_out, $start_tag);	
-				}
+				$hhvm_out = fixLineNumbers($hhvm_out, $start_tag);
 				$hhvm_time = NULL;
 			}
 
@@ -237,9 +233,7 @@
 				while (strpos($hack_out, "/var/www/html/website/tmp/") !== false) {
 					$hack_out = errorPrinter($hack_out);
 				}
-				while (strpos($hack_out, "on line") !== false) {
-					$hack_out = fixLineNumbers($hack_out, $start_tag);	
-				}
+				$hack_out = fixLineNumbers($hack_out, $start_tag);
 				$hack_time = NULL;
 			}
 			//$hack_out = $exec_out_hack;
