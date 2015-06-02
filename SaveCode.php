@@ -243,6 +243,10 @@
 		$start = strpos($error_out, "/var/www/html/website/tmp/");
 		$end = strlen($error_out);
 
+		if (!$start) {
+			return;
+		}
+
 		for ($i = $start; $i < strlen($error_out) - 1; ++$i) {
 			if ($error_out{$i + 1} == ' ') {
 				$end = $i;
@@ -265,13 +269,17 @@
 		$start = strpos($error_out, "tmp/hippyvm");
 		$end = strlen($error_out);
 
+		if (!$start) {
+			return;
+		}
+
 		for ($i = $start; $i < strlen($error_out) - 1; ++$i) {
 			if ($error_out{$i + 1} == ' ') {
 				$end = $i;
 				break;
 			}
 		}
-		return substr($error_out, 0, $start - 3) . " ". substr($error_out, $end + 1, strlen($error_out));
+		return substr($error_out, 0, $start - 5) . " ". substr($error_out, $end + 1, strlen($error_out));
 	}
 
 	/*function isAlpa() {
