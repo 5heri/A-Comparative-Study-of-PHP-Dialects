@@ -49,7 +49,7 @@
 				$zend_time = NULL;
 			}
 
-			//$zend_out = $exec_out_zend;
+			$zend_out = errorPrinterZendHhvmHack($zend_out);
 
 			//`rm $fname`;
 		}
@@ -175,6 +175,31 @@
 							   "hhvm_out"=>$hhvm_out, "hhvm_time"=>$hhvm_time,
 							   "hippyvm_out"=>$hippyvm_out, "hippyvm_time"=>$hippyvm_time,
 							   "hack_out"=>$hack_out, "hack_time"=>$hack_time));
+
+	}
+
+	function errorPrinterZendHhvmHack($error_out) {
+		$start = strpos($error_out, "/var/www/html/website/tmp/");
+		$end = strlen($error_out);
+
+		for ($i = start; $i < strlen($error_out) - 1; ++$i) {
+			if ($error_out{$i + 1} == ' ') {
+				$end = $i;
+				break;
+			}
+		}
+
+		return substr($error_out, 0, $start) . substr($error_out, $end + 1, strlen($error_out));
+
+
+
+	}
+
+	function errorPrinterHippyvm($error_out) {
+
+	}
+
+	function isAlpa() {
 
 	}
 
