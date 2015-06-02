@@ -285,6 +285,24 @@
 		return substr($error_out, 0, $start - 3) . " ". substr($error_out, $end + 1, strlen($error_out));
 	}
 
+	function fixLineNumbers($string) {
+		$start = strpos($string, "on line") + 8;
+		$end = strlen($string);
+
+		if (!start) {
+			return $string;
+		}
+
+		for ($i = $start; $i < strlen($string - 1; ++$i) {
+			if ($string{$i + 1} == ' ') {
+				$end = $i;
+				break;
+			}
+		}
+
+		return substr($string, $end - $start + 1);
+	}
+
 	/*function isAlpa() {
 
 	}*/
