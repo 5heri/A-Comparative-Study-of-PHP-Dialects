@@ -78,7 +78,8 @@
 
 <button id="runCode" class="launch">Run</button> 
 <br>
-
+<div id="MaliResult" class="maliResult">
+</div>
 <div id="ZendResult" class="result">
 </div>
 <div id="ZendTime" class="time">
@@ -218,7 +219,10 @@ $(function() {
                 //alert(response.zend_out);
                 //alert(response.zend_time);
                 var isMali = response.is_mali;
-                alert("--"+isMali+"--");
+                if (isMali) {
+                    document.getElementById("MaliResult").innerHTML = "<b>Malicious Code Found.</b>";
+                    document.getElementById("MaliResult").style.display = "inline";
+                }
                 initialResultStyles();
                 if (isZend) {
                     /*document.getElementById("ZendResult").innerHTML = "<b>Zend: </b>" + response.zend_out;
@@ -296,6 +300,7 @@ $(function() {
         document.getElementById("HHVMTime").style.display      = "none";
         document.getElementById("HippyVMTime").style.display   = "none";
         document.getElementById("HackTime").style.display      = "none";
+        document.getElementById("MaliResult").style.display    = "none";
     }
 
     function setAfterResponse(prefix, out, time) {
