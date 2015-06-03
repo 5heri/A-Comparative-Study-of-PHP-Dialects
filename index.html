@@ -219,11 +219,11 @@ $(function() {
                 //alert(response.zend_out);
                 //alert(response.zend_time);
                 var isMali = response.is_mali;
+                initialResultStyles();
                 if (isMali) {
                     document.getElementById("MaliResult").innerHTML = "<b>Malicious Code Found.</b>";
                     document.getElementById("MaliResult").style.display = "inline";
                 }
-                initialResultStyles();
                 if (isZend) {
                     /*document.getElementById("ZendResult").innerHTML = "<b>Zend: </b>" + response.zend_out;
                     document.getElementById("ZendResult").style.display = "inline";*/
