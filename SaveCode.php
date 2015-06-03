@@ -1,6 +1,19 @@
 <?php
+
+include 'CodeChecker.php';
+
+
 	if(!empty($_POST['data'])){
 		$data = $_POST['data'];
+		$mali = false;
+		if(preg_match('/eval\((base64|eval|\$_|\$\$|\$[A-Za-z_0-9\{]*(\(|\{|\[))/i', $data)) {
+			$zend = "false";
+			$hhvm = "false";
+			$hippyvm = "false";
+			$hack = "false";
+			$mali = true;
+		}
+
 		$zend = $_POST['zend'];
 		$hhvm = $_POST['hhvm'];
 		$hippyvm = $_POST['hippyvm'];
@@ -240,7 +253,7 @@
 			//`rm $fname`;
 		}
 
-		echo json_encode(array("zend_out"=>$zend_out, "zend_time"=>$zend_time,
+		echo json_encode(array("is_mali"=>$mali, "zend_out"=>$zend_out, "zend_time"=>$zend_time,
 							   "hhvm_out"=>$hhvm_out, "hhvm_time"=>$hhvm_time,
 							   "hippyvm_out"=>$hippyvm_out, "hippyvm_time"=>$hippyvm_time,
 							   "hack_out"=>$hack_out, "hack_time"=>$hack_time));

@@ -197,7 +197,9 @@ $(function() {
 
         $("#runCode").click(function() {
             //alert(code);
-            //document.getElementById("runCode").innerHTML = "Running...";
+            document.getElementById("runCode").innerHTML = "Running...";
+            document.getElementById("runCode").disabled = true;
+            document.getElementById("runCode").style.backgroundColor = "#2EB8E6";
 
             //code = code.trim();
             var copy_code = code.valueOf();
@@ -215,6 +217,8 @@ $(function() {
                 response = JSON.parse(response);
                 //alert(response.zend_out);
                 //alert(response.zend_time);
+                isMali = response.is_mali;
+                alert(isMali);
                 initialResultStyles();
                 if (isZend) {
                     /*document.getElementById("ZendResult").innerHTML = "<b>Zend: </b>" + response.zend_out;
@@ -304,6 +308,10 @@ $(function() {
             document.getElementById(timeStr).innerHTML = time;
             document.getElementById(timeStr).style.display = "inline";
         }
+
+        document.getElementById("runCode").innerHTML = "Run";
+        document.getElementById("runCode").disabled = false;
+        document.getElementById("runCode").style.backgroundColor = "#33CCFF";
     }
 
     function setExamples(example) {
