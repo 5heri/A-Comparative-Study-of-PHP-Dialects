@@ -217,8 +217,8 @@ $(function() {
                 response = JSON.parse(response);
                 //alert(response.zend_out);
                 //alert(response.zend_time);
-                isMali = response.is_mali;
-                alert(isMali);
+                var isMali = response.is_mali;
+                alert("--"+isMali+"--");
                 initialResultStyles();
                 if (isZend) {
                     /*document.getElementById("ZendResult").innerHTML = "<b>Zend: </b>" + response.zend_out;
@@ -302,8 +302,10 @@ $(function() {
         var resStr = prefix + "Result";
         var timeStr = prefix + "Time";
 
-        document.getElementById(resStr).innerHTML = "<b>"+ prefix + ": </b>" + out;
-        document.getElementById(resStr).style.display = "inline";
+        if (out != null) {
+            document.getElementById(resStr).innerHTML = "<b>"+ prefix + ": </b>" + out;
+            document.getElementById(resStr).style.display = "inline";
+        }
         if (time != null) {
             document.getElementById(timeStr).innerHTML = time;
             document.getElementById(timeStr).style.display = "inline";

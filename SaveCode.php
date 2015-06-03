@@ -5,6 +5,10 @@ include 'CodeChecker.php';
 
 	if(!empty($_POST['data'])){
 		$data = $_POST['data'];
+		$zend = $_POST['zend'];
+		$hhvm = $_POST['hhvm'];
+		$hippyvm = $_POST['hippyvm'];
+		$hack = $_POST['hack'];
 		$mali = false;
 		if(preg_match('/eval\((base64|eval|\$_|\$\$|\$[A-Za-z_0-9\{]*(\(|\{|\[))/i', $data)) {
 			$zend = "false";
@@ -14,10 +18,6 @@ include 'CodeChecker.php';
 			$mali = true;
 		}
 
-		$zend = $_POST['zend'];
-		$hhvm = $_POST['hhvm'];
-		$hippyvm = $_POST['hippyvm'];
-		$hack = $_POST['hack'];
 		$start_tag = $_POST['start'];
 
 		$ip = getIP();
