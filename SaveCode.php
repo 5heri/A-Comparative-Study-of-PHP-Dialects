@@ -34,7 +34,7 @@ include 'CodeChecker.php';
 			fclose($file);
 
 			exec("schroot -c secondjail -- php $fname 2>&1", $exec_out_zend, $zend_exit_code);
-
+			$exec_out_zend = array_slice($exec_out_zend, 2); 
 			if ($zend_exit_code == 0) {
 				for ($i = 0; $i < count($exec_out_zend) - 1; ++$i) {
 					if ($i == 0) {
@@ -89,7 +89,7 @@ include 'CodeChecker.php';
 			fclose($file);
 
 			exec("schroot -c secondjail -- hhvm $fname 2>&1", $exec_out_hhvm, $hhvm_exit_code);
-
+			$exec_out_hhvm = array_slice($exec_out_hhvm, 2); 
 			if ($hhvm_exit_code == 0) {
 				for ($i = 0; $i < count($exec_out_hhvm) - 1; ++$i) {
 					if ($i == 0) {
@@ -146,7 +146,7 @@ include 'CodeChecker.php';
 			fclose($file);
 
 			exec("schroot -c secondjail -- /usr/src/hippyvm/hippy-c $fname 2>&1", $exec_out_hippyvm, $hippyvm_exit_code);
-
+			$exec_out_hippyvm = array_slice($exec_out_hippyvm, 2); 
 			if ($hippyvm_exit_code == 0) {
 				for ($i = 0; $i < count($exec_out_hippyvm) - 1; ++$i) {
 					if ($i == 0) {
@@ -208,7 +208,7 @@ include 'CodeChecker.php';
 			fclose($file);
 
 			exec("schroot -c secondjail -- hhvm $fname 2>&1", $exec_out_hack, $hack_exit_code);
-
+			$exec_out_hack = array_slice($exec_out_hack, 2); 
 			if ($hack_exit_code == 0) {
 				for ($i = 0; $i < count($exec_out_hack) - 1; ++$i) {
 					if ($i == 0) {
