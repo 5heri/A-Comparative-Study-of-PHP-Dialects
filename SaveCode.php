@@ -28,12 +28,12 @@ include 'CodeChecker.php';
 		$zend_out = NULL;
 
 		if ($zend === "true") {
-			$fname = "tmp/zend/" . $fname_top;	
+			$fname = "/home/tmp/zend/" . $fname_top;	
 			$file = fopen($fname, 'w');
 			fwrite($file, "<?php \n" . $data . " \n?>" );
 			fclose($file);
 
-			exec("php $fname 2>&1", $exec_out_zend, $zend_exit_code);
+			exec("schroot -c secondjail -- php $fname 2>&1", $exec_out_zend, $zend_exit_code);
 
 			if ($zend_exit_code == 0) {
 				for ($i = 0; $i < count($exec_out_zend) - 1; ++$i) {
