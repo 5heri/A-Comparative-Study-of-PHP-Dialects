@@ -246,7 +246,9 @@ $(function() {
                     setAfterResponse("Hack", response.hack_out, response.hack_time);
                 }
                 //document.getElementById("runCode").innerHTML = "Run";
-                    
+                document.getElementById("runCode").innerHTML = "Run";
+                document.getElementById("runCode").disabled = false;
+                document.getElementById("runCode").style.backgroundColor = "#33CCFF";    
             });
         });
     });
@@ -316,10 +318,6 @@ $(function() {
             document.getElementById(timeStr).innerHTML = time;
             document.getElementById(timeStr).style.display = "inline";
         }
-
-        document.getElementById("runCode").innerHTML = "Run";
-        document.getElementById("runCode").disabled = false;
-        document.getElementById("runCode").style.backgroundColor = "#33CCFF";
     }
 
     function setExamples(example) {
@@ -337,11 +335,6 @@ $(function() {
         }
         rawFile.send(null);
     }
-
-    /*
-       
-
-    */
 
 </script>
 </body>
