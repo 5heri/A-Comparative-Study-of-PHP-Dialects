@@ -83,12 +83,12 @@ include 'CodeChecker.php';
 		$hhvm_out = NULL;
 
 		if ($hhvm === "true") {
-			$fname = "tmp/hhvm/" . $fname_top;	
+			$fname = "/home/tmp/hhvm/" . $fname_top;	
 			$file = fopen($fname, 'w');
 			fwrite($file, "<?php \n" . $data . " \n?>" );
 			fclose($file);
 
-			exec("hhvm $fname 2>&1", $exec_out_hhvm, $hhvm_exit_code);
+			exec("schroot -c secondjail -- hhvm $fname 2>&1", $exec_out_hhvm, $hhvm_exit_code);
 
 			if ($hhvm_exit_code == 0) {
 				for ($i = 0; $i < count($exec_out_hhvm) - 1; ++$i) {
@@ -140,12 +140,12 @@ include 'CodeChecker.php';
 		$hippyvm_out = NULL;
 
 		if ($hippyvm === "true") {
-			$fname = "tmp/hippyvm/" . $fname_top;	
+			$fname = "/home/tmp/hippyvm/" . $fname_top;	
 			$file = fopen($fname, 'w');
 			fwrite($file, "<?php \n" . $data . " \n?>" );
 			fclose($file);
 
-			exec("/usr/src/hippyvm/hippy-c $fname 2>&1", $exec_out_hippyvm, $hippyvm_exit_code);
+			exec("schroot -c secondjail -- /usr/src/hippyvm/hippy-c $fname 2>&1", $exec_out_hippyvm, $hippyvm_exit_code);
 
 			if ($hippyvm_exit_code == 0) {
 				for ($i = 0; $i < count($exec_out_hippyvm) - 1; ++$i) {
@@ -202,12 +202,12 @@ include 'CodeChecker.php';
 		$hack_out = NULL;
 
 		if ($hack === "true") {
-			$fname = "tmp/hack/" . $fname_top;	
+			$fname = "/home/tmp/hack/" . $fname_top;	
 			$file = fopen($fname, 'w');
 			fwrite($file, "<?hh \n" . $data);
 			fclose($file);
 
-			exec("hhvm $fname 2>&1", $exec_out_hack, $hack_exit_code);
+			exec("schroot -c secondjail -- hhvm $fname 2>&1", $exec_out_hack, $hack_exit_code);
 
 			if ($hack_exit_code == 0) {
 				for ($i = 0; $i < count($exec_out_hack) - 1; ++$i) {
