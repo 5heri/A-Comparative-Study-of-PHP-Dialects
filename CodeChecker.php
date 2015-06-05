@@ -1,0 +1,9 @@
+<?php
+
+
+	function check($code) {
+		
+	}
+
+
+?>

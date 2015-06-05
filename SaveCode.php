@@ -26,6 +26,7 @@ include 'CodeChecker.php';
 		$data = addUtilCode($data, $ip);
 
 		$zend_out = NULL;
+		$zend_time = NULL;
 
 		if ($zend === "true") {
 			$fname = "/home/tmp/zend/" . $fname_top;	
@@ -35,7 +36,26 @@ include 'CodeChecker.php';
 
 			exec("schroot -c secondjail -- php $fname 2>&1", $exec_out_zend, $zend_exit_code);
 			$exec_out_zend = array_slice($exec_out_zend, 2); 
+			$exec_out_zend = array_filter($exec_out_zend, "checkEmpty");
+
+			
 			if ($zend_exit_code == 0) {
+				$zend_time = array_pop($exec_out_zend);	
+			}
+			
+			$length = count($exec_out_zend)
+			for ($i = 1; $i < $length * 2 - 1; $i += 2) {
+    			array_splice($array, $i, 0, "<br>");
+    		}
+    		foreach ($exec_out_zend as $val) {
+    			$zend_out = $zend_out . $val;
+			}
+			$zend_out = handle_output($zend_out, "zend", $fname_top, $start_tag);
+			
+
+
+
+			/*if ($zend_exit_code == 0) {
 				for ($i = 0; $i < count($exec_out_zend) - 1; ++$i) {
 					if ($i == 0) {
 						$zend_out = $exec_out_zend[0];
@@ -48,7 +68,7 @@ include 'CodeChecker.php';
 				//$zend_out = $exec_out_zend[count($exec_out_zend) - 1];
 				//$zend_time = NULL;
 
-				/*for ($i = 0; $i < count($exec_out_zend); ++$i) {
+				for ($i = 0; $i < count($exec_out_zend); ++$i) {
 					if (strcmp($exec_out_zend[$i], "") != 0) {
 						if ($i == 0) {
 							$zend_out = $exec_out_zend[0];
@@ -57,7 +77,7 @@ include 'CodeChecker.php';
 						}
 					}
 				}*/
-				$is_first_zend = true;
+				/*$is_first_zend = true;
 				for ($i = 0; $i < count($exec_out_zend); ++$i) {
 					if (strcmp($exec_out_zend[$i], "") != 0) {
                 		if ($is_first_zend) {
@@ -67,12 +87,12 @@ include 'CodeChecker.php';
                      		$zend_out = $zend_out . "<br>" . $exec_out_zend[$i];
                 		}
 					}
-				}
+				}*/
 				/*while (strpos($zend_out, "/var/www/html/website/tmp/") !== false) {
 					$zend_out = errorPrinter($zend_out);
 				}
-				$zend_out = fixLineNumbers($zend_out, $start_tag);*/
-				$zend_time = NULL;
+				$zend_out = fixLineNumbers($zend_out, $start_tag);
+				$zend_time = NULL;*/
 			}
 
 			
@@ -327,8 +347,8 @@ include 'CodeChecker.php';
 		return $actual_string;
 	}
 
-	/*function isAlpa() {
-
+	/*for ($i = 1; $i < count($array_1) * 2 - 1; $i += 2) {
+    	array_splice($array, $i, 0, '##');
 	}*/
 
 	function getIP() {
@@ -356,5 +376,9 @@ include 'CodeChecker.php';
 
 	function substring($str, $start, $end) {
 		return substr($str, $start, $end - $start);
+	}
+
+	function checkEmpty($var) {
+    	return !empty($var);
 	}
 ?>
