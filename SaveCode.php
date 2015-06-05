@@ -68,10 +68,10 @@ include 'CodeChecker.php';
                 		}
 					}
 				}
-				while (strpos($zend_out, "/var/www/html/website/tmp/") !== false) {
+				/*while (strpos($zend_out, "/var/www/html/website/tmp/") !== false) {
 					$zend_out = errorPrinter($zend_out);
 				}
-				$zend_out = fixLineNumbers($zend_out, $start_tag);
+				$zend_out = fixLineNumbers($zend_out, $start_tag);*/
 				$zend_time = NULL;
 			}
 
@@ -125,10 +125,10 @@ include 'CodeChecker.php';
 				}
 
 
-				while (strpos($hhvm_out, "/var/www/html/website/tmp/") !== false) {
+				/*while (strpos($hhvm_out, "/var/www/html/website/tmp/") !== false) {
 					$hhvm_out = errorPrinter($hhvm_out);
 				}
-				$hhvm_out = fixLineNumbers($hhvm_out, $start_tag);
+				$hhvm_out = fixLineNumbers($hhvm_out, $start_tag);*/
 				$hhvm_time = NULL;
 			}
 
@@ -169,9 +169,9 @@ include 'CodeChecker.php';
 						}
 					}
 				}*/
-				if (strpos($exec_out_hippyvm[0], "In function") !== false) {
+				/*if (strpos($exec_out_hippyvm[0], "In function") !== false) {
 					$exec_out_hippyvm[0] = "";
-				}
+				}*/
 				$is_first_hippyvm = true;
 				for ($i = 0; $i < count($exec_out_hippyvm); ++$i) {
 					if (strcmp($exec_out_hippyvm[$i], "") != 0) {
@@ -183,15 +183,15 @@ include 'CodeChecker.php';
                 		}
 					}
 				}
-				while(strpos($hippyvm_out, "tmp/hippyvm") !== false) {
+				/*while(strpos($hippyvm_out, "tmp/hippyvm") !== false) {
 					$hippyvm_out = errorPrinterHippyvm($hippyvm_out);
 				}
 				$hippyvm_out = errorPrinterHippyvmCaseTrace($hippyvm_out);
-				if (strpos($hippyvm_out, "Parse error") !== false) {
+				/if (strpos($hippyvm_out, "Parse error") !== false) {
 					$hippyvm_out = "Parse error";
 				} else {
 					$hippyvm_out = rtrim($hippyvm_out, ":");
-				}
+				}*/
 				$hippyvm_time = NULL;
 			}
 
@@ -243,10 +243,10 @@ include 'CodeChecker.php';
                 		}
 					}
 				}
-				while (strpos($hack_out, "/var/www/html/website/tmp/") !== false) {
+				/*while (strpos($hack_out, "/var/www/html/website/tmp/") !== false) {
 					$hack_out = errorPrinter($hack_out);
 				}
-				$hack_out = fixLineNumbers($hack_out, $start_tag);
+				$hack_out = fixLineNumbers($hack_out, $start_tag);*/
 				$hack_time = NULL;
 			}
 			//$hack_out = $exec_out_hack;
