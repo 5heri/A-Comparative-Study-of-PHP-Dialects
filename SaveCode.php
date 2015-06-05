@@ -38,7 +38,7 @@ include 'OutputHandler.php';
 
 			exec("schroot -c secondjail -- php $fname 2>&1", $exec_out_zend, $zend_exit_code);
 			$exec_out_zend = array_slice($exec_out_zend, 2); 
-			$exec_out_zend = array_filter($exec_out_zend, "checkEmpty");
+			//$exec_out_zend = array_filter($exec_out_zend, "checkEmpty");
 
 			
 			if ($zend_exit_code == 0) {
@@ -47,7 +47,7 @@ include 'OutputHandler.php';
 			
 			$length = count($exec_out_zend);
 			for ($i = 1; $i < $length * 2 - 1; $i += 2) {
-    			array_splice($array, $i, 0, "<br>");
+    			array_splice($exec_out_zend, $i, 0, "<br>");
     		}
     		foreach ($exec_out_zend as $val) {
     			$zend_out = $zend_out . $val;
