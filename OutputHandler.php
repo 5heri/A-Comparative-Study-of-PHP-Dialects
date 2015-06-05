@@ -35,11 +35,13 @@ function location_checking($out, $O_TAGS, $fname) {
 }
 
 function fixLineNumbers($string, $buffer_exists) {
-	$start = strpos($string, "on line") + 8;
+	$start = strpos($string, "on line");
 	$end = strlen($string);
 
-	if ($start) {
+	if (!$start) {
 		return $string;
+	} else {
+		$start += 8;
 	}
 
 	for ($i = $start; $i < strlen($string) - 1; ++$i) {
