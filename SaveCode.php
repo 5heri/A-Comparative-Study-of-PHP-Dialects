@@ -1,6 +1,7 @@
 <?php
 
 include 'CodeChecker.php';
+include 'OutputHandler.php';
 
 
 	if(!empty($_POST['data'])){
@@ -43,7 +44,7 @@ include 'CodeChecker.php';
 				$zend_time = array_pop($exec_out_zend);	
 			}
 			
-			$length = count($exec_out_zend)
+			$length = count($exec_out_zend);
 			for ($i = 1; $i < $length * 2 - 1; $i += 2) {
     			array_splice($array, $i, 0, "<br>");
     		}
@@ -93,7 +94,7 @@ include 'CodeChecker.php';
 				}
 				$zend_out = fixLineNumbers($zend_out, $start_tag);
 				$zend_time = NULL;*/
-			}
+			//}
 
 			
 
@@ -280,7 +281,9 @@ include 'CodeChecker.php';
 
 	}
 
-	function errorPrinter($error_out) {
+
+
+	/*function errorPrinter($error_out) {
 		$start = strpos($error_out, "/var/www/html/website/tmp/");
 		$end = strlen($error_out);
 
@@ -321,9 +324,9 @@ include 'CodeChecker.php';
 			}
 		}
 		return substr($error_out, 0, $start - 3) . " ". substr($error_out, $end + 1, strlen($error_out));
-	}
+	}*/
 
-	function fixLineNumbers($string, $buffer_exists) {
+	/*function fixLineNumbers($string, $buffer_exists) {
 		$start = strpos($string, "on line") + 8;
 		$end = strlen($string);
 
@@ -345,7 +348,7 @@ include 'CodeChecker.php';
 		$actual_string = substr($string, 0, $start) . $actual_value . substr($string, $end + 1, strlen($string));
 
 		return $actual_string;
-	}
+	}*/
 
 	/*for ($i = 1; $i < count($array_1) * 2 - 1; $i += 2) {
     	array_splice($array, $i, 0, '##');
