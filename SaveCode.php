@@ -28,7 +28,7 @@ include 'CodeChecker.php';
 		$zend_out = NULL;
 
 		if ($zend === "true") {
-			$fname = "/tmpSaving/zend/" . $fname_top;	
+			$fname = "/home/tmp/zend/" . $fname_top;	
 			$file = fopen($fname, 'w');
 			fwrite($file, "<?php \n" . $data . " \n?>" );
 			fclose($file);
@@ -83,7 +83,7 @@ include 'CodeChecker.php';
 		$hhvm_out = NULL;
 
 		if ($hhvm === "true") {
-			$fname = "/tmpSaving/hhvm/" . $fname_top;	
+			$fname = "/home/tmp/hhvm/" . $fname_top;	
 			$file = fopen($fname, 'w');
 			fwrite($file, "<?php \n" . $data . " \n?>" );
 			fclose($file);
@@ -140,7 +140,7 @@ include 'CodeChecker.php';
 		$hippyvm_out = NULL;
 
 		if ($hippyvm === "true") {
-			$fname = "/tmpSaving/hippyvm/" . $fname_top;	
+			$fname = "/home/tmp/hippyvm/" . $fname_top;	
 			$file = fopen($fname, 'w');
 			fwrite($file, "<?php \n" . $data . " \n?>" );
 			fclose($file);
@@ -202,7 +202,7 @@ include 'CodeChecker.php';
 		$hack_out = NULL;
 
 		if ($hack === "true") {
-			$fname = "/tmpSaving/hack/" . $fname_top;	
+			$fname = "/home/tmp/hack/" . $fname_top;	
 			$file = fopen($fname, 'w');
 			fwrite($file, "<?hh \n" . $data);
 			fclose($file);
