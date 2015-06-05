@@ -1,5 +1,6 @@
 <?php
 
+include 'OutputConfig.php';
 include 'CodeChecker.php';
 include 'OutputHandler.php';
 
@@ -51,7 +52,7 @@ include 'OutputHandler.php';
     		foreach ($exec_out_zend as $val) {
     			$zend_out = $zend_out . $val;
 			}
-			$zend_out = handle_output($zend_out, "zend", $fname_top, $start_tag);
+			$zend_out = handle_output($zend_out, "zend", $fname_top, $start_tag, $O_ZEND, $O_UTIL);
 			
 
 

@@ -1,23 +1,21 @@
 <?php
 
-include 'OutputConfig.php';
-
-function handle_output($out, $kind, $fname, $buffer) {
+function handle_output($out, $kind, $fname, $buffer, $O_TAGS, $O_UTIL) {
 	$trusted_out = $out;
 
 	switch ($kind) {
     case "zend":
-    	$trusted_out = location_checking($trusted_out, $O_ZEND, $kind, $fname);
+    	$trusted_out = location_checking($trusted_out, $O_TAGS, $fname);
         break;	
     case "hhvm":
-    	$trusted_out = location_checking($trusted_out, $O_HHVM, $kind, $fname);
+    	$trusted_out = location_checking($trusted_out, $O_TAGS, $fname);
         break;
     case "hippyvm":
     	$trusted_out = hippyvm_traceback($trusted_out);
-    	$trusted_out = location_checking($trusted_out, $O_HIPPYVM, $kind, $fname);
+    	$trusted_out = location_checking($trusted_out, $O_TAGS, $fname);
         break;
     case "hack":
-    	$trusted_out = location_checking($trusted_out, $O_HACK, $kind, $fname);
+    	$trusted_out = location_checking($trusted_out, $O_TAGS, $fname);
     	break;
     default:
     	return $out;
@@ -29,9 +27,9 @@ function handle_output($out, $kind, $fname, $buffer) {
 	return fixLineNumbers($trusted_out, $buffer);
 }
 
-function location_checking($out, $O_TAGS, $kind, $fname) {
-	foreach ($O_TAGS as $tags) {
-		$out = str_replace($tags . $fname, "", $out);
+function location_checking($out, $O_TAGS, $fname) {
+	foreach ($O_TAGS as $tag) {
+		$out = str_replace($tag . $fname, "", $out);
 	}
 	return $out;
 }
@@ -40,7 +38,7 @@ function fixLineNumbers($string, $buffer_exists) {
 	$start = strpos($string, "on line") + 8;
 	$end = strlen($string);
 
-	if (!$start) {
+	if ($start) {
 		return $string;
 	}
 
