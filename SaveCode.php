@@ -116,8 +116,6 @@ include 'OutputHandler.php';
 			exec("schroot -c secondjail -- hhvm $fname 2>&1", $exec_out_hhvm, $hhvm_exit_code);
 			$exec_out_hhvm = array_slice($exec_out_hhvm, 2); 
 
-
-			
 			if ($hhvm_exit_code == 0) {
 				$hhvm_time = array_pop($exec_out_hhvm);	
 			} else {
