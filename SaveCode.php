@@ -438,7 +438,7 @@ include 'OutputHandler.php';
 		array_shift($exec_hippyvm);
 		array_shift($exec_hippyvm);
 	}
-	if (strpos($exec_hippyvm[count($exec_hippyvm) - 1], "E: Child terminated")) {
+	if (strpos($exec_hippyvm[count($exec_hippyvm) - 1], "E: Child terminated") !== false) {
 		array_pop($exec_hippyvm);
 	}
 	return $exec_hippyvm;
