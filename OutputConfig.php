@@ -21,8 +21,8 @@
 	);
 
 	$O_UTIL = array(
-				"\$time_before_",
-				"\$time_after_",
+				"$time_before_",
+				"$time_after_",
 	);
 
 ?>

@@ -103,6 +103,7 @@ include 'OutputHandler.php';
 		}
 
 		$hhvm_out = NULL;
+		$hhvm_time = NULL;
 
 		if ($hhvm === "true") {
 			$fname = "/home/tmp/hhvm/" . $fname_top;	
@@ -112,7 +113,23 @@ include 'OutputHandler.php';
 
 			exec("schroot -c secondjail -- hhvm $fname 2>&1", $exec_out_hhvm, $hhvm_exit_code);
 			$exec_out_hhvm = array_slice($exec_out_hhvm, 2); 
+			//$exec_out_hhvm = array_filter($exec_out_hhvm, "checkEmpty");
+
+			
 			if ($hhvm_exit_code == 0) {
+				$hhvm_time = array_pop($exec_out_hhvm);	
+			}
+			
+			$length = count($exec_out_hhvm);
+			for ($i = 1; $i < $length * 2 - 1; $i += 2) {
+    			array_splice($exec_out_hhvm, $i, 0, "<br>");
+    		}
+    		foreach ($exec_out_hhvm as $val) {
+    			$hhvm_out = $hhvm_out . $val;
+			}
+			$hhvm_out = handle_output($hhvm_out, "hhvm", $fname_top, $start_tag, $ip, $O_HHVM, $O_UTIL);
+
+			/*if ($hhvm_exit_code == 0) {
 				for ($i = 0; $i < count($exec_out_hhvm) - 1; ++$i) {
 					if ($i == 0) {
 						$hhvm_out = $exec_out_hhvm[0];
@@ -134,7 +151,7 @@ include 'OutputHandler.php';
 						}
 					}
 				}*/
-				$is_first_hhvm = true;
+			/*	$is_first_hhvm = true;
 				for ($i = 0; $i < count($exec_out_hhvm); ++$i) {
 					if (strcmp($exec_out_hhvm[$i], "") != 0) {
                 		if ($is_first_hhvm) {
@@ -144,15 +161,15 @@ include 'OutputHandler.php';
                      		$hhvm_out = $hhvm_out . "<br>" . $exec_out_hhvm[$i];
                 		}
 					}
-				}
+				}*/
 
 
 				/*while (strpos($hhvm_out, "/var/www/html/website/tmp/") !== false) {
 					$hhvm_out = errorPrinter($hhvm_out);
 				}
 				$hhvm_out = fixLineNumbers($hhvm_out, $start_tag);*/
-				$hhvm_time = NULL;
-			}
+			//	$hhvm_time = NULL;
+			//}
 
 			//$hhvm_out = $exec_out_hhvm;
 
@@ -160,6 +177,7 @@ include 'OutputHandler.php';
 		}
 
 		$hippyvm_out = NULL;
+		$hippyvm_time = NULL;
 
 		if ($hippyvm === "true") {
 			$fname = "/home/tmp/hippyvm/" . $fname_top;	
@@ -222,6 +240,7 @@ include 'OutputHandler.php';
 		}
 
 		$hack_out = NULL;
+		$hack_time = NULL;
 
 		if ($hack === "true") {
 			$fname = "/home/tmp/hack/" . $fname_top;	
@@ -230,8 +249,23 @@ include 'OutputHandler.php';
 			fclose($file);
 
 			exec("schroot -c secondjail -- hhvm $fname 2>&1", $exec_out_hack, $hack_exit_code);
-			$exec_out_hack = array_slice($exec_out_hack, 2); 
+			$exec_out_hack = array_slice($exec_out_hack, 2);
+			
 			if ($hack_exit_code == 0) {
+				$hack_time = array_pop($exec_out_hack);	
+			}
+			
+			$length = count($exec_out_hack);
+			for ($i = 1; $i < $length * 2 - 1; $i += 2) {
+    			array_splice($exec_out_hack, $i, 0, "<br>");
+    		}
+    		foreach ($exec_out_hack as $val) {
+    			$hack_out = $hack_out . $val;
+			}
+			$hack_out = handle_output($hack_out, "hack", $fname_top, $start_tag, $ip, $O_HACK, $O_UTIL);
+			
+
+			/*if ($hack_exit_code == 0) {
 				for ($i = 0; $i < count($exec_out_hack) - 1; ++$i) {
 					if ($i == 0) {
 						$hack_out = $exec_out_hack[0];
@@ -240,7 +274,7 @@ include 'OutputHandler.php';
 					}
 				}
 				$hack_time = $exec_out_hack[count($exec_out_hack) - 1] . "s";
-			} else {
+			} else {*/
 				//$hack_out = $exec_out_hack[count($exec_out_hack) - 1];
 				//$hack_time = NULL;
 
@@ -254,7 +288,7 @@ include 'OutputHandler.php';
 					}
 				}*/
 
-				$is_first_hack = true;
+				/*$is_first_hack = true;
 				for ($i = 0; $i < count($exec_out_hack); ++$i) {
 					if (strcmp($exec_out_hack[$i], "") != 0) {
                 		if ($is_first_hack) {
@@ -264,13 +298,13 @@ include 'OutputHandler.php';
                      		$hack_out = $hack_out . "<br>" . $exec_out_hack[$i];
                 		}
 					}
-				}
+				}*/
 				/*while (strpos($hack_out, "/var/www/html/website/tmp/") !== false) {
 					$hack_out = errorPrinter($hack_out);
 				}
 				$hack_out = fixLineNumbers($hack_out, $start_tag);*/
-				$hack_time = NULL;
-			}
+			//	$hack_time = NULL;
+			//}
 			//$hack_out = $exec_out_hack;
 			//`rm $fname`;
 		}

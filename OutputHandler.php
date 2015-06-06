@@ -1,6 +1,6 @@
 <?php
 
-function handle_output($out, $kind, $fname, $buffer, $O_TAGS, $O_UTIL) {
+function handle_output($out, $kind, $fname, $buffer, $ip, $O_TAGS, $O_UTIL) {
 	$trusted_out = $out;
 
 	switch ($kind) {
@@ -22,7 +22,7 @@ function handle_output($out, $kind, $fname, $buffer, $O_TAGS, $O_UTIL) {
 	}
 
 	foreach ($O_UTIL as $util_tags) {
-		$trusted_out = str_replace($util_tags . $fname, "", $trusted_out);
+		$trusted_out = str_replace($util_tags . $ip, "", $trusted_out);
 	}
 	return fixLineNumbers($trusted_out, $buffer);
 }
