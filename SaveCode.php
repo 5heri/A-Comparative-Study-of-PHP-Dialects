@@ -195,6 +195,7 @@ include 'OutputHandler.php';
 			} else {
 				$exec_out_hippyvm = array_filter($exec_out_hippyvm, "checkEmpty");
 			}
+			handle_hippyvm_special($exec_out_hippyvm);
 			
 			$length = count($exec_out_hippyvm);
 			for ($i = 1; $i < $length * 2 - 1; $i += 2) {
