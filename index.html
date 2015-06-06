@@ -78,24 +78,17 @@
 
 <button id="runCode" class="launch">Run</button> 
 <br>
-<div id="MaliResult" class="maliResult">
-</div>
-<div id="ZendResult" class="result">
-</div>
-<div id="ZendTime" class="time">
-</div>
-<div id="HHVMResult" class="result">
-</div>
-<div id="HHVMTime" class="time">
-</div>
-<div id="HippyVMResult" class="result">
-</div>
-<div id="HippyVMTime" class="time">
-</div>
-<div id="HackResult" class="result">
-</div>
-<div id="HackTime" class="time">
-</div>
+<div id="MaliResult" class="maliResult">Malicious Code</div>
+<div id="ServerError" class="serverError">Server Error</div>
+
+<div id="ZendResult" class="result"></div>
+<div id="ZendTime" class="time"></div>
+<div id="HHVMResult" class="result"></div>
+<div id="HHVMTime" class="time"></div>
+<div id="HippyVMResult" class="result"></div>
+<div id="HippyVMTime" class="time"></div>
+<div id="HackResult" class="result"></div>
+<div id="HackTime" class="time"></div>
 <!-- </form> -->
 
 <!--
@@ -197,63 +190,53 @@ $(function() {
         $("#editor_small").focus(); 
 
         $("#runCode").click(function() {
-            //alert(code);
             document.getElementById("runCode").innerHTML = "Running...";
             document.getElementById("runCode").disabled = true;
             document.getElementById("runCode").style.backgroundColor = "#2EB8E6";
 
-            //code = code.trim();
+            initialResultStyles();
+
             var copy_code = code.valueOf();
             var returns = checkPHPtags(copy_code);
             copy_code = returns[0];
             startTag = returns[1];
+
             var isZend = document.getElementById("ZendCheck").checked;
             var isHHVM = document.getElementById("HHVMCheck").checked;
             var isHippyVM = document.getElementById("HippyVMCheck").checked;
             var isHack = document.getElementById("HackCheck").checked;
+
             $.post( "SaveCode.php", { data : copy_code, start : startTag, zend : isZend,
                                       hhvm : isHHVM, hippyvm : isHippyVM, hack : isHack})
                 .done(function( response ) {
 
                 response = JSON.parse(response);
-                var isMali = response.is_mali;
-                initialResultStyles();
 
+                var isMali = response.is_mali;
                 if (isMali) {
-                    document.getElementById("MaliResult").innerHTML = "<b>Malicious Code</b>";
+                    //document.getElementById("MaliResult").innerHTML = "<b>Malicious Code</b>";
                     document.getElementById("MaliResult").style.display = "inline";
                 } else {
                     if (isZend) {
-                        /*document.getElementById("ZendResult").innerHTML = "<b>Zend: </b>" + response.zend_out;
-                        document.getElementById("ZendResult").style.display = "inline";*/
                         setAfterResponse("Zend", response.zend_out, response.zend_time);
                     }
                     if (isHHVM) {
-                        /*document.getElementById("HHVMResult").innerHTML = "<b>HHVM: </b>" + response.hhvm_out;
-                        document.getElementById("HHVMResult").style.display = "inline";*/
                         setAfterResponse("HHVM", response.hhvm_out, response.hhvm_time);
                     }
                     if (isHippyVM) {
-                        /*document.getElementById("HippyVMResult").innerHTML = "<b>HippyVM: </b>" + response.hippyvm_out;
-                        document.getElementById("HippyVMResult").style.display = "inline";*/
                         setAfterResponse("HippyVM", response.hippyvm_out, response.hippyvm_time);
                     }
                     if (isHack) {
-                        /*document.getElementById("HackResult").innerHTML = "<b>Hack: </b>" + response.hack_out;
-                        document.getElementById("HackResult").style.display = "inline";*/
                         setAfterResponse("Hack", response.hack_out, response.hack_time);
                     }
                 }
-                
-                
-                //document.getElementById("runCode").innerHTML = "Run";
                 document.getElementById("runCode").innerHTML = "Run";
                 document.getElementById("runCode").disabled = false;
                 document.getElementById("runCode").style.backgroundColor = "#33CCFF";    
-            });
+            })
             .fail(function() {
                 serverFail();
-            });
+            })
         });
     });
 
@@ -308,6 +291,7 @@ $(function() {
         document.getElementById("HippyVMTime").style.display   = "none";
         document.getElementById("HackTime").style.display      = "none";
         document.getElementById("MaliResult").style.display    = "none";
+        document.getElementById("ServerError").style.display   = "none";
     }
 
     function setAfterResponse(prefix, out, time) {
@@ -330,7 +314,6 @@ $(function() {
             if(rawFile.readyState === 4) {
                 if(rawFile.status === 200 || rawFile.status == 0) {
                     var allText = rawFile.responseText;
-                    //alert(allText);
                     editor.setValue(allText, -1);
                 }
             }
@@ -339,8 +322,8 @@ $(function() {
     }
 
     function serverFail() {
-        document.getElementById("MaliResult").innerHTML = "<b>Malicious Code Found.</b>";
-        document.getElementById("MaliResult").style.display = "inline";
+        //document.getElementById("ServerError").innerHTML = "<b>Server Error</b>";
+        document.getElementById("ServerError").style.display = "inline";
         document.getElementById("runCode").innerHTML = "Run";
         document.getElementById("runCode").disabled = false;
         document.getElementById("runCode").style.backgroundColor = "#33CCFF";

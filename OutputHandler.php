@@ -12,7 +12,7 @@ function handle_output($out, $kind, $fname, $buffer, $ip, $O_TAGS, $O_UTIL) {
         break;
     case "hippyvm":
     	$trusted_out = hippyvm_traceback($trusted_out);
-    	$trusted_out = hippyvm_praseError($error_out)
+    	$trusted_out = hippyvm_praseError($error_out);
     	$trusted_out = location_checking($trusted_out, $O_TAGS, $fname);
         break;
     case "hack":
