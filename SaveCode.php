@@ -118,6 +118,10 @@ include 'OutputHandler.php';
 			
 			if ($hhvm_exit_code == 0) {
 				$hhvm_time = array_pop($exec_out_hhvm);	
+			} else {
+				if (empty($exec_out_hhvm[0])) {
+					array_shift($exec_out_hhvm);
+				}
 			}
 			
 			$length = count($exec_out_hhvm);
