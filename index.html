@@ -218,33 +218,36 @@ $(function() {
                 response = JSON.parse(response);
                 //alert(response.zend_out);
                 //alert(response.zend_time);
+                alert("zend:" + isZend + " hhvm:" + isHHVM + " hippyvm:" + isHippyVM + " hack:" + isHack);
                 var isMali = response.is_mali;
                 initialResultStyles();
                 if (isMali) {
                     document.getElementById("MaliResult").innerHTML = "<b>Malicious Code Found.</b>";
                     document.getElementById("MaliResult").style.display = "inline";
+                } else {
+                    if (isZend) {
+                        /*document.getElementById("ZendResult").innerHTML = "<b>Zend: </b>" + response.zend_out;
+                        document.getElementById("ZendResult").style.display = "inline";*/
+                        setAfterResponse("Zend", response.zend_out, response.zend_time);
+                    }
+                    if (isHHVM) {
+                        /*document.getElementById("HHVMResult").innerHTML = "<b>HHVM: </b>" + response.hhvm_out;
+                        document.getElementById("HHVMResult").style.display = "inline";*/
+                        setAfterResponse("HHVM", response.hhvm_out, response.hhvm_time);
+                    }
+                    if (isHippyVM) {
+                        /*document.getElementById("HippyVMResult").innerHTML = "<b>HippyVM: </b>" + response.hippyvm_out;
+                        document.getElementById("HippyVMResult").style.display = "inline";*/
+                        setAfterResponse("HippyVM", response.hippyvm_out, response.hippyvm_time);
+                    }
+                    if (isHack) {
+                        /*document.getElementById("HackResult").innerHTML = "<b>Hack: </b>" + response.hack_out;
+                        document.getElementById("HackResult").style.display = "inline";*/
+                        setAfterResponse("Hack", response.hack_out, response.hack_time);
+                    }
                 }
-                alert("zend:" + isZend + " hhvm:" + isHHVM + " hippyvm:" + isHippyVM + " hack:" + isHack);
-                if (isZend) {
-                    /*document.getElementById("ZendResult").innerHTML = "<b>Zend: </b>" + response.zend_out;
-                    document.getElementById("ZendResult").style.display = "inline";*/
-                    setAfterResponse("Zend", response.zend_out, response.zend_time);
-                }
-                if (isHHVM) {
-                    /*document.getElementById("HHVMResult").innerHTML = "<b>HHVM: </b>" + response.hhvm_out;
-                    document.getElementById("HHVMResult").style.display = "inline";*/
-                    setAfterResponse("HHVM", response.hhvm_out, response.hhvm_time);
-                }
-                if (isHippyVM) {
-                    /*document.getElementById("HippyVMResult").innerHTML = "<b>HippyVM: </b>" + response.hippyvm_out;
-                    document.getElementById("HippyVMResult").style.display = "inline";*/
-                    setAfterResponse("HippyVM", response.hippyvm_out, response.hippyvm_time);
-                }
-                if (isHack) {
-                    /*document.getElementById("HackResult").innerHTML = "<b>Hack: </b>" + response.hack_out;
-                    document.getElementById("HackResult").style.display = "inline";*/
-                    setAfterResponse("Hack", response.hack_out, response.hack_time);
-                }
+                
+                
                 //document.getElementById("runCode").innerHTML = "Run";
                 document.getElementById("runCode").innerHTML = "Run";
                 document.getElementById("runCode").disabled = false;
@@ -310,10 +313,8 @@ $(function() {
         var resStr = prefix + "Result";
         var timeStr = prefix + "Time";
 
-        if (out != null) {
-            document.getElementById(resStr).innerHTML = "<b>"+ prefix + ": </b>" + out;
-            document.getElementById(resStr).style.display = "inline";
-        }
+        document.getElementById(resStr).innerHTML = "<b>"+ prefix + ": </b>" + out;
+        document.getElementById(resStr).style.display = "inline";
         if (time != null) {
             document.getElementById(timeStr).innerHTML = time;
             document.getElementById(timeStr).style.display = "inline";
