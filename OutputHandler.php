@@ -80,7 +80,9 @@ function hippyvm_praseError($error_out) {
 }
 
 function remove_double_breaks($string) {
-	return str_replace("<br><br>", "<br>", $string);
+	$string = str_replace("<br><br>", "<br>", $string);
+	$string = str_replace("<br> <br>", "<br>", $string);
+	return $string;
 }
 
 ?>
