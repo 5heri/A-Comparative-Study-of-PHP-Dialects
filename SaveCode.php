@@ -54,7 +54,7 @@ include 'OutputHandler.php';
     		foreach ($exec_out_zend as $val) {
     			$zend_out = $zend_out . $val;
 			}
-			$zend_out = handle_output($zend_out, "zend", $fname_top, $start_tag, $ip, $O_ZEND, $O_UTIL);
+			$zend_out = handle_output($zend_out, "zend", $fname_top, $start_tag, $ip, $O_ZEND, $O_UTIL, $zend_exit_code);
 			
 
 
@@ -129,7 +129,7 @@ include 'OutputHandler.php';
     		foreach ($exec_out_hhvm as $val) {
     			$hhvm_out = $hhvm_out . $val;
 			}
-			$hhvm_out = handle_output($hhvm_out, "hhvm", $fname_top, $start_tag, $ip, $O_HHVM, $O_UTIL);
+			$hhvm_out = handle_output($hhvm_out, "hhvm", $fname_top, $start_tag, $ip, $O_HHVM, $O_UTIL, $hhvm_exit_code);
 
 			/*if ($hhvm_exit_code == 0) {
 				for ($i = 0; $i < count($exec_out_hhvm) - 1; ++$i) {
@@ -204,7 +204,7 @@ include 'OutputHandler.php';
     		foreach ($exec_out_hippyvm as $val) {
     			$hippyvm_out = $hippyvm_out . $val;
 			}
-			$hippyvm_out = handle_output($hippyvm_out, "hippyvm", $fname_top, $start_tag, $ip, $O_HIPPYVM, $O_UTIL);
+			$hippyvm_out = handle_output($hippyvm_out, "hippyvm", $fname_top, $start_tag, $ip, $O_HIPPYVM, $O_UTIL, $hippyvm_exit_code);
 
 			/*if ($hippyvm_exit_code == 0) {
 				for ($i = 0; $i < count($exec_out_hippyvm) - 1; ++$i) {
@@ -283,7 +283,7 @@ include 'OutputHandler.php';
     		foreach ($exec_out_hack as $val) {
     			$hack_out = $hack_out . $val;
 			}
-			$hack_out = handle_output($hack_out, "hack", $fname_top, $start_tag, $ip, $O_HACK, $O_UTIL);
+			$hack_out = handle_output($hack_out, "hack", $fname_top, $start_tag, $ip, $O_HACK, $O_UTIL, $hack_exit_code);
 			
 
 			/*if ($hack_exit_code == 0) {

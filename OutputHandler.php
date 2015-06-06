@@ -1,6 +1,6 @@
 <?php
 
-function handle_output($out, $kind, $fname, $buffer, $ip, $O_TAGS, $O_UTIL) {
+function handle_output($out, $kind, $fname, $buffer, $ip, $O_TAGS, $O_UTIL, $exit_code) {
 	$trusted_out = $out;
 
 	switch ($kind) {
@@ -24,6 +24,9 @@ function handle_output($out, $kind, $fname, $buffer, $ip, $O_TAGS, $O_UTIL) {
 
 	foreach ($O_UTIL as $util_tags) {
 		$trusted_out = str_replace($util_tags . $ip, "", $trusted_out);
+	}
+	if ($exit_code != 0) {
+		$trusted_out = remove_double_breaks($trusted_out);
 	}
 	return fixLineNumbers($trusted_out, $buffer);
 }
@@ -74,6 +77,10 @@ function hippyvm_praseError($error_out) {
 		$error_out = "Parse error";
 	}
 	return $error_out;
+}
+
+function remove_double_breaks($string) {
+	return str_replace("<br><br>", "<br>", $string);
 }
 
 ?>
