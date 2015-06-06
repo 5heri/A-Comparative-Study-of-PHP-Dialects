@@ -60,16 +60,6 @@ function fixLineNumbers($string, $buffer_exists) {
 	return $actual_string;
 }
 
-function handle_hippyvm_special($exec_hippyvm) {
-	if (strpos($exec_hippyvm[0], "In function") !== false) {
-		array_shift($exec_hippyvm);
-		array_shift($exec_hippyvm);
-	}
-	if (strpos($exec_hippyvm[count($exec_hippyvm) - 1], "E: Child terminated")) {
-		array_pop($exec_hippyvm);
-	}
-}
-
 function hippyvm_traceback($error_out) {
 	$start = strpos($error_out, "RPython traceback:");
 	$end = strpos($error_out, "...");

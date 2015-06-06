@@ -195,7 +195,7 @@ include 'OutputHandler.php';
 			} else {
 				$exec_out_hippyvm = array_filter($exec_out_hippyvm, "checkEmpty");
 			}
-			handle_hippyvm_special($exec_out_hippyvm);
+			$exec_out_hippyvm = handle_hippyvm_special($exec_out_hippyvm);
 			
 			$length = count($exec_out_hippyvm);
 			for ($i = 1; $i < $length * 2 - 1; $i += 2) {
@@ -432,6 +432,17 @@ include 'OutputHandler.php';
 
 		return $data;
 	}
+
+	function handle_hippyvm_special($exec_hippyvm) {
+	if (strpos($exec_hippyvm[0], "In function") !== false) {
+		array_shift($exec_hippyvm);
+		array_shift($exec_hippyvm);
+	}
+	if (strpos($exec_hippyvm[count($exec_hippyvm) - 1], "E: Child terminated")) {
+		array_pop($exec_hippyvm);
+	}
+	return $exec_hippyvm;
+}
 
 	function substring($str, $start, $end) {
 		return substr($str, $start, $end - $start);
