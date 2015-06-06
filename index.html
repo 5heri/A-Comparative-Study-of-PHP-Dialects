@@ -214,15 +214,13 @@ $(function() {
             $.post( "SaveCode.php", { data : copy_code, start : startTag, zend : isZend,
                                       hhvm : isHHVM, hippyvm : isHippyVM, hack : isHack})
                 .done(function( response ) {
-                //alert( "Data Loaded: " + response );
+
                 response = JSON.parse(response);
-                //alert(response.zend_out);
-                //alert(response.zend_time);
-                alert("zend:" + isZend + " hhvm:" + isHHVM + " hippyvm:" + isHippyVM + " hack:" + isHack);
                 var isMali = response.is_mali;
                 initialResultStyles();
+
                 if (isMali) {
-                    document.getElementById("MaliResult").innerHTML = "<b>Malicious Code Found.</b>";
+                    document.getElementById("MaliResult").innerHTML = "<b>Malicious Code</b>";
                     document.getElementById("MaliResult").style.display = "inline";
                 } else {
                     if (isZend) {
@@ -252,6 +250,9 @@ $(function() {
                 document.getElementById("runCode").innerHTML = "Run";
                 document.getElementById("runCode").disabled = false;
                 document.getElementById("runCode").style.backgroundColor = "#33CCFF";    
+            });
+            .fail(function() {
+                serverFail();
             });
         });
     });
@@ -335,6 +336,14 @@ $(function() {
             }
         }
         rawFile.send(null);
+    }
+
+    function serverFail() {
+        document.getElementById("MaliResult").innerHTML = "<b>Malicious Code Found.</b>";
+        document.getElementById("MaliResult").style.display = "inline";
+        document.getElementById("runCode").innerHTML = "Run";
+        document.getElementById("runCode").disabled = false;
+        document.getElementById("runCode").style.backgroundColor = "#33CCFF";
     }
 
 </script>

@@ -12,6 +12,7 @@ function handle_output($out, $kind, $fname, $buffer, $ip, $O_TAGS, $O_UTIL) {
         break;
     case "hippyvm":
     	$trusted_out = hippyvm_traceback($trusted_out);
+    	$trusted_out = hippyvm_praseError($error_out)
     	$trusted_out = location_checking($trusted_out, $O_TAGS, $fname);
         break;
     case "hack":
@@ -66,6 +67,13 @@ function hippyvm_traceback($error_out) {
 		return $error_out;
 	}
 	return substr($error_out, 0, $start) . " ". substr($error_out, $end + 3, strlen($error_out));
+}
+
+function hippyvm_praseError($error_out) {
+	if (strpos($error_out, "Parse error") !== false) {
+		$error_out = "Parse error";
+	}
+	return $error_out;
 }
 
 ?>

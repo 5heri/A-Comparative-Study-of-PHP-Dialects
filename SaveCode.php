@@ -191,7 +191,23 @@ include 'OutputHandler.php';
 
 			exec("schroot -c secondjail -- /usr/src/hippyvm/hippy-c $fname 2>&1", $exec_out_hippyvm, $hippyvm_exit_code);
 			$exec_out_hippyvm = array_slice($exec_out_hippyvm, 2); 
+			
 			if ($hippyvm_exit_code == 0) {
+				$hippyvm_time = array_pop($exec_out_hippyvm);	
+			} else {
+				$exec_out_hippyvm = array_filter($exec_out_hippyvm, "checkEmpty");
+			}
+			
+			$length = count($exec_out_hippyvm);
+			for ($i = 1; $i < $length * 2 - 1; $i += 2) {
+    			array_splice($exec_out_hippyvm, $i, 0, "<br>");
+    		}
+    		foreach ($exec_out_hippyvm as $val) {
+    			$hippyvm_out = $hippyvm_out . $val;
+			}
+			$hippyvm_out = handle_output($hippyvm_out, "hippyvm", $fname_top, $start_tag, $ip, $O_HIPPYVM, $O_UTIL);
+
+			/*if ($hippyvm_exit_code == 0) {
 				for ($i = 0; $i < count($exec_out_hippyvm) - 1; ++$i) {
 					if ($i == 0) {
 						$hippyvm_out = $exec_out_hippyvm[0];
@@ -200,7 +216,7 @@ include 'OutputHandler.php';
 					}
 				}
 				$hippyvm_time = $exec_out_hippyvm[count($exec_out_hippyvm) - 1] . "s";
-			} else {
+			} else {*/
 				//$hippyvm_out = $exec_out_hippyvm[count($exec_out_hippyvm) - 1];
 				//$hippyvm_time = NULL;
 
@@ -216,7 +232,7 @@ include 'OutputHandler.php';
 				/*if (strpos($exec_out_hippyvm[0], "In function") !== false) {
 					$exec_out_hippyvm[0] = "";
 				}*/
-				$is_first_hippyvm = true;
+				/*$is_first_hippyvm = true;
 				for ($i = 0; $i < count($exec_out_hippyvm); ++$i) {
 					if (strcmp($exec_out_hippyvm[$i], "") != 0) {
                 		if ($is_first_hippyvm) {
@@ -226,7 +242,7 @@ include 'OutputHandler.php';
                      		$hippyvm_out = $hippyvm_out . "<br>" . $exec_out_hippyvm[$i];
                 		}
 					}
-				}
+				}*/
 				/*while(strpos($hippyvm_out, "tmp/hippyvm") !== false) {
 					$hippyvm_out = errorPrinterHippyvm($hippyvm_out);
 				}
@@ -236,8 +252,8 @@ include 'OutputHandler.php';
 				} else {
 					$hippyvm_out = rtrim($hippyvm_out, ":");
 				}*/
-				$hippyvm_time = NULL;
-			}
+				//$hippyvm_time = NULL;
+			//}//
 
 			//$hippyvm_out = $exec_out_hippyvm;
 			//`rm $fname`;
