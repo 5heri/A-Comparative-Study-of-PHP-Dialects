@@ -43,6 +43,8 @@ include 'OutputHandler.php';
 			
 			if ($zend_exit_code == 0) {
 				$zend_time = array_pop($exec_out_zend);	
+			} else {
+				$exec_out_zend = array_filter($exec_out_zend, "checkEmpty");
 			}
 			
 			$length = count($exec_out_zend);
@@ -113,15 +115,13 @@ include 'OutputHandler.php';
 
 			exec("schroot -c secondjail -- hhvm $fname 2>&1", $exec_out_hhvm, $hhvm_exit_code);
 			$exec_out_hhvm = array_slice($exec_out_hhvm, 2); 
-			//$exec_out_hhvm = array_filter($exec_out_hhvm, "checkEmpty");
+
 
 			
 			if ($hhvm_exit_code == 0) {
 				$hhvm_time = array_pop($exec_out_hhvm);	
 			} else {
-				if (empty($exec_out_hhvm[0])) {
-					array_shift($exec_out_hhvm);
-				}
+				$exec_out_hhvm = array_filter($exec_out_hhvm, "checkEmpty");
 			}
 			
 			$length = count($exec_out_hhvm);
@@ -257,6 +257,8 @@ include 'OutputHandler.php';
 			
 			if ($hack_exit_code == 0) {
 				$hack_time = array_pop($exec_out_hack);	
+			} else {
+				$exec_out_hack = array_filter($exec_out_hack, "checkEmpty");
 			}
 			
 			$length = count($exec_out_hack);
