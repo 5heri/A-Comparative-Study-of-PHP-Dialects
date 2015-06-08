@@ -459,6 +459,7 @@ include 'InputConfig.php';
 				$i++;
 			}
 		}
+		return $exec_hippyvm;
 	}	
 
 	function substring($str, $start, $end) {
