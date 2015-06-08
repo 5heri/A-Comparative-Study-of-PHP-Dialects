@@ -197,9 +197,11 @@ include 'InputConfig.php';
 				array_pop($exec_out_hippyvm);	
 				$hippyvm_time = array_pop($exec_out_hippyvm);
 			} else {
+				$hippyvm_exit_code = 255;
+				$exec_out_hippyvm = handle_hippyvm_special($exec_out_hippyvm);
 				$exec_out_hippyvm = array_filter($exec_out_hippyvm, "checkEmpty");
 			}
-			$exec_out_hippyvm = handle_hippyvm_special($exec_out_hippyvm);
+			
 			
 			$length = count($exec_out_hippyvm);
 			for ($i = 1; $i < $length * 2 - 1; $i += 2) {
