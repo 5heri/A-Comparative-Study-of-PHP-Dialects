@@ -440,7 +440,7 @@ include 'InputConfig.php';
 
 	function addUtilCodeHippyVM($data) {
 		$data = $data . str_replace("n", "\n", "echo 'n';");
-		$data = $data . "\necho 'success_EOF_exit_0;'\n";
+		$data = $data . "\necho 'success_EOF_exit_0';\n";
 		return $data;
 	}
 
