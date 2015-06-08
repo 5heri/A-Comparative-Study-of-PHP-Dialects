@@ -201,6 +201,7 @@ include 'InputConfig.php';
 				$exec_out_hippyvm = handle_hippyvm_special($exec_out_hippyvm);
 				$exec_out_hippyvm = array_filter($exec_out_hippyvm, "checkEmpty");
 			}
+			$exec_out_hippyvm = handle_hippyvm_special($exec_out_hippyvm);
 			
 			
 			$length = count($exec_out_hippyvm);
