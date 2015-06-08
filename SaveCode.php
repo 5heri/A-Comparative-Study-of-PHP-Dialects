@@ -441,15 +441,25 @@ include 'InputConfig.php';
 	}
 
 	function handle_hippyvm_special($exec_hippyvm) {
-	if (strpos($exec_hippyvm[0], "In function") !== false) {
-		array_shift($exec_hippyvm);
-		array_shift($exec_hippyvm);
-	}
-	if (strpos($exec_hippyvm[count($exec_hippyvm) - 1], "E: Child terminated") !== false) {
-		array_pop($exec_hippyvm);
-	}
-	return $exec_hippyvm;
-}
+
+		/*if (strpos($exec_hippyvm[0], "In function") !== false) {
+			array_shift($exec_hippyvm);
+			array_shift($exec_hippyvm);
+		}
+		if (strpos($exec_hippyvm[count($exec_hippyvm) - 1], "E: Child terminated") !== false) {
+			array_pop($exec_hippyvm);
+		}
+		return $exec_hippyvm;*/
+		$indexes = array();
+
+		for ($i = 0; $i < count($exec_hippyvm); ++$i) {
+			if (strpos($exec_hippyvm[$i], "In function") !== false) {
+				$exec_hippyvm[$i] = "";
+				$exec_hippyvm[$i + 1] = "";
+				$i++;
+			}
+		}
+	}	
 
 	function substring($str, $start, $end) {
 		return substr($str, $start, $end - $start);
