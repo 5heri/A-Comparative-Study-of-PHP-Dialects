@@ -3,6 +3,8 @@
 include 'OutputConfig.php';
 include 'CodeChecker.php';
 include 'OutputHandler.php';
+include 'InputHandler.php';
+include 'InputConfig.php';
 
 
 	if(!empty($_POST['data'])){

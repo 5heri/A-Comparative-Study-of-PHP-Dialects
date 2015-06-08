@@ -55,12 +55,12 @@ textarea {
   margin-left: 5px;
 }
 
-.maliResult {
+.serverError {
   color: #9F6000;
   background: #FEEFB3;
 }
 
-.serverError {
+.maliResult {
   color:  #D8000C;
   background: #FFBABA;
 }
