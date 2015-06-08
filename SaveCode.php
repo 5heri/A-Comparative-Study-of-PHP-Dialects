@@ -194,7 +194,8 @@ include 'InputConfig.php';
 			$exec_out_hippyvm = array_slice($exec_out_hippyvm, 2); 
 			
 			if ($hippyvm_exit_code == 0 && $exec_out_hippyvm[count($exec_out_hippyvm) - 1] === 'success_EOF_exit_0') {
-				$hippyvm_time = array_pop($exec_out_hippyvm);	
+				array_pop($exec_out_hippyvm);	
+				$hippyvm_time = array_pop($exec_out_hippyvm);
 			} else {
 				$exec_out_hippyvm = array_filter($exec_out_hippyvm, "checkEmpty");
 			}
@@ -441,23 +442,14 @@ include 'InputConfig.php';
 	}
 
 	function handle_hippyvm_special($exec_hippyvm) {
-
-		/*if (strpos($exec_hippyvm[0], "In function") !== false) {
-			array_shift($exec_hippyvm);
-			array_shift($exec_hippyvm);
+		for ($i = 0; $i < count($exec_hippyvm); ++$i) {
+			if (strpos($exec_hippyvm[$i], "In function") !== false 
+				|| strpos($exec_hippyvm[$i], "function <") !== false) {
+				$exec_hippyvm[$i] = "";
+			}
 		}
 		if (strpos($exec_hippyvm[count($exec_hippyvm) - 1], "E: Child terminated") !== false) {
 			array_pop($exec_hippyvm);
-		}
-		return $exec_hippyvm;*/
-		$indexes = array();
-
-		for ($i = 0; $i < count($exec_hippyvm); ++$i) {
-			if (strpos($exec_hippyvm[$i], "In function") !== false) {
-				$exec_hippyvm[$i] = "";
-				$exec_hippyvm[$i + 1] = "";
-				$i++;
-			}
 		}
 		return $exec_hippyvm;
 	}	
