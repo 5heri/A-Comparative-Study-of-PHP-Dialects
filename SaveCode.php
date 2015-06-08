@@ -28,6 +28,7 @@ include 'InputConfig.php';
 		$fname_top = $ip . "code.php";
 
 		$data = addUtilCode($data, $ip);
+		$hippyvm_data = addUtilCodeHippyVM($data);
 
 		$zend_out = NULL;
 		$zend_time = NULL;
@@ -186,13 +187,13 @@ include 'InputConfig.php';
 		if ($hippyvm === "true") {
 			$fname = "/home/tmp/hippyvm/" . $fname_top;	
 			$file = fopen($fname, 'w');
-			fwrite($file, "<?php \n" . $data . " \n?>" );
+			fwrite($file, "<?php \n" . $hippyvm_data . " \n?>" );
 			fclose($file);
 
 			exec("schroot -c secondjail -- /usr/src/hippyvm/hippy-c $fname 2>&1", $exec_out_hippyvm, $hippyvm_exit_code);
 			$exec_out_hippyvm = array_slice($exec_out_hippyvm, 2); 
 			
-			if ($hippyvm_exit_code == 0) {
+			if ($hippyvm_exit_code == 0 && $exec_out_hippyvm[count($exec_out_hippyvm) - 1] === 'success_EOF_exit_0') {
 				$hippyvm_time = array_pop($exec_out_hippyvm);	
 			} else {
 				$exec_out_hippyvm = array_filter($exec_out_hippyvm, "checkEmpty");
@@ -431,7 +432,11 @@ include 'InputConfig.php';
 		$data = $data . "\n$" . "time_after_$ip = microtime(true);\n"; 
 		$data = $data . str_replace("n", "\n", "echo 'n';");
 		$data = $data . "\necho printf('%.7f', " . "$" . "time_after_$ip - " . "$" . "time_before_$ip);\n";
+		return $data;
+	}
 
+	function addUtilCodeHippyVM($data) {
+		$data = $data . "\necho 'success_EOF_exit_0'\n";
 		return $data;
 	}
 
