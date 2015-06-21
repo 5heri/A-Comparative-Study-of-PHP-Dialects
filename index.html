@@ -16,7 +16,7 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="index.html">PHP Labs</a>
+      <a class="navbar-brand" href="index.html">Run PHP code in Zend, HHVM, HippyVM and Hack!</a>
     </div>
     <div>
       <ul class="nav navbar-nav navbar-right">
@@ -78,7 +78,7 @@
 
 <button id="runCode" class="launch">Run</button> 
 <br>
-<div id="MaliResult" class="maliResult">Malicious Code</div>
+<div id="MaliResult" class="maliResult"></div>
 <div id="ServerError" class="serverError">Server Error</div>
 
 <div id="ZendResult" class="result"></div>
@@ -214,7 +214,8 @@ $(function() {
 
                 var isMali = response.is_mali;
                 if (isMali) {
-                    //document.getElementById("MaliResult").innerHTML = "<b>Malicious Code</b>";
+                    //document.getElementById("MaliResult").innerHTML = "<b></b>";
+                    document.getElementById("MaliResult").innerHTML = "<b>Malicious Code</b><br>" + response.mal_func;
                     document.getElementById("MaliResult").style.display = "inline";
                 } else {
                     if (isZend) {

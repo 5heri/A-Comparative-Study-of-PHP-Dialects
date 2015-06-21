@@ -14,12 +14,21 @@ include 'InputConfig.php';
 		$hippyvm = $_POST['hippyvm'];
 		$hack = $_POST['hack'];
 		$mali = false;
-		if(preg_match('/eval\((base64|eval|\$_|\$\$|\$[A-Za-z_0-9\{]*(\(|\{|\[))/i', $data)) {
+		/*if(preg_match('/eval\((base64|eval|\$_|\$\$|\$[A-Za-z_0-9\{]*(\(|\{|\[))/i', $data)) {
 			$zend = "false";
 			$hhvm = "false";
 			$hippyvm = "false";
 			$hack = "false";
 			$mali = true;
+		}*/
+		$res_functions = search_input("<?php ". $data . " ?>", $A_VUNS);
+		if (count($res_functions) > 0) {
+			$zend = "false";
+			$hhvm = "false";
+			$hippyvm = "false";
+			$hack = "false";
+			$mali = true;
+			$res_functions = print_blocked($res_functions);
 		}
 
 		$start_tag = $_POST['start'];
@@ -337,7 +346,8 @@ include 'InputConfig.php';
 			//`rm $fname`;
 		}
 
-		echo json_encode(array("is_mali"=>$mali, "zend_out"=>$zend_out, "zend_time"=>$zend_time,
+		echo json_encode(array("is_mali"=>$mali, "mal_func"=>$res_functions,
+							   "zend_out"=>$zend_out, "zend_time"=>$zend_time,
 							   "hhvm_out"=>$hhvm_out, "hhvm_time"=>$hhvm_time,
 							   "hippyvm_out"=>$hippyvm_out, "hippyvm_time"=>$hippyvm_time,
 							   "hack_out"=>$hack_out, "hack_time"=>$hack_time));
