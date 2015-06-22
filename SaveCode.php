@@ -54,7 +54,7 @@ include 'InputConfig.php';
 
 			
 			if ($zend_exit_code == 0) {
-				$zend_time = array_pop($exec_out_zend);	
+				$zend_time = array_pop($exec_out_zend) . "s";	
 			} else {
 				$exec_out_zend = array_filter($exec_out_zend, "checkEmpty");
 			}
@@ -129,7 +129,7 @@ include 'InputConfig.php';
 			$exec_out_hhvm = array_slice($exec_out_hhvm, 2); 
 
 			if ($hhvm_exit_code == 0) {
-				$hhvm_time = array_pop($exec_out_hhvm);	
+				$hhvm_time = array_pop($exec_out_hhvm) . "s";	
 			} else {
 				$exec_out_hhvm = array_filter($exec_out_hhvm, "checkEmpty");
 			}
@@ -204,7 +204,7 @@ include 'InputConfig.php';
 			
 			if ($hippyvm_exit_code == 0 && $exec_out_hippyvm[count($exec_out_hippyvm) - 1] === 'success_EOF_exit_0') {
 				array_pop($exec_out_hippyvm);	
-				$hippyvm_time = array_pop($exec_out_hippyvm);
+				$hippyvm_time = array_pop($exec_out_hippyvm) . "s";
 			} else {
 				$hippyvm_exit_code = 255;
 				$exec_out_hippyvm = handle_hippyvm_special($exec_out_hippyvm);
@@ -287,7 +287,7 @@ include 'InputConfig.php';
 			$exec_out_hack = array_slice($exec_out_hack, 2);
 			
 			if ($hack_exit_code == 0) {
-				$hack_time = array_pop($exec_out_hack);	
+				$hack_time = array_pop($exec_out_hack) . "";	
 			} else {
 				$exec_out_hack = array_filter($exec_out_hack, "checkEmpty");
 			}
