@@ -287,7 +287,7 @@ include 'InputConfig.php';
 			$exec_out_hack = array_slice($exec_out_hack, 2);
 			
 			if ($hack_exit_code == 0) {
-				$hack_time = array_pop($exec_out_hack) . "";	
+				$hack_time = array_pop($exec_out_hack) . "s";	
 			} else {
 				$exec_out_hack = array_filter($exec_out_hack, "checkEmpty");
 			}
