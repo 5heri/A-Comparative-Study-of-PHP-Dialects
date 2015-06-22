@@ -65,6 +65,29 @@ textarea {
   background: #FFBABA;
 }
 
+.code {
+  float: left;
+  width: 750px;
+  text-align: left;
+  background: #EFEFEF;
+  border: 1px solid #CCC;
+  border-radius: 8px;
+  padding: 10px;
+  display: none;
+  margin: 5px 0px 0px 0px;
+  margin-left: 5px;
+}
+
+.dontfloat {
+  clear:both;
+}
+
+.dontfloat:hover {
+  clear:both;
+  background-color: #D6EBFF;
+  margin-right: 100px;
+}
+
 #ajaxResult {
   display: none;
 }

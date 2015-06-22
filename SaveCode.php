@@ -35,11 +35,11 @@ include 'InputConfig.php';
 
 		$ip = getIP();
 		$fname_top = $ip . "code.php";
-
+		
 		$data = addUtilCode($data, $ip);
 		$hippyvm_data = addUtilCodeHippyVM($data);
-
-		$zend_out = NULL;
+		$zend_out = $data;
+		//$zend_out = NULL;
 		$zend_time = NULL;
 
 		if ($zend === "true") {
@@ -441,8 +441,18 @@ include 'InputConfig.php';
 	}
 
 	function addUtilCode($data, $ip) {
-		$data = "$" . "time_before_$ip = microtime(true);\n" . $data;
-		$data = "set_time_limit(3);\nini_set('memory_limit','64K');\n" . $data; 
+		$index = strripos($data, "namespace");
+		if ($index !== FALSE) {
+			while ($index < strlen($data) && $data[$index] !== "\n") {
+				$index++;
+			}
+			$str_to_insert = "set_time_limit(3);\nini_set('memory_limit','64K');\n";
+			$str_to_insert = $str_to_insert . "$" . "time_before_$ip = microtime(true);\n";
+			$data = substr_replace($data, $str_to_insert, $index, 0);
+		} else {
+			$data = "$" . "time_before_$ip = microtime(true);\n" . $data;
+			$data = "set_time_limit(3);\nini_set('memory_limit','64K');\n" . $data; 
+		}
 		$data = $data . "\n$" . "time_after_$ip = microtime(true);\n"; 
 		$data = $data . str_replace("n", "\n", "echo 'n';");
 		$data = $data . "\necho printf('%.7f', " . "$" . "time_after_$ip - " . "$" . "time_before_$ip);\n";

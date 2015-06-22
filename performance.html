@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>PHP Labs</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<script src="javascripts/jquery-linedtextarea.js"></script>
+	<link href="stylesheets/jquery-linedtextarea.css" type="text/css" rel="stylesheet" />
+	<link href="stylesheets/main.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+</head>
+
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.html">Performance Test Suite</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="index.html"><span ></span>Editor</a></li>
+        <li><a href="#"><span ></span>about</a></li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<button id="runCode" class="launch">Run Test Suite</button> 
+
+<hr width="96%" style="border-top: dotted 1px; border-width:1px;	
+    border-style:dashed; border-color:#D8D8D8" />
+
+
+<ul id="tests">
+  <li class="dontfloat" id="coffee title">Coffee</li>
+  <div id="coffee" style="display:none" class="code">function test($arg) {}<br>
+<br>
+function call_to_usr_func() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for ($i = 0; $i < 1000000; ++$i)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;test("hello");<br>
+}</div>
+<li class="dontfloat" id="tea title">Tea</li>
+<div id="tea" style="display:none" class="code">function test($arg) {}<br>
+<br>
+function call_to_usr_func() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for ($i = 0; $i < 1000000; ++$i)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;test("hello");<br>
+}</div>
+</ul>
+
+
+<!--<div class="dontfloat">
+<ul id="tests">
+  <li id="tea title">Tea</li>
+  <div id="tea" style="display:none" class="code">function test($arg) {}<br>
+<br>
+function call_to_usr_func() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for ($i = 0; $i < 1000000; ++$i)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;test("hello");<br>
+}</div>
+</ul>
+</div>
+ -->
+
+
+<script>
+
+function getEventTarget(e) {
+        e = e || window.event;
+        return e.target || e.srcElement; 
+}
+
+var ul = document.getElementById('tests');
+ul.onclick = function(event) {
+    var target = getEventTarget(event);
+    if (target.id == "coffee title") {
+    	var theDiv = document.getElementById("coffee");
+    	if (theDiv.style.display == "none") {
+    		theDiv.style.display = "inline";
+    	} else if (theDiv.style.display == "inline") {
+    		theDiv.style.display = "none";
+    	}
+    } else if (target.id == "tea title") {
+    	var theDiv = document.getElementById("tea");
+    	if (theDiv.style.display == "none") {
+    		theDiv.style.display = "inline";
+    	} else if (theDiv.style.display == "inline") {
+    		theDiv.style.display = "none";
+    	}
+    }
+};
+
+</script>
+
+<script>
+
+$(document).ready(function() {
+    $("#runCode").click(function() {
+        document.getElementById("runCode").innerHTML = "Running...";
+        document.getElementById("runCode").disabled = true;
+        document.getElementById("runCode").style.backgroundColor = "#2EB8E6";
+
+        $.post( "performance_tests/php01.php", {})
+            .done(function( response ) {
+
+            response = JSON.parse(response);
+            var first = document.getElementById("coffee title");
+            first.innerHTML = getString(first.innerHTML, response.zend_time, response.hhvm_time,
+            							 response.hippyvm_time, response.hack_time);
+
+        })
+        .fail(function() {
+            //serverFail();
+        })
+
+        /*$.post( "performance_tests/php02.php", {})
+            .done(function( response ) {
+
+            response = JSON.parse(response);
+
+            
+        })
+        .fail(function() {
+            //serverFail();
+        })*/
+
+        document.getElementById("runCode").innerHTML = "Run Test Suite";
+        document.getElementById("runCode").disabled = false;
+        document.getElementById("runCode").style.backgroundColor = "#33CCFF";    
+
+    });
+});
+
+
+function getString(name, zend, hhvm, hippyvm, hack) {
+	return name + "&nbsp;&nbsp;&nbsp;&nbsp;" + "Zend:" + zend
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;" + "HHVM:" + hhvm
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;" + "HippyVM" + hippyvm
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;" + "Hack:" + hack; 
+}
+
+</script>
+
+</body>
+
+</html>

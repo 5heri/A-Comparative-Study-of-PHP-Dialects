@@ -3,6 +3,7 @@
 	function search_input($source, $VUNS) {
 		$tokens = token_get_all($source);
 		$vun_found = array();
+		$back_ticks_exists = FALSE;
 		foreach ($tokens as $token) {
  			if (!is_string($token)) {
     			list($id, $text) = $token;
@@ -22,6 +23,9 @@
       					//}*/
       				//}
     			//}
+  			} else if ($token === "`" && !$back_ticks_exists) {
+  				$back_ticks_exists = TRUE;
+  				array_push($vun_found, "backTicks");
   			}
 		}
 		//array_push($vun_found, "test");

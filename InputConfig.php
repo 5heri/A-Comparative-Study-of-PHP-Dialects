@@ -335,8 +335,8 @@ $F_OTHER = array(
 		'parse_str',						
 		'putenv',						
 		'set_include_path',				
-		'apache_setenv',				
-		'define'					
+		'apache_setenv'/*,				
+		'define'		*/			
 	);
 
 $A_VUNS = array_merge($F_CODE, $F_FILE_INCLUDE, $F_FILE_READ, $F_FILE_AFFECT, 
