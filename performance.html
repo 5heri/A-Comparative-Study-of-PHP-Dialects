@@ -43,405 +43,400 @@
 
 <ul id="tests">
 <li class="dontfloat" id="simple">simple()</li>
-<div id="simpleCode" style="display:none" class="code">
-function simple() {<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;$a = 0;<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;for ($i = 0; $i < 1000000; $i++) <br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$a++;<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;$thisisanotherlongname = 0;<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;for ($thisisalongname = 0; $thisisalongname < 1000000; $thisisalongname++) <br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$thisisanotherlongname++;<br>
+<pre id="simpleCode" style="display:none" class="code">
+function simple() {
+    $a = 0;
+    for ($i = 0; $i < 1000000; $i++)
+        $a++;
+    $thisisanotherlongname = 0;
+    for ($thisisalongname = 0; $thisisalongname < 1000000; $thisisalongname++) 
+    $thisisanotherlongname++;
 }
-</div>
+</pre>
 
 <li class="dontfloat" id="simplecall">simplecall()</li>
-<div id="simplecallCode" style="display:none" class="code">
-function simplecall() {<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;for ($i = 0; $i < 1000000; $i++) <br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;strlen("hallo");<br>
+<pre id="simplecallCode" style="display:none" class="code">
+function simplecall() {
+  for ($i = 0; $i < 1000000; $i++) 
+    strlen("hallo");
 }
-</div>
+</pre>
 
 <li class="dontfloat" id="simpleucall">simpleucall()</li>
-<div id="simpleucallCode" style="display:none" class="code">
-function hallo($a) {}<br>
-<br>
-function simpleucall() {<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;for ($i = 0; $i < 1000000; $i++) <br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hallo("hallo");<br>
+<pre id="simpleucallCode" style="display:none" class="code">
+function hallo($a) {}
+
+function simpleucall() {
+  for ($i = 0; $i < 1000000; $i++) 
+    hallo("hallo");
 }
-</div>
+</pre>
 
 <li class="dontfloat" id="simpleudcall">simpleudcall()</li>
-<div id="simpleudcallCode" style="display:none" class="code">
-function simpleudcall() {<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;for ($i = 0; $i < 1000000; $i++) <br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hallo2("hallo");<br>
-}<br>
-<br>
+<pre id="simpleudcallCode" style="display:none" class="code">
+function simpleudcall() {
+  for ($i = 0; $i < 1000000; $i++) 
+    hallo2("hallo");
+}
+
 function hallo2($a) {}
-</div>
+</pre>
 
 <li class="dontfloat" id="mandel">mandel()</li>
-<div id="mandelCode" style="display:none" class="code">
-function mandel() {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;$w1 = 50; $w2 = 40; $h1 = 150; $h2 = 12;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;$recen = -.45; $imcen = 0.0;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;$r = 0.7; $s = 0; $x = 0; $y = 0;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;$rec = 0; $imc = 0; $re = 0;  $im = 0;  $re2 = 0;  $im2 = 0;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;$color = 0;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;$s = 2 * $r / $w1;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;for ($y = 0; $y <= $w1; $y++) {<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$imc = $s * ($y - $h2) + $imcen;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($x = 0; $x <= $h1; $x++) {<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$rec = $s * ($x - $w2) + $recen;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$re = $rec;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$im = $imc;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$color = 1000;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$re2 = $re * $re;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$im2 = $im * $im;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while(((($re2 + $im2) < 1000000) && $color>0)) {<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$im = $re * $im * 2 + $imc;<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$re = $re2 - $im2 + $rec;<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$re2 = $re * $re;<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$im2 = $im * $im;<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$color = $color - 1;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<pre id="mandelCode" style="display:none" class="code">
+function mandel() {
+  $w1 = 50; $w2 = 40; $h1 = 150; $h2 = 12;
+  $recen = -.45; $imcen = 0.0;
+  $r = 0.7; $s = 0; $x = 0; $y = 0;
+  $rec = 0; $imc = 0; $re = 0;  $im = 0;  $re2 = 0;  $im2 = 0;
+  $color = 0;
+  $s = 2 * $r / $w1;
+  for ($y = 0; $y <= $w1; $y++) {
+    $imc = $s * ($y - $h2) + $imcen;
+    for ($x = 0; $x <= $h1; $x++) {
+      $rec = $s * ($x - $w2) + $recen;
+      $re = $rec;
+      $im = $imc;
+      $color = 1000;
+      $re2 = $re * $re;
+      $im2 = $im * $im;
+      while(((($re2 + $im2) < 1000000) && $color>0)) {
+        $im = $re * $im * 2 + $imc;
+        $re = $re2 - $im2 + $rec;
+        $re2 = $re * $re;
+        $im2 = $im * $im;
+        $color = $color - 1;
+      }
+    }
+  }
 }
-</div>
+</pre>
 
 <li class="dontfloat" id="mandel2">mandel2()</li>
-<div id="mandel2Code" style="display:none" class="code">
-function mandel2() {<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;$b = " .:,;!/>)|&IH%*#";<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;for ($y=30; /*printf("\n"),*/ $C = $y*0.1 - 1.5, $y--;){<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($x=0; $c = $x*0.04 - 2, $z=0, $Z=0, $x++ < 75;){<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($r=$c, $i=$C, $k=0; $t = $z*$z - $Z*$Z + $r, $Z = 2*$z*$Z + $i, $z=$t, $k<5000; $k++)<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ($z*$z + $Z*$Z > 500000) break;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<pre id="mandel2Code" style="display:none" class="code">
+function mandel2() {
+  $b = " .:,;!/>)|&IH%*#";
+  for ($y=30; /*printf("\n"),*/ $C = $y*0.1 - 1.5, $y--;){
+    for ($x=0; $c = $x*0.04 - 2, $z=0, $Z=0, $x++ < 75;){
+      for ($r=$c, $i=$C, $k=0; $t=$z*$z - $Z*$Z+$r, $Z=2*$z*$Z+$i, $z=$t, $k<5000; $k++)
+        if ($z*$z + $Z*$Z > 500000) break;
+    }
+  }
 }
-</div>
+</pre>
 
 <li class="dontfloat" id="ackermann">ackermann(7)</li>
-<div id="ackermannCode" style="display:none" class="code">
-function Ack($m, $n){<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;if($m == 0) return $n+1;<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;if($n == 0) return Ack($m-1, 1);<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;return Ack($m - 1, Ack($m, ($n - 1)));<br>
-}<br>
-function ackermann($n) {<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;$r = Ack(3,$n);<br>
+<pre id="ackermannCode" style="display:none" class="code">
+function Ack($m, $n){
+  if($m == 0) return $n+1;
+  if($n == 0) return Ack($m-1, 1);
+  return Ack($m - 1, Ack($m, ($n - 1)));
 }
-</div>
+function ackermann($n) {
+  $r = Ack(3,$n);
+}
+</pre>
 
 <li class="dontfloat" id="ary">ary(50000)</li>
-<div id="aryCode" style="display:none" class="code">
-function ary($n) {<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;for ($i=0; $i<$n; $i++) {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[$i] = $i;<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;for ($i=$n-1; $i>=0; $i--) {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] = $X[$i];<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;$last = $n-1;<br>
+<pre id="aryCode" style="display:none" class="code">
+function ary($n) {
+  for ($i=0; $i<$n; $i++) {
+    $X[$i] = $i;
+  }
+  for ($i=$n-1; $i>=0; $i--) {
+    $Y[$i] = $X[$i];
+  }
+  $last = $n-1;
 }
-
-</div>
+</pre>
 
 <li class="dontfloat" id="ary2">ary2(50000)</li>
-<div id="ary2Code" style="display:none" class="code">
-function ary2($n) {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;  for ($i=0; $i<$n;) {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[$i] = $i; ++$i;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[$i] = $i; ++$i;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[$i] = $i; ++$i;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[$i] = $i; ++$i;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[$i] = $i; ++$i;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[$i] = $i; ++$i;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[$i] = $i; ++$i;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[$i] = $i; ++$i;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[$i] = $i; ++$i;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[$i] = $i; ++$i;<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;for ($i=$n-1; $i>=0;) {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] = $X[$i]; --$i;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] = $X[$i]; --$i;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] = $X[$i]; --$i;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] = $X[$i]; --$i;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] = $X[$i]; --$i;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] = $X[$i]; --$i;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] = $X[$i]; --$i;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] = $X[$i]; --$i;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] = $X[$i]; --$i;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] = $X[$i]; --$i;<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;$last = $n-1;<br>
+<pre id="ary2Code" style="display:none" class="code">
+function ary2($n) {
+  for ($i=0; $i<$n;) {
+    $X[$i] = $i; ++$i;
+    $X[$i] = $i; ++$i;
+    $X[$i] = $i; ++$i;
+    $X[$i] = $i; ++$i;
+    $X[$i] = $i; ++$i;
+    $X[$i] = $i; ++$i;
+    $X[$i] = $i; ++$i;
+    $X[$i] = $i; ++$i;
+    $X[$i] = $i; ++$i;
+    $X[$i] = $i; ++$i;
+  }
+  for ($i=$n-1; $i>=0;) {
+    $Y[$i] = $X[$i]; --$i;
+    $Y[$i] = $X[$i]; --$i;
+    $Y[$i] = $X[$i]; --$i;
+    $Y[$i] = $X[$i]; --$i;
+    $Y[$i] = $X[$i]; --$i;
+    $Y[$i] = $X[$i]; --$i;
+    $Y[$i] = $X[$i]; --$i;
+    $Y[$i] = $X[$i]; --$i;
+    $Y[$i] = $X[$i]; --$i;
+    $Y[$i] = $X[$i]; --$i;
+  }
+  $last = $n-1;
 }
-
-</div>
+</pre>
 
 <li class="dontfloat" id="ary3">ary3(2000)</li>
-<div id="ary3Code" style="display:none" class="code">
-function ary3($n) {<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;for ($i=0; $i<$n; $i++) {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[$i] = $i + 1;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] = 0;<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;for ($k=0; $k<1000; $k++) {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($i=$n-1; $i>=0; $i--) {<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] += $X[$i];<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;$last = $n-1;<br>
+<pre id="ary3Code" style="display:none" class="code">
+function ary3($n) {
+  for ($i=0; $i<$n; $i++) {
+    $X[$i] = $i + 1;
+    $Y[$i] = 0;
+  }
+  for ($k=0; $k<1000; $k++) {
+    for ($i=$n-1; $i>=0; $i--) {
+      $Y[$i] += $X[$i];
+    }
+  }
+  $last = $n-1;
 }
-</div>
+</pre>
 
 <li class="dontfloat" id="fibo">fibo(30)</li>
-<div id="fiboCode" style="display:none" class="code">
-function fibo_r($n){<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;return(($n < 2) ? 1 : fibo_r($n - 2) + fibo_r($n - 1));<br>
-}<br>
-function fibo($n) {<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;$r = fibo_r($n);<br>
+<pre id="fiboCode" style="display:none" class="code">
+function fibo_r($n){
+    return(($n < 2) ? 1 : fibo_r($n - 2) + fibo_r($n - 1));
 }
-</div>
+function fibo($n) {
+  $r = fibo_r($n);
+}
+</pre>
 
 <li class="dontfloat" id="hash1">hash1(50000)</li>
-<div id="hash1Code" style="display:none" class="code">
-function hash1($n) {<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;for ($i = 1; $i <= $n; $i++) {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[dechex($i)] = $i;<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;$c = 0;<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;for ($i = $n; $i > 0; $i--) {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ($X[dechex($i)]) { $c++; }<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<pre id="hash1Code" style="display:none" class="code">
+function hash1($n) {
+  for ($i = 1; $i <= $n; $i++) {
+    $X[dechex($i)] = $i;
+  }
+  $c = 0;
+  for ($i = $n; $i > 0; $i--) {
+    if ($X[dechex($i)]) { $c++; }
+  }
 }
 
-</div>
+</pre>
 
 <li class="dontfloat" id="hash2">hash2(500)</li>
-<div id="hash2Code" style="display:none" class="code">
-function hash2($n) {<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;for ($i = 0; $i < $n; $i++) {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$hash1["foo_$i"] = $i;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$hash2["foo_$i"] = 0;<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;for ($i = $n; $i > 0; $i--) {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach($hash1 as $key => $value) $hash2[$key] += $value;<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;$first = "foo_0";<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;$last  = "foo_".($n-1);<br>
+<pre id="hash2Code" style="display:none" class="code">
+function hash2($n) {
+  for ($i = 0; $i < $n; $i++) {
+    $hash1["foo_$i"] = $i;
+    $hash2["foo_$i"] = 0;
+  }
+  for ($i = $n; $i > 0; $i--) {
+    foreach($hash1 as $key => $value) $hash2[$key] += $value;
+  }
+  $first = "foo_0";
+  $last  = "foo_".($n-1);
 }
-</div>
+</pre>
 
 <li class="dontfloat" id="heapsort">heapsort(20000)</li>
-<div id="heapsortCode" style="display:none" class="code">
-function gen_random ($n) {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;global $LAST;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;return( ($n * ($LAST = ($LAST * IA + IC) % IM)) / IM );<br>
-}<br>
-<br>
-function heapsort_r($n, &$ra) {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;$l = ($n >> 1) + 1;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;$ir = $n;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;while (1) {<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ($l > 1) {<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$rra = $ra[--$l];<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$rra = $ra[$ir];<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ra[$ir] = $ra[1];<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (--$ir == 1) {<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ra[1] = $rra;<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$i = $l;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$j = $l << 1;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while ($j <= $ir) {<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (($j < $ir) && ($ra[$j] < $ra[$j+1])) {<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$j++;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ($rra < $ra[$j]) {<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ra[$i] = $ra[$j];<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$j += ($i = $j);<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$j = $ir + 1;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ra[$i] = $rra;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-}<br>
-<br>
-function heapsort($N) {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;  global $LAST;<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;define("IM", 139968);<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;define("IA", 3877);<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;define("IC", 29573);<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;$LAST = 42;<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;for ($i=1; $i<=$N; $i++) {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ary[$i] = gen_random(1);<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;heapsort_r($N, $ary);<br>
+<pre id="heapsortCode" style="display:none" class="code">
+function gen_random ($n) {
+    global $LAST;
+    return( ($n * ($LAST = ($LAST * IA + IC) % IM)) / IM );
 }
-</div>
+
+function heapsort_r($n, &$ra) {
+    $l = ($n >> 1) + 1;
+    $ir = $n;
+    while (1) {
+        if ($l > 1) {
+            $rra = $ra[--$l];
+        } else {
+            $rra = $ra[$ir];
+            $ra[$ir] = $ra[1];
+            if (--$ir == 1) {
+                $ra[1] = $rra;
+                return;
+            }
+        }
+        $i = $l;
+        $j = $l << 1;
+        while ($j <= $ir) {
+            if (($j < $ir) && ($ra[$j] < $ra[$j+1])) {
+                $j++;
+            }
+            if ($rra < $ra[$j]) {
+                $ra[$i] = $ra[$j];
+                $j += ($i = $j);
+            } else {
+                $j = $ir + 1;
+            }
+        }
+        $ra[$i] = $rra;
+    }
+}
+
+function heapsort($N) {
+  global $LAST;
+  define("IM", 139968);
+  define("IA", 3877);
+  define("IC", 29573);
+  $LAST = 42;
+  for ($i=1; $i<=$N; $i++) {
+    $ary[$i] = gen_random(1);
+  }
+  heapsort_r($N, $ary);
+}
+</pre>
 
 <li class="dontfloat" id="matrix">matrix(20)</li>
-<div id="matrixCode" style="display:none" class="code">
-function mkmatrix ($rows, $cols) {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;$count = 1;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;$mx = array();<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;for ($i=0; $i<$rows; $i++) {<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($j=0; $j<$cols; $j++) {<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mx[$i][$j] = $count++;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;return($mx);<br>
-}<br>
-<br>
-function mmult ($rows, $cols, $m1, $m2) {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;$m3 = array();<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;for ($i=0; $i<$rows; $i++) {<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($j=0; $j<$cols; $j++) {<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$x = 0;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($k=0; $k<$cols; $k++) {<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$x += $m1[$i][$k] * $m2[$k][$j];<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$m3[$i][$j] = $x;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;return($m3);<br>
-}<br>
-<br>
-function matrix($n) {<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;$SIZE = 30;<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;$m1 = mkmatrix($SIZE, $SIZE);<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;$m2 = mkmatrix($SIZE, $SIZE);<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;while ($n--) {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mm = mmult($SIZE, $SIZE, $m1, $m2);<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<pre id="matrixCode" style="display:none" class="code">
+function mkmatrix ($rows, $cols) {
+    $count = 1;
+    $mx = array();
+    for ($i=0; $i<$rows; $i++) {
+    for ($j=0; $j<$cols; $j++) {
+        $mx[$i][$j] = $count++;
+    }
+    }
+    return($mx);
 }
-</div>
+function mmult ($rows, $cols, $m1, $m2) {
+    $m3 = array();
+    for ($i=0; $i<$rows; $i++) {
+    for ($j=0; $j<$cols; $j++) {
+        $x = 0;
+        for ($k=0; $k<$cols; $k++) {
+        $x += $m1[$i][$k] * $m2[$k][$j];
+        }
+        $m3[$i][$j] = $x;
+    }
+    }
+    return($m3);
+}
+function matrix($n) {
+  $SIZE = 30;
+  $m1 = mkmatrix($SIZE, $SIZE);
+  $m2 = mkmatrix($SIZE, $SIZE);
+  while ($n--) {
+    $mm = mmult($SIZE, $SIZE, $m1, $m2);
+  }
+}
+</pre>
 
 <li class="dontfloat" id="nestedloop">nestedloop(12)</li>
-<div id="nestedloopCode" style="display:none" class="code">
-function nestedloop($n) {<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;$x = 0;<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;for ($a=0; $a<$n; $a++)<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($b=0; $b<$n; $b++)<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($c=0; $c<$n; $c++)<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($d=0; $d<$n; $d++)<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($e=0; $e<$n; $e++)<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  for ($f=0; $f<$n; $f++)<br>
-             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$x++;<br>
+<pre id="nestedloopCode" style="display:none" class="code">
+function nestedloop($n) {
+  $x = 0;
+  for ($a=0; $a<$n; $a++)
+    for ($b=0; $b<$n; $b++)
+      for ($c=0; $c<$n; $c++)
+        for ($d=0; $d<$n; $d++)
+          for ($e=0; $e<$n; $e++)
+            for ($f=0; $f<$n; $f++)
+             $x++;
 }
-</div>
+</pre>
 
 <li class="dontfloat" id="sieve">sieve(30)</li>
-<div id="sieveCode" style="display:none" class="code">
-function sieve($n) {<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;$count = 0;<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;while ($n-- > 0) {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$count = 0;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$flags = range (0,8192);<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($i=2; $i<8193; $i++) {<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ($flags[$i] > 0) {<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($k=$i+$i; $k <= 8192; $k+=$i) {<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  $flags[$k] = 0;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$count++;<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<pre id="sieveCode" style="display:none" class="code">
+function sieve($n) {
+  $count = 0;
+  while ($n-- > 0) {
+    $count = 0;
+    $flags = range (0,8192);
+    for ($i=2; $i<8193; $i++) {
+      if ($flags[$i] > 0) {
+        for ($k=$i+$i; $k <= 8192; $k+=$i) {
+          $flags[$k] = 0;
+        }
+        $count++;
+      }
+    }
+  }
 }
-</div>
+</pre>
 
 <li class="dontfloat" id="strcat">strcat(200000)</li>
-<div id="strcatCode" style="display:none" class="code">
-function strcat($n) {<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;$str = "";<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;while ($n-- > 0) {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$str .= "hello\n";<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;$len = strlen($str);<br>
+<pre id="strcatCode" style="display:none" class="code">
+function strcat($n) {
+  $str = "";
+  while ($n-- > 0) {
+    $str .= "hello\n";
+  }
+  $len = strlen($str);
 }
-</div>
+</pre>
 
 <li class="dontfloat" id="jumpapaluza">jumpapaluza(50, 50)</li>
-<div id="jumpapaluzaCode" style="display:none" class="code">
-function jumpapaluza($x, $y) {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;$result = 1.0;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;for ($i = 0; $i < $x; $i++) {<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($j = 0; $j < $y; $j++) {<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($k = 0; $k < $x; $k++) {<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($m = 0; $m < $y; $m++) {<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$result = $result * 1.0001;<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;return $result;<br>
+<pre id="jumpapaluzaCode" style="display:none" class="code">
+function jumpapaluza($x, $y) {
+    $result = 1.0;
+    for ($i = 0; $i < $x; $i++) {
+        for ($j = 0; $j < $y; $j++) {
+            for ($k = 0; $k < $x; $k++) {
+                for ($m = 0; $m < $y; $m++) {
+                    $result = $result * 1.0001;
+                }
+            }
+        }
+    }
+    return $result;
 }
-
-</div>
+</pre>
 
 <li class="dontfloat" id="bitapaluza1">bitapaluza1(21)</li>
-<div id="bitapaluza1Code" style="display:none" class="code">
-function bitapaluza1($x) {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;$a = 1;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;$b = 1 << 63;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;$c = 0;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;$d = 0;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;$e = 0;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;$f = 0;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;for ($i = 0; $i < (1 << $x); $i++) {<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$a <<= 1;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$b >>= 1;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$c = $a | $b;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$d = $a ^ $b;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$e = $a & $b;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$f = ~$a;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while ($a >>= 1) {<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$c = $d << $e;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$d = $e >> $f;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$e = $f << $c;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$f = $c >> $d;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;return $a + $b + $c + $d;<br>
+<pre id="bitapaluza1Code" style="display:none" class="code">
+function bitapaluza1($x) {
+    $a = 1;
+    $b = 1 << 63;
+    $c = 0;
+    $d = 0;
+    $e = 0;
+    $f = 0;
+    for ($i = 0; $i < (1 << $x); $i++) {
+        $a <<= 1;
+        $b >>= 1;
+        $c = $a | $b;
+        $d = $a ^ $b;
+        $e = $a & $b;
+        $f = ~$a;
+        while ($a >>= 1) {
+            $c = $d << $e;
+            $d = $e >> $f;
+            $e = $f << $c;
+            $f = $c >> $d;
+        }
+    }
+    return $a + $b + $c + $d;
 }
-</div>
+</pre>
 
 <li class="dontfloat" id="bitapaluza2">bitapaluza2(18)</li>
-<div id="bitapaluza2Code" style="display:none" class="code">
-function bitapaluza2($x) {<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;$a = 1;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;$b = 1 << 63;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;$c = 0;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;$d = 0;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;$e = 0;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;$f = 0;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;for ($i = 0; $i < (1 << $x); $i++) {<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$a <<= 1;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$b >>= 1;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$c = $a | $b;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$d = $a ^ $b;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$e = $a & $b;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$f = ~$a;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$l = 1 << 8;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while ($l >>= 1) {<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$c = $d << $e;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$d = $e >> $f;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$e = $f << $c;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$f = $c >> $d;<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;return $a + $b + $c + $d;<br>
+<pre id="bitapaluza2Code" style="display:none" class="code">
+function bitapaluza2($x) {
+    $a = 1;
+    $b = 1 << 63;
+    $c = 0;
+    $d = 0;
+    $e = 0;
+    $f = 0;
+    for ($i = 0; $i < (1 << $x); $i++) {
+        $a <<= 1;
+        $b >>= 1;
+        $c = $a | $b;
+        $d = $a ^ $b;
+        $e = $a & $b;
+        $f = ~$a;
+        $l = 1 << 8;
+        while ($l >>= 1) {
+            $c = $d << $e;
+            $d = $e >> $f;
+            $e = $f << $c;
+            $f = $c >> $d;
+        }
+    }
+    return $a + $b + $c + $d;
 }
-</div>
+</pre>
 
 </ul>
 
@@ -948,6 +943,10 @@ function padding(str) {
 }
 
 </script>
+
+<hr width="96%" style="border-top: dotted 1px; border-width:1px;    
+    border-style:dashed; border-color:#D8D8D8" />
+
 
 </body>
 
