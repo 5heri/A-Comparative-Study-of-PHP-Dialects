@@ -32,7 +32,7 @@
 
           </ul>
         </li>
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Examples<span class="caret"></span></a>
+       <!-- <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Examples<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li>
                 <a id="factorial" href="#" onclick="setExamples('factorial');return false;">Factorial
@@ -62,7 +62,7 @@
 
 
           </ul>
-        </li>
+        </li> -->
         <li><a href="#"><span ></span>about</a></li>
 
       </ul>
@@ -88,7 +88,44 @@
 
 <!-- <button id="runCode" class="launch" onclick="sendToServer(code)">Run</button> -->
 
+
+<div class="dropdown">
+
+    <!-- trigger button -->
+    <button>Examples</button>
+
+    <!-- dropdown menu -->
+    <ul class="dropdown-menu">
+        <li>
+                <a id="factorial" href="#" onclick="setExamples('factorial');return false;">Factorial
+                </a>
+            </li>
+            <li>
+                <a id="fibonacci_naive" href="#" onclick="setExamples('fibonacci_naive');return false;">Fibonacci (naive)</a>
+            </li>
+            <li>
+                <a id="fibonacci_dynamic" href="#" onclick="setExamples('fibonacci_dynamic');return false;">Fibonacci (dynamic)</a>
+            </li>
+            <li>
+                <a id="bubble_sort" href="#" onclick="setExamples('bubble_sort');return false;">Bubble-Sort</a>
+            </li>
+            <li>
+                <a id="insertion_sort" href="#" onclick="setExamples('insertion_sort');return false;">Insertion-Sort</a>
+            </li>
+            <li>
+                <a id="merge_sort" href="#" onclick="setExamples('merge_sort');return false;">Merge-Sort</a>
+            </li>
+            <li>
+                <a id="selection_sort" href="#" onclick="setExamples('selection_sort');return false;">Selection-Sort</a>
+            </li>
+            <li>
+                <a id="binary_search" href="#" onclick="setExamples('binary_search');return false;">Binary Search</a>
+            </li>
+    </ul>
+</div>
+
 <button id="runCode" class="launch">Run</button> 
+
 <br>
 <div id="MaliResult" class="maliResult"></div>
 <div id="ServerError" class="serverError">Server Error</div>

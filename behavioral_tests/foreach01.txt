@@ -1,0 +1,7 @@
+// Foreach Loop 01
+
+$arr = array("A", "B", "C", "D");
+
+foreach ($arr as $v) {
+	var_dump(current($arr));
+}

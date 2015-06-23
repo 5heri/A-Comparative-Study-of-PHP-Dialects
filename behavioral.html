@@ -29,11 +29,152 @@
   </div>
 </nav>
 
+<p>
+<!--<form action="code.php" method="post"> -->
+<!--<textarea id="textarea" name="code" class="lined" rows="14" cols="100"></textarea>-->
+<!--<div style="font-family:monaco">&lt?php</div>-->
+
+<pre id="editor_small">
+// Aliasing 02
+
+$a = array("a", "b", "c");
+
+foreach ($a as &$v) {};  // aliasing on $v
+foreach ($a as $v) {};
+
+var_dump($a);
+</pre>
+<!--<div style="font-family:monaco">?></div>-->
+
+<!-- <button id="runCode" class="launch" onclick="sendToServer(code)">Run</button> -->
 
 
+<div class="dropdown">
 
+    <!-- trigger button -->
+    <button>Tests</button>
 
+    <!-- dropdown menu -->
+    <ul class="dropdown-menu">
+        <li>
+                <a id="aliasing01" href="#" onclick="setTests('aliasing01');return false;">Aliasing 01</a>
+            </li>
+            <li>
+                <a id="aliasing02" href="#" onclick="setTests('aliasing02');return false;">Aliasing 02</a>
+            </li>
+            <li>
+                <a id="aliasing03" href="#" onclick="setTests('aliasing03');return false;">Aliasing 03</a>
+            </li>
+            <li>
+                <a id="evaluation_order01" href="#" onclick="setTests('evaluation_order');return false;">Evaluation Order 01</a>
+            </li>
+            <li>
+                <a id="foreach_loop01" href="#" onclick="setTests('foreach01');return false;">Foreach Loop 01</a>
+            </li>
+            <li>
+                <a id="foreach_loop02" href="#" onclick="setTests('foreach02');return false;">Foreach Loop 02</a>
+            </li>
+            <li>
+                <a id="internal_pointer01" href="#" onclick="setTests('internal_array_pointer01');return false;">Internal Array Pointer 01</a>
+            </li>
+            <li>
+                <a id="internal_pointer02" href="#" onclick="setTests('internal_array_pointer02');return false;">Internal Array Pointer 02</a>
+            </li>
+            <li>
+                <a id="lang_construct01" href="#" onclick="setTests('language_construct');return false;">Language Construct 01</a>
+            </li>
+            <li>
+                <a id="namespace_01" href="#" onclick="setTests('namespace');return false;">Namespace 01</a>
+            </li>
+    </ul>
+</div>
 
+<button id="runCode" class="launch">Run</button> 
+
+<br>
+
+<div id="ZendResult" class="result"></div>
+<div id="HHVMResult" class="result"></div>
+<div id="HippyVMResult" class="result"></div>
+<div id="HackResult" class="result"></div>
+
+<script src="src/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var editor = ace.edit("editor_small");
+    editor.setTheme("ace/theme/textmate");
+    editor.getSession().setMode({path:"ace/mode/php", inline:true});
+
+    editor.setReadOnly(true);
+
+    //var code = editor.getSession().getValue();
+
+</script>
+
+<script>
+var testName = "aliasing01"; // set to initial
+$(document).ready(function() {
+
+        $("#editor_small").focus(); 
+
+        $("#runCode").click(function() {
+            document.getElementById("runCode").innerHTML = "Running...";
+            document.getElementById("runCode").disabled = true;
+            document.getElementById("runCode").style.backgroundColor = "#2EB8E6";
+
+            initialResultStyles();
+
+            $.post( "runTests.php", { name : testName})
+                .done(function( response ) {
+
+                response = JSON.parse(response);
+
+                document.getElementById("ZendResult").innerHTML = "<b>Zend: </b>" + response.zend_out;
+                document.getElementById("ZendResult").style.display = "inline";
+
+                document.getElementById("HHVMResult").innerHTML = "<b>HHVM/Hack: </b>" + response.hhvm_out;
+                document.getElementById("HHVMResult").style.display = "inline";
+
+                document.getElementById("HippyVMResult").innerHTML = "<b>HippyVM: </b>" + response.hippyvm_out;
+                document.getElementById("HippyVMResult").style.display = "inline";
+
+                document.getElementById("runCode").innerHTML = "Run";
+                document.getElementById("runCode").disabled = false;
+                document.getElementById("runCode").style.backgroundColor = "#33CCFF";    
+   
+            })
+            .fail(function() {
+                serverFail();
+            })
+        });
+    });
+
+</script>
+
+<script>
+  function setTests(test) {
+    initialResultStyles();
+      var file = "behavioral_tests/" + test + ".txt"
+      testName = test;
+      var rawFile = new XMLHttpRequest();
+      rawFile.open("GET", file, false);
+      rawFile.onreadystatechange = function () {
+          if(rawFile.readyState === 4) {
+              if(rawFile.status === 200 || rawFile.status == 0) {
+                  var allText = rawFile.responseText;
+                  editor.setValue(allText, -1);
+              }
+          }
+      }
+      rawFile.send(null);
+  }
+
+  function initialResultStyles() {
+        document.getElementById("ZendResult").style.display    = "none";
+        document.getElementById("HHVMResult").style.display    = "none";
+        document.getElementById("HippyVMResult").style.display = "none";
+  }
+
+</script>
 
 
 

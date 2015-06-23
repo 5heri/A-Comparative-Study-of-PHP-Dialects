@@ -1,0 +1,13 @@
+<?php
+
+$array1 = array(1, 2);
+$x = &$array1[1];  // Used reference
+$array2 = $array1; // Aliased to $array2!
+
+unset($x);
+
+$array2[1] = 22;
+
+var_dump($array1);
+
+?>
