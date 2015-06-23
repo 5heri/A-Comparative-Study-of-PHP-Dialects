@@ -9,6 +9,6 @@ function fibonacci($n) {
 $num = 5;
 
 // ===== PROCESS - Determing the factorial of the input number =====
-$output = "\n\nFibonacci " . $num . " = " . fibonacci($num) . "\n\n";
+$output = "Fibonacci " . $num . " = " . fibonacci($num) . "\n";
 echo $output;
 

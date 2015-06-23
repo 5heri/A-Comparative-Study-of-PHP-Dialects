@@ -10,6 +10,6 @@ function nfact($n) {
 $num = 5;
 
 // ===== PROCESS - Determing the factorial of the input number =====
-$output = "\n\nFactorial " . $num . " = " . nfact($num) . "\n\n";
+$output = "Factorial " . $num . " = " . nfact($num) . "\n";
 echo $output;
 
