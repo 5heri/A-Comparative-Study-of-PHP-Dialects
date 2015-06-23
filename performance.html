@@ -35,10 +35,10 @@
     border-style:dashed; border-color:#D8D8D8" />
 
 
-    <div class="left">Zend</div>
-    <div class="right">HHVM</div>
-    <div class="right">HippyVM</div>
-    <div class="right">Hack</div>
+    <div class="left"><b>Zend</b></div>
+    <div class="right"><b>HHVM</b></div>
+    <div class="right"><b>HippyVM</b></div>
+    <div class="right"><b>Hack</b></div>
 
 <ul id="tests">
 <li class="dontfloat" id="simple">simple()</li>
@@ -472,11 +472,14 @@ ul.onclick = function(event) {
     //setVisibility(target.id);
     var name = target.id + "Code";
     var codeDiv = document.getElementById(name);
-    if (codeDiv.style.display == "none") {
-        codeDiv.style.display = "inline";
-    } else if (codeDiv.style.display == "inline") {
-        codeDiv.style.display = "none";
+    if (codeDiv != null) {
+        if (codeDiv.style.display == "none") {
+            codeDiv.style.display = "inline";
+        } else if (codeDiv.style.display == "inline") {
+            codeDiv.style.display = "none";
+        }
     }
+    
     
 };
 
