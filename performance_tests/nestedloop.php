@@ -2,25 +2,25 @@
 
 	$array_zend = array();
 	for ($i = 0; $i < 5; ++$i) {
-		$time = `php php01Test.php`;
+		$time = `php nestedloopTest.php`;
 		array_push($array_zend, $time);
 	}
 
 	$array_hhvm = array();
 	for ($i = 0; $i < 5; ++$i) {
-		$time = `hhvm php01Test.php`;
+		$time = `hhvm nestedloopTest.php`;
 		array_push($array_hhvm, $time);
 	}
 
 	$array_hippyvm = array();
 	for ($i = 0; $i < 5; ++$i) {
-		$time = `/usr/src/hippyvm/hippy-c php01Test.php`;
+		$time = `/usr/src/hippyvm/hippy-c nestedloopTest.php`;
 		array_push($array_hippyvm, $time);
 	}
 
 	$array_hack = array();
 	for ($i = 0; $i < 5; ++$i) {
-		$time = `hhvm php01TestH.php`;
+		$time = `hhvm nestedloopTestH.php`;
 		array_push($array_hack, $time);
 	}
 
@@ -29,10 +29,10 @@
 	$hippyvm_time = round(getBestTime($array_hippyvm), 5);
 	$hack_time = round(getBestTime($array_hack), 5);
 
-	echo json_encode(array("zend_time"=>$zend_time . "s",
-							"hhvm_time"=>$hhvm_time . "s",
-							"hippyvm_time"=>$hippyvm_time . "s",
-							"hack_time"=>$hack_time . "s"));
+	echo json_encode(array("zend_time"=>$zend_time,
+							"hhvm_time"=>$hhvm_time,
+							"hippyvm_time"=>$hippyvm_time,
+							"hack_time"=>$hack_time));
 
 	function getBestTime($array) {
 		sort($array);

@@ -35,21 +35,413 @@
     border-style:dashed; border-color:#D8D8D8" />
 
 
+    <div class="left">Zend</div>
+    <div class="right">HHVM</div>
+    <div class="right">HippyVM</div>
+    <div class="right">Hack</div>
+
 <ul id="tests">
-  <li class="dontfloat" id="coffee title">Coffee</li>
-  <div id="coffee" style="display:none" class="code">function test($arg) {}<br>
+<li class="dontfloat" id="simple">simple()</li>
+<div id="simpleCode" style="display:none" class="code">
+function simple() {<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;$a = 0;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;for ($i = 0; $i < 1000000; $i++) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$a++;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;$thisisanotherlongname = 0;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;for ($thisisalongname = 0; $thisisalongname < 1000000; $thisisalongname++) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$thisisanotherlongname++;<br>
+}
+</div>
+
+<li class="dontfloat" id="simplecall">simplecall()</li>
+<div id="simplecallCode" style="display:none" class="code">
+function simplecall() {<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;for ($i = 0; $i < 1000000; $i++) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;strlen("hallo");<br>
+}
+</div>
+
+<li class="dontfloat" id="simpleucall">simpleucall()</li>
+<div id="simpleucallCode" style="display:none" class="code">
+function hallo($a) {}<br>
 <br>
-function call_to_usr_func() {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;for ($i = 0; $i < 1000000; ++$i)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;test("hello");<br>
-}</div>
-<li class="dontfloat" id="tea title">Tea</li>
-<div id="tea" style="display:none" class="code">function test($arg) {}<br>
+function simpleucall() {<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;for ($i = 0; $i < 1000000; $i++) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hallo("hallo");<br>
+}
+</div>
+
+<li class="dontfloat" id="simpleudcall">simpleudcall()</li>
+<div id="simpleudcallCode" style="display:none" class="code">
+function simpleudcall() {<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;for ($i = 0; $i < 1000000; $i++) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hallo2("hallo");<br>
+}<br>
 <br>
-function call_to_usr_func() {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;for ($i = 0; $i < 1000000; ++$i)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;test("hello");<br>
-}</div>
+function hallo2($a) {}
+</div>
+
+<li class="dontfloat" id="mandel">mandel()</li>
+<div id="mandelCode" style="display:none" class="code">
+function mandel() {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;$w1 = 50; $w2 = 40; $h1 = 150; $h2 = 12;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;$recen = -.45; $imcen = 0.0;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;$r = 0.7; $s = 0; $x = 0; $y = 0;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;$rec = 0; $imc = 0; $re = 0;  $im = 0;  $re2 = 0;  $im2 = 0;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;$color = 0;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;$s = 2 * $r / $w1;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;for ($y = 0; $y <= $w1; $y++) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$imc = $s * ($y - $h2) + $imcen;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($x = 0; $x <= $h1; $x++) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$rec = $s * ($x - $w2) + $recen;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$re = $rec;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$im = $imc;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$color = 1000;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$re2 = $re * $re;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$im2 = $im * $im;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while(((($re2 + $im2) < 1000000) && $color>0)) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$im = $re * $im * 2 + $imc;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$re = $re2 - $im2 + $rec;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$re2 = $re * $re;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$im2 = $im * $im;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$color = $color - 1;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+</div>
+
+<li class="dontfloat" id="mandel2">mandel2()</li>
+<div id="mandel2Code" style="display:none" class="code">
+function mandel2() {<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;$b = " .:,;!/>)|&IH%*#";<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;for ($y=30; /*printf("\n"),*/ $C = $y*0.1 - 1.5, $y--;){<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($x=0; $c = $x*0.04 - 2, $z=0, $Z=0, $x++ < 75;){<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($r=$c, $i=$C, $k=0; $t = $z*$z - $Z*$Z + $r, $Z = 2*$z*$Z + $i, $z=$t, $k<5000; $k++)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ($z*$z + $Z*$Z > 500000) break;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+</div>
+
+<li class="dontfloat" id="ackermann">ackermann(7)</li>
+<div id="ackermannCode" style="display:none" class="code">
+function Ack($m, $n){<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;if($m == 0) return $n+1;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;if($n == 0) return Ack($m-1, 1);<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;return Ack($m - 1, Ack($m, ($n - 1)));<br>
+}<br>
+function ackermann($n) {<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;$r = Ack(3,$n);<br>
+}
+</div>
+
+<li class="dontfloat" id="ary">ary(50000)</li>
+<div id="aryCode" style="display:none" class="code">
+function ary($n) {<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;for ($i=0; $i<$n; $i++) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[$i] = $i;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;for ($i=$n-1; $i>=0; $i--) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] = $X[$i];<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;$last = $n-1;<br>
+}
+
+</div>
+
+<li class="dontfloat" id="ary2">ary2(50000)</li>
+<div id="ary2Code" style="display:none" class="code">
+function ary2($n) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;  for ($i=0; $i<$n;) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[$i] = $i; ++$i;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[$i] = $i; ++$i;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[$i] = $i; ++$i;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[$i] = $i; ++$i;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[$i] = $i; ++$i;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[$i] = $i; ++$i;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[$i] = $i; ++$i;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[$i] = $i; ++$i;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[$i] = $i; ++$i;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[$i] = $i; ++$i;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;for ($i=$n-1; $i>=0;) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] = $X[$i]; --$i;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] = $X[$i]; --$i;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] = $X[$i]; --$i;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] = $X[$i]; --$i;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] = $X[$i]; --$i;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] = $X[$i]; --$i;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] = $X[$i]; --$i;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] = $X[$i]; --$i;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] = $X[$i]; --$i;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] = $X[$i]; --$i;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;$last = $n-1;<br>
+}
+
+</div>
+
+<li class="dontfloat" id="ary3">ary3(2000)</li>
+<div id="ary3Code" style="display:none" class="code">
+function ary3($n) {<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;for ($i=0; $i<$n; $i++) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[$i] = $i + 1;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] = 0;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;for ($k=0; $k<1000; $k++) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($i=$n-1; $i>=0; $i--) {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$Y[$i] += $X[$i];<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;$last = $n-1;<br>
+}
+</div>
+
+<li class="dontfloat" id="fibo">fibo(30)</li>
+<div id="fiboCode" style="display:none" class="code">
+function fibo_r($n){<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;return(($n < 2) ? 1 : fibo_r($n - 2) + fibo_r($n - 1));<br>
+}<br>
+function fibo($n) {<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;$r = fibo_r($n);<br>
+}
+</div>
+
+<li class="dontfloat" id="hash1">hash1(50000)</li>
+<div id="hash1Code" style="display:none" class="code">
+function hash1($n) {<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;for ($i = 1; $i <= $n; $i++) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$X[dechex($i)] = $i;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;$c = 0;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;for ($i = $n; $i > 0; $i--) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ($X[dechex($i)]) { $c++; }<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+
+</div>
+
+<li class="dontfloat" id="hash2">hash2(500)</li>
+<div id="hash2Code" style="display:none" class="code">
+function hash2($n) {<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;for ($i = 0; $i < $n; $i++) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$hash1["foo_$i"] = $i;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$hash2["foo_$i"] = 0;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;for ($i = $n; $i > 0; $i--) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foreach($hash1 as $key => $value) $hash2[$key] += $value;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;$first = "foo_0";<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;$last  = "foo_".($n-1);<br>
+}
+</div>
+
+<li class="dontfloat" id="heapsort">heapsort(20000)</li>
+<div id="heapsortCode" style="display:none" class="code">
+function gen_random ($n) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;global $LAST;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;return( ($n * ($LAST = ($LAST * IA + IC) % IM)) / IM );<br>
+}<br>
+<br>
+function heapsort_r($n, &$ra) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;$l = ($n >> 1) + 1;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;$ir = $n;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;while (1) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ($l > 1) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$rra = $ra[--$l];<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$rra = $ra[$ir];<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ra[$ir] = $ra[1];<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (--$ir == 1) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ra[1] = $rra;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$i = $l;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$j = $l << 1;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while ($j <= $ir) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (($j < $ir) && ($ra[$j] < $ra[$j+1])) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$j++;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ($rra < $ra[$j]) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ra[$i] = $ra[$j];<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$j += ($i = $j);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$j = $ir + 1;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ra[$i] = $rra;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}<br>
+<br>
+function heapsort($N) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;  global $LAST;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;define("IM", 139968);<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;define("IA", 3877);<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;define("IC", 29573);<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;$LAST = 42;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;for ($i=1; $i<=$N; $i++) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ary[$i] = gen_random(1);<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;heapsort_r($N, $ary);<br>
+}
+</div>
+
+<li class="dontfloat" id="matrix">matrix(20)</li>
+<div id="matrixCode" style="display:none" class="code">
+function mkmatrix ($rows, $cols) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;$count = 1;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;$mx = array();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;for ($i=0; $i<$rows; $i++) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($j=0; $j<$cols; $j++) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mx[$i][$j] = $count++;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;return($mx);<br>
+}<br>
+<br>
+function mmult ($rows, $cols, $m1, $m2) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;$m3 = array();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;for ($i=0; $i<$rows; $i++) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($j=0; $j<$cols; $j++) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$x = 0;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($k=0; $k<$cols; $k++) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$x += $m1[$i][$k] * $m2[$k][$j];<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$m3[$i][$j] = $x;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;return($m3);<br>
+}<br>
+<br>
+function matrix($n) {<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;$SIZE = 30;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;$m1 = mkmatrix($SIZE, $SIZE);<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;$m2 = mkmatrix($SIZE, $SIZE);<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;while ($n--) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$mm = mmult($SIZE, $SIZE, $m1, $m2);<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+</div>
+
+<li class="dontfloat" id="nestedloop">nestedloop(12)</li>
+<div id="nestedloopCode" style="display:none" class="code">
+function nestedloop($n) {<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;$x = 0;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;for ($a=0; $a<$n; $a++)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($b=0; $b<$n; $b++)<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($c=0; $c<$n; $c++)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($d=0; $d<$n; $d++)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($e=0; $e<$n; $e++)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  for ($f=0; $f<$n; $f++)<br>
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$x++;<br>
+}
+</div>
+
+<li class="dontfloat" id="sieve">sieve(30)</li>
+<div id="sieveCode" style="display:none" class="code">
+function sieve($n) {<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;$count = 0;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;while ($n-- > 0) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$count = 0;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$flags = range (0,8192);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($i=2; $i<8193; $i++) {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ($flags[$i] > 0) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($k=$i+$i; $k <= 8192; $k+=$i) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  $flags[$k] = 0;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$count++;<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+</div>
+
+<li class="dontfloat" id="strcat">strcat(200000)</li>
+<div id="strcatCode" style="display:none" class="code">
+function strcat($n) {<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;$str = "";<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;while ($n-- > 0) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$str .= "hello\n";<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;$len = strlen($str);<br>
+}
+</div>
+
+<li class="dontfloat" id="jumpapaluza">jumpapaluza(50, 50)</li>
+<div id="jumpapaluzaCode" style="display:none" class="code">
+function jumpapaluza($x, $y) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;$result = 1.0;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;for ($i = 0; $i < $x; $i++) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($j = 0; $j < $y; $j++) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($k = 0; $k < $x; $k++) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ($m = 0; $m < $y; $m++) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$result = $result * 1.0001;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;return $result;<br>
+}
+
+</div>
+
+<li class="dontfloat" id="bitapaluza1">bitapaluza1(21)</li>
+<div id="bitapaluza1Code" style="display:none" class="code">
+function bitapaluza1($x) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;$a = 1;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;$b = 1 << 63;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;$c = 0;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;$d = 0;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;$e = 0;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;$f = 0;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;for ($i = 0; $i < (1 << $x); $i++) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$a <<= 1;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$b >>= 1;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$c = $a | $b;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$d = $a ^ $b;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$e = $a & $b;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$f = ~$a;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while ($a >>= 1) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$c = $d << $e;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$d = $e >> $f;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$e = $f << $c;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$f = $c >> $d;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;return $a + $b + $c + $d;<br>
+}
+</div>
+
+<li class="dontfloat" id="bitapaluza2">bitapaluza2(18)</li>
+<div id="bitapaluza2Code" style="display:none" class="code">
+function bitapaluza2($x) {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;$a = 1;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;$b = 1 << 63;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;$c = 0;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;$d = 0;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;$e = 0;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;$f = 0;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;for ($i = 0; $i < (1 << $x); $i++) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$a <<= 1;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$b >>= 1;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$c = $a | $b;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$d = $a ^ $b;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$e = $a & $b;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$f = ~$a;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$l = 1 << 8;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while ($l >>= 1) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$c = $d << $e;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$d = $e >> $f;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$e = $f << $c;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$f = $c >> $d;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;return $a + $b + $c + $d;<br>
+}
+</div>
+
 </ul>
 
 
@@ -77,22 +469,27 @@ function getEventTarget(e) {
 var ul = document.getElementById('tests');
 ul.onclick = function(event) {
     var target = getEventTarget(event);
-    if (target.id == "coffee title") {
-    	var theDiv = document.getElementById("coffee");
-    	if (theDiv.style.display == "none") {
-    		theDiv.style.display = "inline";
-    	} else if (theDiv.style.display == "inline") {
-    		theDiv.style.display = "none";
-    	}
-    } else if (target.id == "tea title") {
-    	var theDiv = document.getElementById("tea");
-    	if (theDiv.style.display == "none") {
-    		theDiv.style.display = "inline";
-    	} else if (theDiv.style.display == "inline") {
-    		theDiv.style.display = "none";
-    	}
+    //setVisibility(target.id);
+    var name = target.id + "Code";
+    var codeDiv = document.getElementById(name);
+    if (codeDiv.style.display == "none") {
+        codeDiv.style.display = "inline";
+    } else if (codeDiv.style.display == "inline") {
+        codeDiv.style.display = "none";
     }
+    
 };
+
+function setVisibility(targetID) {
+    var name = targetID + "Code";
+    var codeDiv = document.getElementById(targetID);
+    //alert(codeDiv.style.display);
+    if (codeDiv.style.display == "none") {
+        codeDiv.style.display = "inline";
+    } else if (codeDiv.style.display == "inline") {
+        codeDiv.style.display = "none";
+    }
+}
 
 </script>
 
@@ -104,43 +501,446 @@ $(document).ready(function() {
         document.getElementById("runCode").disabled = true;
         document.getElementById("runCode").style.backgroundColor = "#2EB8E6";
 
-        $.post( "performance_tests/php01.php", {})
+        $.post( "performance_tests/simple.php", {})
             .done(function( response ) {
 
             response = JSON.parse(response);
-            var first = document.getElementById("coffee title");
-            first.innerHTML = getString(first.innerHTML, response.zend_time, response.hhvm_time,
+            var first = document.getElementById("simple");
+            first.innerHTML = getString("simple()", response.zend_time, response.hhvm_time,
             							 response.hippyvm_time, response.hack_time);
-
         })
         .fail(function() {
             //serverFail();
         })
 
-        /*$.post( "performance_tests/php02.php", {})
+        $.post( "performance_tests/simplecall.php", {})
             .done(function( response ) {
 
             response = JSON.parse(response);
+            var first = document.getElementById("simplecall");
+            first.innerHTML = getString("simplecall()", response.zend_time, response.hhvm_time,
+                                         response.hippyvm_time, response.hack_time);
 
             
         })
         .fail(function() {
             //serverFail();
-        })*/
+        })
 
-        document.getElementById("runCode").innerHTML = "Run Test Suite";
-        document.getElementById("runCode").disabled = false;
-        document.getElementById("runCode").style.backgroundColor = "#33CCFF";    
+        $.post( "performance_tests/simpleucall.php", {})
+            .done(function( response ) {
 
+            response = JSON.parse(response);
+            var first = document.getElementById("simpleucall");
+            first.innerHTML = getString("simpleucall()", response.zend_time, response.hhvm_time,
+                                         response.hippyvm_time, response.hack_time);
+
+            
+        })
+        .fail(function() {
+            //serverFail();
+        })
+
+        $.post( "performance_tests/simpleudcall.php", {})
+            .done(function( response ) {
+
+            response = JSON.parse(response);
+            var first = document.getElementById("simpleudcall");
+            first.innerHTML = getString("simpleudcall()", response.zend_time, response.hhvm_time,
+                                         response.hippyvm_time, response.hack_time);
+
+            
+        })
+        .fail(function() {
+            //serverFail();
+        })
+
+        $.post( "performance_tests/mandel.php", {})
+            .done(function( response ) {
+
+            response = JSON.parse(response);
+            var first = document.getElementById("mandel");
+            first.innerHTML = getString("mandel()", response.zend_time, response.hhvm_time,
+                                         response.hippyvm_time, response.hack_time);
+
+            
+        })
+        .fail(function() {
+            //serverFail();
+        })
+
+        $.post( "performance_tests/mandel2.php", {})
+            .done(function( response ) {
+
+            response = JSON.parse(response);
+            var first = document.getElementById("mandel2");
+            first.innerHTML = getString("mandel2()", response.zend_time, response.hhvm_time,
+                                         response.hippyvm_time, response.hack_time);
+
+            
+        })
+        .fail(function() {
+            //serverFail();
+        })
+
+        $.post( "performance_tests/ackermann.php", {})
+            .done(function( response ) {
+
+            response = JSON.parse(response);
+            var first = document.getElementById("ackermann");
+            first.innerHTML = getString("ackermann(7)", response.zend_time, response.hhvm_time,
+                                         response.hippyvm_time, response.hack_time);
+
+            
+        })
+        .fail(function() {
+            //serverFail();
+        })
+
+        $.post( "performance_tests/ary.php", {})
+            .done(function( response ) {
+
+            response = JSON.parse(response);
+            var first = document.getElementById("ary");
+            first.innerHTML = getString("ary(50000)", response.zend_time, response.hhvm_time,
+                                         response.hippyvm_time, response.hack_time);
+
+            
+        })
+        .fail(function() {
+            //serverFail();
+        })
+
+        $.post( "performance_tests/ary2.php", {})
+            .done(function( response ) {
+
+            response = JSON.parse(response);
+            var first = document.getElementById("ary2");
+            first.innerHTML = getString("ary2(50000)", response.zend_time, response.hhvm_time,
+                                         response.hippyvm_time, response.hack_time);
+
+            
+        })
+        .fail(function() {
+            //serverFail();
+        })
+
+        $.post( "performance_tests/ary3.php", {})
+            .done(function( response ) {
+
+            response = JSON.parse(response);
+            var first = document.getElementById("ary3");
+            first.innerHTML = getString("ary3(2000)", response.zend_time, response.hhvm_time,
+                                         response.hippyvm_time, response.hack_time);
+
+        })
+        .fail(function() {
+            //serverFail();
+        })
+
+        $.post( "performance_tests/fibo.php", {})
+            .done(function( response ) {
+
+            response = JSON.parse(response);
+            var first = document.getElementById("fibo");
+            first.innerHTML = getString("fibo(30)", response.zend_time, response.hhvm_time,
+                                         response.hippyvm_time, response.hack_time);
+
+            
+        })
+        .fail(function() {
+            //serverFail();
+        })
+
+        $.post( "performance_tests/hash1.php", {})
+            .done(function( response ) {
+
+            response = JSON.parse(response);
+            var first = document.getElementById("hash1");
+            first.innerHTML = getString("hash1(50000)", response.zend_time, response.hhvm_time,
+                                         response.hippyvm_time, response.hack_time);
+
+            
+        })
+        .fail(function() {
+            //serverFail();
+        })
+
+        $.post( "performance_tests/hash2.php", {})
+            .done(function( response ) {
+
+            response = JSON.parse(response);
+            var first = document.getElementById("hash2");
+            first.innerHTML = getString("hash2(500)", response.zend_time, response.hhvm_time,
+                                         response.hippyvm_time, response.hack_time);
+
+            
+        })
+        .fail(function() {
+            //serverFail();
+        })
+
+        $.post( "performance_tests/heapsort.php", {})
+            .done(function( response ) {
+
+            response = JSON.parse(response);
+            var first = document.getElementById("heapsort");
+            first.innerHTML = getString("heapsort(20000)", response.zend_time, response.hhvm_time,response.hippyvm_time, response.hack_time);
+
+            
+        })
+        .fail(function() {
+            //serverFail();
+        })
+
+        $.post( "performance_tests/matrix.php", {})
+            .done(function( response ) {
+
+            response = JSON.parse(response);
+            var first = document.getElementById("matrix");
+            first.innerHTML = getString("matrix(20)", response.zend_time, response.hhvm_time,
+                                         response.hippyvm_time, response.hack_time);
+
+            
+        })
+        .fail(function() {
+            //serverFail();
+        })
+
+        $.post( "performance_tests/nestedloop.php", {})
+            .done(function( response ) {
+
+            response = JSON.parse(response);
+            var first = document.getElementById("nestedloop");
+            first.innerHTML = getString("nestedloop(12)", response.zend_time, response.hhvm_time,
+                                         response.hippyvm_time, response.hack_time);
+
+            
+        })
+        .fail(function() {
+            //serverFail();
+        })
+
+        $.post( "performance_tests/sieve.php", {})
+            .done(function( response ) {
+
+            response = JSON.parse(response);
+            var first = document.getElementById("sieve");
+            first.innerHTML = getString("sieve(30)", response.zend_time, response.hhvm_time,
+                                         response.hippyvm_time, response.hack_time);
+
+            
+        })
+        .fail(function() {
+            //serverFail();
+        })
+
+        $.post( "performance_tests/strcat.php", {})
+            .done(function( response ) {
+
+            response = JSON.parse(response);
+            var first = document.getElementById("strcat");
+            first.innerHTML = getString("strcat(200000)", response.zend_time, response.hhvm_time,
+                                         response.hippyvm_time, response.hack_time);
+
+            
+        })
+        .fail(function() {
+            //serverFail();
+        })
+
+        $.post( "performance_tests/jumpapaluza.php", {})
+            .done(function( response ) {
+
+            response = JSON.parse(response);
+            var first = document.getElementById("jumpapaluza");
+            first.innerHTML = getString("jumpapaluza(50, 50)", response.zend_time, response.hhvm_time, response.hippyvm_time, response.hack_time);
+
+            
+        })
+        .fail(function() {
+            //serverFail();
+        })
+
+        $.post( "performance_tests/bitapaluza1.php", {})
+            .done(function( response ) {
+
+            response = JSON.parse(response);
+            var first = document.getElementById("bitapaluza1");
+            first.innerHTML = getString("bitapaluza1(21)", response.zend_time, response.hhvm_time, response.hippyvm_time, response.hack_time);
+
+            
+        })
+        .fail(function() {
+            //serverFail();
+        })
+
+        $.post( "performance_tests/bitapaluza2.php", {})
+            .done(function( response ) {
+
+            response = JSON.parse(response);
+            var first = document.getElementById("bitapaluza2");
+            first.innerHTML = getString("bitapaluza2(18)", response.zend_time, response.hhvm_time, response.hippyvm_time, response.hack_time);
+
+            
+            
+        })
+        .fail(function() {
+            //serverFail();
+        })
     });
+});
+
+$(document).ajaxStop(function() {
+    document.getElementById("runCode").innerHTML = "Run Test Suite";
+    document.getElementById("runCode").disabled = false;
+    document.getElementById("runCode").style.backgroundColor = "#33CCFF";  
 });
 
 
 function getString(name, zend, hhvm, hippyvm, hack) {
-	return name + "&nbsp;&nbsp;&nbsp;&nbsp;" + "Zend:" + zend
-				+ "&nbsp;&nbsp;&nbsp;&nbsp;" + "HHVM:" + hhvm
-				+ "&nbsp;&nbsp;&nbsp;&nbsp;" + "HippyVM" + hippyvm
-				+ "&nbsp;&nbsp;&nbsp;&nbsp;" + "Hack:" + hack; 
+    zend = padZeros(zend);
+    hhvm = /*"0.64561s";*/padZeros(hhvm);
+    hippyvm = /*"0.17134s";*/padZeros(hippyvm);
+    hack = /*"0.03818s";*/padZeros(hack);
+    str = padding(name);
+    //alert(str + " " + zend);
+	return  str + " " + zend
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + hhvm
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + hippyvm
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + hack;
+}
+
+var STR_PAD_LEFT = 1;
+var STR_PAD_RIGHT = 2;
+var STR_PAD_BOTH = 3;
+
+function padZeros(num) {
+    var numStr = "" + num;
+    //alert("before:" + numStr);
+    if (numStr.length < 7) {
+        var diff = 7 - numStr.length;
+        for (var i = 0; i < diff; i++) {
+            numStr += "0";
+        }
+    }
+    numStr += "s";
+    //alert("after:" + numStr);
+    return numStr;
+}
+
+function pad(str, len, pad, dir) {
+
+    if (typeof(len) == "undefined") { var len = 0; }
+    if (typeof(pad) == "undefined") { var pad = ' '; }
+    if (typeof(dir) == "undefined") { var dir = STR_PAD_RIGHT; }
+
+    if (len + 1 >= str.length) {
+
+        switch (dir){
+
+            case STR_PAD_LEFT:
+                str = Array(len + 1 - str.length).join(pad) + str;
+            break;
+
+            case STR_PAD_BOTH:
+                var right = Math.ceil((padlen = len - str.length) / 2);
+                var left = padlen - right;
+                str = Array(left+1).join(pad) + str + Array(right+1).join(pad);
+            break;
+
+            default:
+                str = str + Array(len + 1 - str.length).join(pad);
+            break;
+
+        } // switch
+
+    }
+    return str;
+
+}
+
+function padding(str) {
+    var len = 60;
+    var diff = len - str.length;
+    switch (str) {
+    case "simple()":
+        diff += 10;
+        break;
+    case "simplecall()":
+        diff += 9;
+        break;
+    case "simpleucall()":
+        diff += 8; 
+        break;
+    case "simpleudcall()":
+        diff += 7;
+        break;
+    case "mandel()":
+        diff += 9;
+        break;
+    case "mandel2()":
+        diff += 8;
+        break;
+    case "ackermann(7)":
+        diff += 5;
+        break;
+    case "ary(50000)":
+        diff += 8;
+        break;
+    case "ary2(50000)":
+        diff += 7;
+        break;
+    case "ary3(2000)":
+        diff += 8;
+        break;
+    case "fibo(30)":
+        diff += 11;
+        break;
+    case "hash1(50000)":
+        diff += 5;
+        break;
+    case "hash2(500)":
+        diff += 7;
+        break;
+    case "heapsort(20000)":
+        diff += 4;
+        break;
+    case "matrix(20)":
+        diff += 9;
+        break;
+    case "nestedloop(12)":
+        diff += 5;
+        break;  
+    case "sieve(30)":
+        diff += 10;
+        break;
+    case "strcat(200000)":
+        diff += 6;
+        break;
+    case "jumpapaluza(50, 50)":
+        diff += 2;
+        break;
+    case "bitapaluza1(21)":
+        diff += 6;
+        break;
+    case "bitapaluza2(18)":
+        diff += 6;
+        break;
+    }
+
+    for (var i = 0; i < diff; i++) {
+        str = str + "&nbsp;";
+    } 
+
+    //alert(str + " " + str.length + " " + diff);
+
+
+   // for (var i = 0; i < diff; i++) {
+     //   str = str + "&nbsp;";
+    //}
+    //alert(str.length);
+    return str;
 }
 
 </script>

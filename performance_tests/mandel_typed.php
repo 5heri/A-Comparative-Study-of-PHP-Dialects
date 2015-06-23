@@ -2,25 +2,25 @@
 
 	$array_zend = array();
 	for ($i = 0; $i < 5; ++$i) {
-		$time = `php php01Test.php`;
+		$time = `php mandel_typedTest.php`;
 		array_push($array_zend, $time);
 	}
 
 	$array_hhvm = array();
 	for ($i = 0; $i < 5; ++$i) {
-		$time = `hhvm php01Test.php`;
+		$time = `hhvm mandel_typedTest.php`;
 		array_push($array_hhvm, $time);
 	}
 
 	$array_hippyvm = array();
 	for ($i = 0; $i < 5; ++$i) {
-		$time = `/usr/src/hippyvm/hippy-c php01Test.php`;
+		$time = `/usr/src/hippyvm/hippy-c mandel_typedTest.php`;
 		array_push($array_hippyvm, $time);
 	}
 
 	$array_hack = array();
 	for ($i = 0; $i < 5; ++$i) {
-		$time = `hhvm php01TestH.php`;
+		$time = `hhvm mandel_typedTestH.php`;
 		array_push($array_hack, $time);
 	}
 
