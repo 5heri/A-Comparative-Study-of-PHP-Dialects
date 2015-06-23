@@ -38,8 +38,8 @@ include 'InputConfig.php';
 		
 		$data = addUtilCode($data, $ip);
 		$hippyvm_data = addUtilCodeHippyVM($data);
-		$zend_out = $data;
-		//$zend_out = NULL;
+		//$zend_out = $data;
+		$zend_out = NULL;
 		$zend_time = NULL;
 
 		if ($zend === "true") {
