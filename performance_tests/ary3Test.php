@@ -16,7 +16,7 @@ function ary3($n) {
 /////////////////////////////////
 
 $time_before = microtime(true);
-ary3(50000);
+ary3(2000);
 
 $time_after = microtime(true);
 printf('%.7f', $time_after - $time_before);
